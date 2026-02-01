@@ -1601,30 +1601,19 @@
         // Checkout
         function checkout() {
             if (cart.length === 0) return;
-            
-            let message = "🍔 *Nouvelle commande Burger California*\n\n";
-            
-            cart.forEach(item => {
-                const displayName = item.displayName || item.name;
-                message += `• ${item.quantity}x ${displayName} - ${(item.price * item.quantity).toFixed(2)}€\n`;
+
+            const payload = { cart: cart.map(i => ({ id: i.id, qty: i.qty })) };
+
+            const res = await fetch("api/create-checkout-session", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
             });
-            
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            message += `\n*Total: ${total.toFixed(2)}€*`;
-            
-            // Option 1: WhatsApp (preferred for online ordering)
-            const whatsappNumber = "33143460238"; // Replace with actual WhatsApp number
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-            
-            // Option 2: Phone call
-            const phoneUrl = "tel:0143460238";
-            
-            // Ask user preference
-            if (confirm("Comment souhaitez-vous passer votre commande ?\n\nOK = WhatsApp\nAnnuler = Appel téléphonique")) {
-                window.open(whatsappUrl, '_blank');
-            } else {
-                window.location.href = phoneUrl;
-            }
+
+            const data = await res.json();
+            if (data.error) return alert(data.error);
+
+            window.location.href = data.url;
         }
 
         // Event listeners
