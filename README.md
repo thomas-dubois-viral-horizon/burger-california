@@ -1,2 +1,2 @@
 # burger-california
-Clients Website of Burger California
+Client's Website of Burger California
