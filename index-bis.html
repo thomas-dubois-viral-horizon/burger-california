@@ -351,7 +351,7 @@
                 line-height: 1.7;
             }
 
-            /* Menu Preview */
+            /* Menu Preview – NO fade-in here */
             .menu-preview {
                 padding: 6rem 5%;
                 background: linear-gradient(180deg, var(--cream) 0%, white 100%);
@@ -752,7 +752,6 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                position: relative;
             }
 
             .cart-toggle:hover {
@@ -1074,7 +1073,7 @@
                 }
             }
 
-            /* Scroll animations */
+            /* Scroll animations – kept for other sections */
             .fade-in {
                 opacity: 0;
                 transform: translateY(30px);
@@ -1157,8 +1156,8 @@
             </div>
         </section>
 
-        <!-- Menu Section -->
-        <section class="menu-preview fade-in" id="menu">
+        <!-- Menu Section – NO fade-in class here -->
+        <section class="menu-preview" id="menu">
             <h2 class="section-title">NOTRE MENU</h2>
             <p class="section-subtitle">Commandez directement en ligne</p>
             
@@ -1316,12 +1315,12 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2026 Burger California. Tous droits réservés. | Design par Viral Horizon</p>
+                <p>© 2026 Burger California. Tous droits réservés. | Design par Viral Horizon</p>
             </div>
         </footer>
 
         <script>
-            // Menu Data
+            // Menu Data (unchanged)
             const menuData = {
                 burgers: [
                     { name: "Menu California Burger", image: "images/california-burger.jpeg", desc: "Pain maison, steak 160g, salade, sauce California, bacon, oignons confits, cheddar fondu + Frites maison + Boisson", price: 11.90, icon: "🍔" },
@@ -1394,10 +1393,8 @@
                 ]
             };
 
-            // Shopping cart (always must be an array)
             let cart = [];
 
-            // Load menu items
             function loadMenuItems(category) {
                 const container = document.getElementById('menuItemsContainer');
                 const items = menuData[category] || [];
@@ -1410,12 +1407,9 @@
                 let html = '<div class="menu-grid">';
 
                 items.forEach((item) => {
-                    let imageHtml;
-                    if (item.image) {
-                        imageHtml = `<div class="menu-item-image has-image"><img src="${item.image}" alt="${item.name}" loading="lazy"></div>`;
-                    } else {
-                        imageHtml = `<div class="menu-item-image">${item.icon}</div>`;
-                    }
+                    let imageHtml = item.image 
+                        ? `<div class="menu-item-image has-image"><img src="${item.image}" alt="${item.name}" loading="lazy"></div>`
+                        : `<div class="menu-item-image">${item.icon || '🍔'}</div>`;
 
                     if (item.sizes) {
                         html += `
@@ -1466,109 +1460,83 @@
                 html += '</div>';
                 container.innerHTML = html;
 
+                // Size buttons logic
                 document.querySelectorAll('.size-btn').forEach(btn => {
                     btn.addEventListener('click', function() {
-                        const parent = this.closest('.pizza-sizes');
-                        parent.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+                        this.parentElement.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
                         this.classList.add('active');
                     });
                 });
             }
 
             function addToCart(name, price) {
-                if (!Array.isArray(cart)) cart = [];
-
-                const existingItem = cart.find(item => item.name === name && !item.size);
-
-                if (existingItem) {
-                    existingItem.quantity++;
+                const existing = cart.find(i => i.name === name && !i.size);
+                if (existing) {
+                    existing.quantity++;
                 } else {
-                    cart.push({
-                        name: name,
-                        displayName: name,
-                        price: Number(price),
-                        quantity: 1,
-                        size: null
-                    });
+                    cart.push({ name, displayName: name, price: Number(price), quantity: 1, size: null });
                 }
-
                 updateCart();
                 showCartNotification();
             }
 
             function addPizzaToCart(name, button) {
-                if (!Array.isArray(cart)) cart = [];
-
                 const menuItem = button.closest('.menu-item');
-                const activeSize = menuItem.querySelector('.size-btn.active');
-
-                if (!activeSize) {
+                const active = menuItem.querySelector('.size-btn.active');
+                if (!active) {
                     alert("Veuillez sélectionner une taille.");
                     return;
                 }
 
-                const size = activeSize.dataset.size;
-                const price = parseFloat(activeSize.dataset.price);
-
+                const size = active.dataset.size;
+                const price = parseFloat(active.dataset.price);
                 const sizeNames = { junior: 'Junior (26cm)', senior: 'Senior (31cm)', mega: 'Méga (34cm)' };
-                const fullName = `${name} - ${sizeNames[size]}`;
+                const displayName = `${name} – ${sizeNames[size]}`;
 
-                const existingItem = cart.find(item => item.name === name && item.size === size);
-
-                if (existingItem) {
-                    existingItem.quantity++;
+                const existing = cart.find(i => i.name === name && i.size === size);
+                if (existing) {
+                    existing.quantity++;
                 } else {
-                    cart.push({
-                        name: name,
-                        displayName: fullName,
-                        price: Number(price),
-                        quantity: 1,
-                        size: size
-                    });
+                    cart.push({ name, displayName, price: Number(price), quantity: 1, size });
                 }
-
                 updateCart();
                 showCartNotification();
             }
 
             function updateCart() {
-                if (!Array.isArray(cart)) cart = [];
-
-                const cartItemsEl = document.getElementById('cartItems');
-                const cartCountEl = document.getElementById('cartCount');
-                const cartTotalEl = document.getElementById('cartTotal');
+                const itemsEl = document.getElementById('cartItems');
+                const countEl = document.getElementById('cartCount');
+                const totalEl = document.getElementById('cartTotal');
                 const checkoutBtn = document.getElementById('checkoutBtn');
 
                 if (cart.length === 0) {
-                    cartItemsEl.innerHTML = '<p class="cart-empty">Votre panier est vide</p>';
-                    cartCountEl.textContent = '0';
-                    cartTotalEl.textContent = '0.00€';
+                    itemsEl.innerHTML = '<p class="cart-empty">Votre panier est vide</p>';
+                    countEl.textContent = '0';
+                    totalEl.textContent = '0.00€';
                     checkoutBtn.disabled = true;
                     return;
                 }
 
                 let total = 0;
-                let totalItems = 0;
+                let count = 0;
                 let html = '';
 
-                cart.forEach((item, index) => {
-                    const itemTotal = Number(item.price) * Number(item.quantity);
+                cart.forEach((item, idx) => {
+                    const itemTotal = item.price * item.quantity;
                     total += itemTotal;
-                    totalItems += Number(item.quantity);
-
-                    const displayName = item.displayName || item.name || "Article";
+                    count += item.quantity;
 
                     html += `
                         <div class="cart-item">
                             <div class="cart-item-header">
-                                <div class="cart-item-name">${displayName}</div>
-                                <button class="cart-item-remove" onclick="removeFromCart(${index})">✕</button>
+                                <div class="cart-item-name">${item.displayName || item.name}</div>
+                                <button class="cart-item-remove" onclick="removeFromCart(${idx})">✕</button>
                             </div>
                             <div class="cart-item-footer">
                                 <div class="quantity-controls">
-                                    <button class="qty-btn" onclick="updateQuantity(${index}, -1)">−</button>
+                                    <button class="qty-btn" onclick="updateQuantity(${idx}, -1)">−</button>
                                     <span class="qty-display">${item.quantity}</span>
-                                    <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                                    <button class="qty-btn" onclick="updateQuantity(${idx}, 1)">+</button>
                                 </div>
                                 <div class="cart-item-price">${itemTotal.toFixed(2)}€</div>
                             </div>
@@ -1576,182 +1544,107 @@
                     `;
                 });
 
-                cartItemsEl.innerHTML = html;
-                cartCountEl.textContent = totalItems;
-                cartTotalEl.textContent = total.toFixed(2) + '€';
+                itemsEl.innerHTML = html;
+                countEl.textContent = count;
+                totalEl.textContent = total.toFixed(2) + '€';
                 checkoutBtn.disabled = false;
             }
 
-            function updateQuantity(index, change) {
-                if (!Array.isArray(cart)) cart = [];
-                if (!cart[index]) return;
-
-                cart[index].quantity = Number(cart[index].quantity) + Number(change);
-
-                if (cart[index].quantity <= 0) {
-                    cart.splice(index, 1);
-                }
-
+            function updateQuantity(idx, delta) {
+                if (!cart[idx]) return;
+                cart[idx].quantity += delta;
+                if (cart[idx].quantity <= 0) cart.splice(idx, 1);
                 updateCart();
             }
 
-            function removeFromCart(index) {
-                if (!Array.isArray(cart)) cart = [];
-                cart.splice(index, 1);
+            function removeFromCart(idx) {
+                cart.splice(idx, 1);
                 updateCart();
             }
 
             function showCartNotification() {
-                const cartToggle = document.getElementById('cartToggle');
-                cartToggle.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    cartToggle.style.transform = 'scale(1)';
-                }, 200);
+                const btn = document.getElementById('cartToggle');
+                btn.style.transform = 'scale(1.2)';
+                setTimeout(() => btn.style.transform = 'scale(1)', 180);
             }
 
             function toggleCart() {
-                const cartSidebar = document.getElementById('cartSidebar');
-                cartSidebar.classList.toggle('open');
+                document.getElementById('cartSidebar').classList.toggle('open');
             }
 
             async function checkout() {
-                if (!Array.isArray(cart)) {
-                    console.error("Cart corrupted / not array:", cart);
-                    cart = [];
-                }
-
                 if (cart.length === 0) {
                     alert("Votre panier est vide");
                     return;
                 }
 
                 try {
-                    const lineItems = cart.map(item => {
-                        const name = item.displayName || item.name;
-
-                        if (!name) throw new Error("Invalid cart item: missing name");
-                        if (item.price === undefined || item.price === null || isNaN(Number(item.price))) {
-                            throw new Error("Invalid cart item: missing/invalid price");
-                        }
-                        if (item.quantity === undefined || item.quantity === null || isNaN(Number(item.quantity))) {
-                            throw new Error("Invalid cart item: missing/invalid quantity");
-                        }
-
-                        const priceInCents = Math.round(Number(item.price) * 100);
-
-                        return {
-                            price_data: {
-                                currency: 'eur',
-                                product_data: {
-                                    name: name,
-                                    ...(item.size ? { description: `Taille: ${item.size}` } : {})
-                                },
-                                unit_amount: priceInCents
-                            },
-                            quantity: parseInt(item.quantity, 10)
-                        };
-                    });
-
-                    const payload = { cart: cart };
-
                     const res = await fetch("/api/create-checkout-session", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(payload)
+                        body: JSON.stringify({ cart })
                     });
 
-                    const data = await res.json().catch(() => ({}));
+                    const data = await res.json();
 
-                    if (!res.ok) {
-                        console.error("Checkout error response:", data);
-                        alert(data.error || `Erreur ${res.status}: Impossible de créer la session de paiement`);
-                        return;
-                    }
-
-                    if (data.error) {
-                        alert(data.error);
-                        return;
-                    }
-
-                    if (!data.url) {
-                        alert("Erreur: URL de paiement manquante");
+                    if (!res.ok || data.error || !data.url) {
+                        alert(data.error || "Erreur lors de la création de la session de paiement");
                         return;
                     }
 
                     window.location.href = data.url;
-
-                } catch (error) {
-                    console.error("Checkout failed:", error);
-                    alert("Erreur lors du paiement: " + error.message);
+                } catch (err) {
+                    alert("Erreur paiement : " + err.message);
                 }
             }
 
-            // Event listeners
-            document.addEventListener('DOMContentLoaded', function() {
-                // Load default category
+            document.addEventListener('DOMContentLoaded', () => {
                 loadMenuItems('burgers');
 
-                // Category buttons
                 document.querySelectorAll('.category-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
+                    btn.addEventListener('click', () => {
                         document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        loadMenuItems(this.dataset.category);
+                        btn.classList.add('active');
+                        loadMenuItems(btn.dataset.category);
                     });
                 });
 
-                // Cart toggle
                 document.getElementById('cartToggle').addEventListener('click', toggleCart);
                 document.getElementById('cartClose').addEventListener('click', toggleCart);
-
-                // Checkout button
                 document.getElementById('checkoutBtn').addEventListener('click', checkout);
 
-                // Smooth scrolling
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function (e) {
+                // Smooth scroll for anchors
+                document.querySelectorAll('a[href^="#"]').forEach(a => {
+                    a.addEventListener('click', e => {
                         e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
-                        if (target) {
-                            target.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        }
+                        const target = document.querySelector(a.getAttribute('href'));
+                        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     });
                 });
 
-                // Scroll animations with fallback for older browsers (especially iOS Safari)
+                // Scroll animations (only for elements that still have .fade-in)
                 const fadeEls = document.querySelectorAll('.fade-in');
 
-                if (!('IntersectionObserver' in window)) {
-                    fadeEls.forEach(el => el.classList.add('visible'));
-                } else {
-                    const observerOptions = {
-                        threshold: 0.1,
-                        rootMargin: '0px 0px -50px 0px'
-                    };
-
-                    const observer = new IntersectionObserver(function(entries) {
+                if ('IntersectionObserver' in window) {
+                    const observer = new IntersectionObserver(entries => {
                         entries.forEach(entry => {
                             if (entry.isIntersecting) {
                                 entry.target.classList.add('visible');
                             }
                         });
-                    }, observerOptions);
+                    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
                     fadeEls.forEach(el => observer.observe(el));
+                } else {
+                    fadeEls.forEach(el => el.classList.add('visible'));
                 }
 
-                // Contact form
-                const contactForm = document.querySelector('.contact-form');
-                if (contactForm) {
-                    contactForm.addEventListener('submit', function(e) {
-                        e.preventDefault();
-                        alert('Merci pour votre message ! Nous vous répondrons dans les plus brefs délais.');
-                        this.reset();
-                    });
-                }
+                // Contact form placeholder
+                document.querySelector('.contact-form')?.addEventListener('submit', e => {
+                    e.preventDefault();
+                    alert('Message envoyé ! Nous vous répondons rapidement.');
+                    e.target.reset();
+                });
             });
         </script>
     </body>
