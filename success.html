@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement Réussi - Burger California</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FFF8E7 0%, #FFE5B4 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .success-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            padding: 60px 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #4CAF50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .checkmark::after {
+            content: "✓";
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #C41E3A;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn-home {
+            display: inline-block;
+            background: #C41E3A;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+        }
+
+        .btn-home:hover {
+            background: #FF6B35;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .order-details {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .order-details h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .emoji {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="checkmark"></div>
+        <div class="emoji">🍔</div>
+        <h1>Paiement Réussi !</h1>
+        <p>Merci pour votre commande ! Nous préparons vos délicieux burgers californiens.</p>
+        
+        <div class="order-details">
+            <h3>📧 Confirmation envoyée</h3>
+            <p style="font-size: 0.95rem; color: #666;">
+                Un email de confirmation a été envoyé à votre adresse. 
+                Vous recevrez bientôt les détails de livraison.
+            </p>
+        </div>
+
+        <p style="font-size: 0.9rem; color: #999; margin-bottom: 30px;">
+            Numéro de commande : <span id="sessionId" style="color: #333; font-weight: bold;"></span>
+        </p>
+
+        <a href="/" class="btn-home">Retour à l'accueil</a>
+    </div>
+
+    <script>
+        // Get session ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
+        if (sessionId) {
+            document.getElementById('sessionId').textContent = sessionId.substring(0, 20) + '...';
+        }
+    </script>
+</body>
+</html>

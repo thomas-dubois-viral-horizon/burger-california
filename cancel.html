@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement Annulé - Burger California</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FFF8E7 0%, #FFE5B4 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .cancel-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            padding: 60px 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #FF9800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .icon::after {
+            content: "✕";
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #C41E3A;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .emoji {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #C41E3A;
+            color: white;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #FF6B35;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #C41E3A;
+            border: 2px solid #C41E3A;
+        }
+
+        .btn-secondary:hover {
+            background: #C41E3A;
+            color: white;
+        }
+
+        .info-box {
+            background: #FFF3CD;
+            border-left: 4px solid #FFA000;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .info-box p {
+            margin: 0;
+            color: #856404;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="cancel-container">
+        <div class="icon"></div>
+        <div class="emoji">😔</div>
+        <h1>Paiement Annulé</h1>
+        <p>Votre commande n'a pas été finalisée. Aucun montant n'a été débité.</p>
+        
+        <div class="info-box">
+            <p>
+                <strong>💡 Besoin d'aide ?</strong><br>
+                Si vous avez rencontré un problème lors du paiement, n'hésitez pas à nous contacter au 
+                <strong>01 43 46 02 38</strong> ou par email.
+            </p>
+        </div>
+
+        <div class="btn-container">
+            <a href="/#menu" class="btn btn-primary">Retour au Menu</a>
+            <a href="/#contact" class="btn btn-secondary">Nous Contacter</a>
+        </div>
+    </div>
+</body>
+</html>
