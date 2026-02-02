@@ -1224,7 +1224,7 @@
                         <div class="info-icon">✉️</div>
                         <div class="info-text">
                             <h4>Email</h4>
-                            <p>burgercalifornia75@gmail.com</p>
+                            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d9bbacabbebcabbab8b5b0bfb6abb7b0b8eeec99beb4b8b0b5f7bab6b4">[email&#160;protected]</a></p>
                         </div>
                     </div>
 
@@ -1315,7 +1315,7 @@
             </div>
         </footer>
 
-        <script>
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
             // Menu Data
             const menuData = {
                 burgers: [
@@ -1652,12 +1652,27 @@
 
                 // Contact form placeholder
                 document.querySelector('.contact-form')?.addEventListener('submit', e => {
-                    e.preventDefault();
-                    alert('Message envoyé ! Nous vous répondrons rapidement.');
-                    e.target.reset();
+                       e.preventDefault();
+                    
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Construct email body with all form information
+                    let body = `Nom: ${name}%0D%0A`;
+                    body += `Email: ${email}%0D%0A`;
+                    if (phone) {
+                        body += `Téléphone: ${phone}%0D%0A`;
+                    }
+                    body += `%0D%0A`;
+                    body += `Message:%0D%0A${encodeURIComponent(message)}`;
+                    
+                    // Open email client with pre-filled information
+                    window.location.href = `mailto:contact@burgercalifornia.fr?subject=${encodeURIComponent(subject)}&body=${body}`;
                 });
             });
         </script>
     </body>
 </html>
-
