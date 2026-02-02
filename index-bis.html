@@ -205,28 +205,32 @@
                 text-decoration: none;
                 transition: all 0.3s;
                 display: inline-block;
+                text-align: center;
+                cursor: pointer;
             }
 
             .btn-primary {
                 background: var(--deep-red);
                 color: white;
-                box-shadow: 0 8px 25px rgba(196, 30, 58, 0.3);
+                box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
             }
 
             .btn-primary:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 12px 35px rgba(196, 30, 58, 0.4);
+                background: var(--sunset-orange);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
             }
 
             .btn-secondary {
-                border: 2px solid var(--charcoal);
-                color: var(--charcoal);
-                background: transparent;
+                background: white;
+                color: var(--deep-red);
+                border: 2px solid var(--deep-red);
             }
 
             .btn-secondary:hover {
-                background: var(--charcoal);
+                background: var(--deep-red);
                 color: white;
+                transform: translateY(-2px);
             }
 
             .hero-image {
@@ -245,58 +249,27 @@
                 }
             }
 
-            .burger-visual {
+            .hero-image img {
                 width: 100%;
-                max-width: 500px;
-                height: 500px;
-                background: linear-gradient(135deg, var(--sunset-orange) 0%, var(--deep-red) 100%);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-family: 'Righteous', cursive;
-                font-size: 4rem;
-                color: white;
-                box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-                position: relative;
-                overflow: hidden;
-            }
-
-            .burger-visual::after {
-                content: '🍔';
-                font-size: 8rem;
-                animation: bounce 2s ease-in-out infinite;
+                max-width: 600px;
+                height: auto;
+                filter: drop-shadow(0 20px 40px rgba(0,0,0,0.2));
+                animation: bounce 3s ease-in-out infinite;
             }
 
             @keyframes bounce {
                 0%, 100% { transform: translateY(0); }
-                50% { transform: translateY(-20px); }
+                50% { transform: translateY(-15px); }
             }
 
-            /* Features Section */
+            /* Features */
             .features {
                 padding: 6rem 5%;
                 background: white;
             }
 
-            .section-title {
-                font-family: 'Bebas Neue', cursive;
-                font-size: clamp(2.5rem, 5vw, 4rem);
-                text-align: center;
-                color: var(--deep-red);
-                margin-bottom: 1rem;
-                letter-spacing: 2px;
-            }
-
-            .section-subtitle {
-                text-align: center;
-                color: var(--warm-gray);
-                margin-bottom: 4rem;
-                font-size: 1.1rem;
-            }
-
-            .features-grid {
-                max-width: 1200px;
+            .features-container {
+                max-width: 1400px;
                 margin: 0 auto;
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -305,197 +278,172 @@
 
             .feature-card {
                 text-align: center;
-                padding: 2.5rem 2rem;
+                padding: 2.5rem 1.5rem;
                 border-radius: 20px;
-                background: var(--cream);
                 transition: all 0.3s;
-                position: relative;
-                overflow: hidden;
-            }
-
-            .feature-card::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 4px;
-                background: linear-gradient(90deg, var(--california-gold), var(--sunset-orange));
-                transform: scaleX(0);
-                transition: transform 0.3s;
-            }
-
-            .feature-card:hover::before {
-                transform: scaleX(1);
+                background: var(--cream);
             }
 
             .feature-card:hover {
                 transform: translateY(-10px);
-                box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             }
 
             .feature-icon {
-                font-size: 3.5rem;
+                font-size: 4rem;
                 margin-bottom: 1.5rem;
+                display: block;
             }
 
             .feature-card h3 {
-                font-size: 1.5rem;
+                font-family: 'Righteous', cursive;
+                font-size: 1.6rem;
                 color: var(--deep-red);
                 margin-bottom: 1rem;
-                font-weight: 700;
             }
 
             .feature-card p {
                 color: var(--warm-gray);
-                line-height: 1.7;
+                line-height: 1.8;
             }
 
-            /* Menu Preview – NO fade-in here */
-            .menu-preview {
+            /* Menu Section */
+            .menu-section {
                 padding: 6rem 5%;
-                background: linear-gradient(180deg, var(--cream) 0%, white 100%);
+                background: var(--cream);
             }
 
-            /* Menu Categories */
-            .menu-categories {
-                max-width: 1200px;
-                margin: 0 auto 3rem;
+            .section-header {
+                text-align: center;
+                margin-bottom: 4rem;
+            }
+
+            .section-title {
+                font-family: 'Bebas Neue', cursive;
+                font-size: clamp(2.5rem, 6vw, 5rem);
+                color: var(--deep-red);
+                margin-bottom: 1rem;
+                letter-spacing: 2px;
+            }
+
+            .section-subtitle {
+                font-size: 1.2rem;
+                color: var(--sunset-orange);
+                font-weight: 600;
+            }
+
+            .category-filters {
                 display: flex;
                 justify-content: center;
                 gap: 1rem;
                 flex-wrap: wrap;
+                margin-bottom: 3rem;
             }
 
             .category-btn {
+                padding: 0.8rem 2rem;
+                border: 2px solid var(--deep-red);
                 background: white;
-                border: 2px solid var(--charcoal);
-                color: var(--charcoal);
-                padding: 1rem 2rem;
-                border-radius: 50px;
+                color: var(--deep-red);
                 font-weight: 700;
-                font-size: 1rem;
+                border-radius: 50px;
                 cursor: pointer;
                 transition: all 0.3s;
-                font-family: 'DM Sans', sans-serif;
             }
 
-            .category-btn:hover {
-                background: var(--charcoal);
+            .category-btn:hover, .category-btn.active {
+                background: var(--deep-red);
                 color: white;
                 transform: translateY(-2px);
             }
 
-            .category-btn.active {
-                background: var(--deep-red);
-                border-color: var(--deep-red);
-                color: white;
-                box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
-            }
-
-            /* Menu Items Container */
-            .menu-items-container {
-                max-width: 1200px;
-                margin: 0 auto;
-                min-height: 400px;
-            }
-
             .menu-grid {
+                max-width: 1400px;
+                margin: 0 auto;
                 display: grid;
                 grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-                gap: 2rem;
+                gap: 2.5rem;
             }
 
             .menu-item {
                 background: white;
                 border-radius: 20px;
                 overflow: hidden;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.08);
                 transition: all 0.3s;
-                display: flex;
-                flex-direction: column;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             }
 
             .menu-item:hover {
-                transform: translateY(-8px);
-                box-shadow: 0 15px 50px rgba(0,0,0,0.12);
+                transform: translateY(-5px);
+                box-shadow: 0 8px 25px rgba(0,0,0,0.12);
             }
 
             .menu-item-image {
                 width: 100%;
-                height: 200px;
-                background: linear-gradient(135deg, var(--sunset-orange), var(--deep-red));
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 4rem;
-                position: relative;
-                overflow: hidden;
-            }
-
-            .menu-item-image img {
-                width: 100%;
-                height: 100%;
+                height: 250px;
                 object-fit: cover;
-                display: block;
-            }
-
-            .menu-item-image.has-image {
-                background: #000;
             }
 
             .menu-item-content {
                 padding: 1.5rem;
-                flex: 1;
-                display: flex;
-                flex-direction: column;
             }
 
-            .menu-item-content h3 {
+            .menu-item h3 {
+                font-family: 'Righteous', cursive;
                 font-size: 1.5rem;
                 color: var(--deep-red);
                 margin-bottom: 0.5rem;
-                font-weight: 700;
             }
 
-            .menu-item-content p {
+            .menu-item p {
                 color: var(--warm-gray);
                 margin-bottom: 1rem;
-                font-size: 0.95rem;
                 line-height: 1.6;
-                flex: 1;
             }
 
             .menu-item-footer {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                margin-top: auto;
                 gap: 1rem;
             }
 
             .price {
                 font-size: 1.8rem;
                 font-weight: 700;
-                color: var(--california-gold);
+                color: var(--sunset-orange);
             }
 
-            .add-to-cart-btn {
-                background: var(--deep-red);
-                color: white;
-                border: none;
-                padding: 0.8rem 1.8rem;
-                border-radius: 50px;
-                font-weight: 700;
+            /* Delivery Toggle Button */
+            .delivery-toggle {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+                padding: 0.5rem;
+                background: #f5f5f5;
+                border-radius: 10px;
+            }
+
+            .delivery-toggle label {
+                font-size: 0.9rem;
+                color: var(--charcoal);
+                font-weight: 600;
                 cursor: pointer;
-                transition: all 0.3s;
-                font-family: 'DM Sans', sans-serif;
-                white-space: nowrap;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
             }
 
-            .add-to-cart-btn:hover {
-                background: var(--sunset-orange);
-                transform: scale(1.05);
+            .delivery-toggle input[type="checkbox"] {
+                width: 20px;
+                height: 20px;
+                cursor: pointer;
+                accent-color: var(--deep-red);
+            }
+
+            .delivery-icon {
+                font-size: 1.2rem;
             }
 
             /* Pizza Sizes */
@@ -507,48 +455,73 @@
 
             .size-btn {
                 flex: 1;
-                background: var(--cream);
+                padding: 0.8rem 0.5rem;
+                background: #f5f5f5;
                 border: 2px solid transparent;
-                padding: 0.6rem;
                 border-radius: 10px;
                 cursor: pointer;
                 transition: all 0.3s;
-                font-family: 'DM Sans', sans-serif;
-                font-weight: 600;
+                text-align: center;
             }
 
             .size-btn:hover {
-                border-color: var(--sunset-orange);
+                background: #e8e8e8;
             }
 
             .size-btn.active {
-                background: var(--sunset-orange);
-                color: white;
-                border-color: var(--sunset-orange);
-            }
-
-            .size-btn .size-name {
-                display: block;
-                font-size: 0.85rem;
-            }
-
-            .size-btn .size-price {
-                display: block;
-                font-size: 1.1rem;
+                background: var(--cream);
+                border-color: var(--deep-red);
+                color: var(--deep-red);
                 font-weight: 700;
             }
 
-            /* Shopping Cart Sidebar */
+            .size-name {
+                display: block;
+                font-size: 0.85rem;
+                font-weight: 600;
+            }
+
+            .size-detail {
+                display: block;
+                font-size: 0.75rem;
+                color: #666;
+            }
+
+            .size-price {
+                display: block;
+                font-size: 1rem;
+                font-weight: 700;
+                color: var(--sunset-orange);
+                margin-top: 0.3rem;
+            }
+
+            .add-to-cart-btn {
+                padding: 0.8rem 2rem;
+                background: var(--deep-red);
+                color: white;
+                border: none;
+                border-radius: 50px;
+                font-weight: 700;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+
+            .add-to-cart-btn:hover {
+                background: var(--sunset-orange);
+                transform: scale(1.05);
+            }
+
+            /* Cart Sidebar */
             .cart-sidebar {
                 position: fixed;
-                right: -400px;
                 top: 0;
-                width: 400px;
+                right: -450px;
+                width: 450px;
                 height: 100vh;
                 background: white;
-                box-shadow: -5px 0 30px rgba(0,0,0,0.2);
+                box-shadow: -5px 0 25px rgba(0,0,0,0.2);
+                transition: right 0.3s;
                 z-index: 2000;
-                transition: right 0.3s ease;
                 display: flex;
                 flex-direction: column;
             }
@@ -566,9 +539,9 @@
                 align-items: center;
             }
 
-            .cart-header h3 {
-                margin: 0;
-                font-size: 1.5rem;
+            .cart-header h2 {
+                font-family: 'Righteous', cursive;
+                font-size: 1.8rem;
             }
 
             .cart-close {
@@ -577,17 +550,6 @@
                 color: white;
                 font-size: 2rem;
                 cursor: pointer;
-                width: 40px;
-                height: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 50%;
-                transition: background 0.3s;
-            }
-
-            .cart-close:hover {
-                background: rgba(255,255,255,0.2);
             }
 
             .cart-items {
@@ -605,45 +567,32 @@
             .cart-item {
                 background: var(--cream);
                 padding: 1rem;
-                border-radius: 15px;
+                border-radius: 10px;
                 margin-bottom: 1rem;
             }
 
             .cart-item-header {
                 display: flex;
                 justify-content: space-between;
-                align-items: flex-start;
-                margin-bottom: 0.5rem;
+                align-items: start;
+                margin-bottom: 0.8rem;
             }
 
             .cart-item-name {
                 font-weight: 700;
-                color: var(--deep-red);
-                font-size: 1.1rem;
+                color: var(--charcoal);
+                flex: 1;
             }
 
             .cart-item-remove {
-                background: transparent;
+                background: var(--deep-red);
+                color: white;
                 border: none;
-                color: #999;
-                cursor: pointer;
-                font-size: 1.2rem;
-                padding: 0;
                 width: 24px;
                 height: 24px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .cart-item-remove:hover {
-                color: var(--deep-red);
-            }
-
-            .cart-item-details {
-                color: var(--warm-gray);
+                border-radius: 50%;
+                cursor: pointer;
                 font-size: 0.9rem;
-                margin-bottom: 0.8rem;
             }
 
             .cart-item-footer {
@@ -654,8 +603,8 @@
 
             .quantity-controls {
                 display: flex;
+                gap: 0.5rem;
                 align-items: center;
-                gap: 0.8rem;
             }
 
             .qty-btn {
@@ -666,33 +615,28 @@
                 height: 30px;
                 border-radius: 50%;
                 cursor: pointer;
-                font-size: 1.1rem;
+                font-size: 1.2rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                transition: background 0.3s;
-            }
-
-            .qty-btn:hover {
-                background: var(--sunset-orange);
             }
 
             .qty-display {
-                font-weight: 700;
-                font-size: 1.1rem;
                 min-width: 30px;
                 text-align: center;
+                font-weight: 700;
             }
 
             .cart-item-price {
                 font-weight: 700;
-                font-size: 1.2rem;
-                color: var(--california-gold);
+                color: var(--sunset-orange);
+                font-size: 1.1rem;
             }
 
             .cart-footer {
-                padding: 1.5rem 2rem;
-                border-top: 2px solid var(--cream);
+                padding: 2rem;
+                background: #f9f9f9;
+                border-top: 2px solid #eee;
             }
 
             .cart-total {
@@ -704,40 +648,34 @@
                 color: var(--charcoal);
             }
 
-            .cart-total span:last-child {
-                color: var(--deep-red);
-            }
-
             .checkout-btn {
                 width: 100%;
+                padding: 1.2rem;
                 background: var(--deep-red);
                 color: white;
                 border: none;
-                padding: 1.2rem;
                 border-radius: 50px;
-                font-weight: 700;
                 font-size: 1.1rem;
+                font-weight: 700;
                 cursor: pointer;
                 transition: all 0.3s;
-                font-family: 'DM Sans', sans-serif;
             }
 
-            .checkout-btn:hover {
+            .checkout-btn:hover:not(:disabled) {
                 background: var(--sunset-orange);
                 transform: translateY(-2px);
-                box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
             }
 
             .checkout-btn:disabled {
-                background: #ccc;
+                opacity: 0.5;
                 cursor: not-allowed;
             }
 
             /* Cart Toggle Button */
             .cart-toggle {
                 position: fixed;
-                bottom: 30px;
-                right: 30px;
+                bottom: 2rem;
+                right: 2rem;
                 width: 70px;
                 height: 70px;
                 background: var(--deep-red);
@@ -746,17 +684,18 @@
                 border-radius: 50%;
                 font-size: 1.8rem;
                 cursor: pointer;
-                box-shadow: 0 8px 25px rgba(196, 30, 58, 0.4);
-                z-index: 1500;
+                box-shadow: 0 4px 20px rgba(196, 30, 58, 0.4);
                 transition: all 0.3s;
+                z-index: 1500;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                position: relative;
             }
 
             .cart-toggle:hover {
-                background: var(--sunset-orange);
                 transform: scale(1.1);
+                background: var(--sunset-orange);
             }
 
             .cart-count {
@@ -775,154 +714,108 @@
                 font-weight: 700;
             }
 
-            .cart-count:empty {
-                display: none;
-            }
-
-            /* Location Section */
-            .location {
+            /* Contact Section */
+            .contact-section {
                 padding: 6rem 5%;
-                background: var(--charcoal);
+                background: linear-gradient(135deg, var(--deep-red) 0%, var(--sunset-orange) 100%);
                 color: white;
             }
 
-            .location .section-title {
-                color: white;
-            }
-
-            .location-content {
-                max-width: 1200px;
+            .contact-container {
+                max-width: 1000px;
                 margin: 0 auto;
+            }
+
+            .contact-grid {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 4rem;
-                align-items: center;
+                margin-top: 3rem;
             }
 
-            .location-info h3 {
-                font-size: 2rem;
-                color: var(--california-gold);
+            .contact-info h3 {
+                font-family: 'Righteous', cursive;
+                font-size: 1.8rem;
                 margin-bottom: 1.5rem;
             }
 
             .info-item {
                 display: flex;
-                align-items: flex-start;
+                align-items: start;
                 gap: 1rem;
-                margin-bottom: 2rem;
+                margin-bottom: 1.5rem;
             }
 
             .info-icon {
-                font-size: 2rem;
-                color: var(--sunset-orange);
+                font-size: 1.5rem;
+                margin-top: 0.2rem;
             }
 
             .info-text h4 {
-                color: var(--california-gold);
-                margin-bottom: 0.5rem;
-            }
-
-            .info-text p {
-                color: #ccc;
-            }
-
-            .hours-grid {
-                display: grid;
-                gap: 1rem;
-                margin-top: 2rem;
-            }
-
-            .hour-row {
-                display: flex;
-                justify-content: space-between;
-                padding: 1rem;
-                background: rgba(255,255,255,0.05);
-                border-radius: 10px;
-            }
-
-            .map-container {
-                width: 100%;
-                height: 450px;
-                border-radius: 20px;
-                overflow: hidden;
-                box-shadow: 0 15px 50px rgba(0,0,0,0.3);
-            }
-
-            .map-container iframe {
-                width: 100%;
-                height: 100%;
-                border: none;
-            }
-
-            /* Contact Section */
-            .contact {
-                padding: 6rem 5%;
-                background: var(--cream);
-            }
-
-            .contact-container {
-                max-width: 800px;
-                margin: 0 auto;
+                font-weight: 700;
+                margin-bottom: 0.3rem;
             }
 
             .contact-form {
                 background: white;
-                padding: 3rem;
+                padding: 2.5rem;
                 border-radius: 20px;
-                box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+            }
+
+            .contact-form h3 {
+                font-family: 'Righteous', cursive;
+                color: var(--deep-red);
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
             }
 
             .form-group {
-                margin-bottom: 2rem;
+                margin-bottom: 1.5rem;
             }
 
             .form-group label {
                 display: block;
-                margin-bottom: 0.5rem;
                 color: var(--charcoal);
                 font-weight: 600;
+                margin-bottom: 0.5rem;
             }
 
             .form-group input,
             .form-group textarea {
                 width: 100%;
-                padding: 1rem;
+                padding: 0.8rem;
                 border: 2px solid #e0e0e0;
                 border-radius: 10px;
-                font-family: 'DM Sans', sans-serif;
-                font-size: 1rem;
+                font-family: inherit;
                 transition: border-color 0.3s;
             }
 
             .form-group input:focus,
             .form-group textarea:focus {
                 outline: none;
-                border-color: var(--sunset-orange);
+                border-color: var(--deep-red);
             }
 
             .form-group textarea {
                 resize: vertical;
-                min-height: 150px;
+                min-height: 120px;
             }
 
             .submit-btn {
+                width: 100%;
+                padding: 1rem;
                 background: var(--deep-red);
                 color: white;
                 border: none;
-                padding: 1.2rem 3rem;
                 border-radius: 50px;
                 font-weight: 700;
-                font-size: 1.1rem;
                 cursor: pointer;
-                width: 100%;
                 transition: all 0.3s;
-                box-shadow: 0 8px 25px rgba(196, 30, 58, 0.3);
             }
 
             .submit-btn:hover {
                 background: var(--sunset-orange);
                 transform: translateY(-2px);
-                box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
             }
 
             /* Footer */
@@ -934,67 +827,30 @@
             }
 
             .footer-content {
-                max-width: 1200px;
+                max-width: 1400px;
                 margin: 0 auto;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 3rem;
-                margin-bottom: 2rem;
-            }
-
-            .footer-section h3 {
-                color: var(--california-gold);
-                margin-bottom: 1rem;
-                font-size: 1.5rem;
-            }
-
-            .footer-section p,
-            .footer-section a {
-                color: #ccc;
-                text-decoration: none;
-                line-height: 2;
-            }
-
-            .footer-section a:hover {
-                color: var(--sunset-orange);
             }
 
             .social-links {
                 display: flex;
-                gap: 1.5rem;
                 justify-content: center;
-                margin-top: 1rem;
+                gap: 2rem;
+                margin: 2rem 0;
             }
 
-            .social-icon {
-                width: 45px;
-                height: 45px;
-                background: rgba(255,255,255,0.1);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.5rem;
+            .social-links a {
+                color: white;
+                font-size: 1.8rem;
                 transition: all 0.3s;
             }
 
-            .social-icon:hover {
-                background: var(--sunset-orange);
-                transform: translateY(-5px);
+            .social-links a:hover {
+                color: var(--california-gold);
+                transform: translateY(-3px);
             }
 
-            .copyright {
-                padding-top: 2rem;
-                border-top: 1px solid rgba(255,255,255,0.1);
-                color: #888;
-            }
-
-            /* Mobile Responsiveness */
-            @media (max-width: 968px) {
-                .nav-links {
-                    display: none;
-                }
-
+            /* Responsive */
+            @media (max-width: 1024px) {
                 .hero-content {
                     grid-template-columns: 1fr;
                     text-align: center;
@@ -1006,25 +862,24 @@
 
                 .hero-buttons {
                     justify-content: center;
-                    flex-wrap: wrap;
                 }
 
                 .hero-image {
                     order: -1;
                 }
 
-                .burger-visual {
-                    max-width: 350px;
-                    height: 350px;
-                    margin: 0 auto;
-                }
-
-                .location-content {
+                .contact-grid {
                     grid-template-columns: 1fr;
                 }
+            }
 
-                .footer-content {
-                    text-align: left;
+            @media (max-width: 768px) {
+                .nav-links {
+                    display: none;
+                }
+
+                .menu-grid {
+                    grid-template-columns: 1fr;
                 }
 
                 .cart-sidebar {
@@ -1032,52 +887,19 @@
                     right: -100%;
                 }
 
-                .menu-categories {
-                    size: 1rem;
+                .hero-buttons {
+                    flex-direction: column;
                 }
 
-                .category-btn {
-                    padding: 0.8rem 1.5rem;
-                    font-size: 0.5rem;
-                }
-
-                .menu-grid {
-                    grid-template-columns: 1fr;
+                .btn-primary, .btn-secondary {
+                    width: 100%;
                 }
             }
 
-            @media (max-width: 640px) {
-                .hero-text h1 {
-                    font-size: 3rem;
-                }
-
-                .burger-visual {
-                    max-width: 280px;
-                    height: 280px;
-                }
-
-                .burger-visual::after {
-                    font-size: 5rem;
-                }
-
-                .contact-form {
-                    padding: 2rem 1.5rem;
-                }
-
-                .cart-toggle {
-                    width: 60px;
-                    height: 60px;
-                    font-size: 1.5rem;
-                    bottom: 20px;
-                    right: 20px;
-                }
-            }
-
-            /* Scroll animations – kept for other sections */
             .fade-in {
                 opacity: 0;
                 transform: translateY(30px);
-                transition: opacity 0.6s, transform 0.6s;
+                transition: opacity 0.8s, transform 0.8s;
             }
 
             .fade-in.visible {
@@ -1093,10 +915,10 @@
                 <a href="#" class="logo">BURGER CALIFORNIA</a>
                 <ul class="nav-links">
                     <li><a href="#menu">Menu</a></li>
-                    <li><a href="#location">Localisation</a></li>
+                    <li><a href="#features">Nos Valeurs</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-                <a href="tel:0143460238" class="cta-button">Commander</a>
+                <a href="#menu" class="cta-button">Commander</a>
             </div>
         </nav>
 
@@ -1105,84 +927,134 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <h1>LE GOÛT DE LA CALIFORNIE À PARIS</h1>
-                    <div class="subtitle">Burgers Authentiques • Saveurs Explosives</div>
-                    <p>Découvrez nos burgers artisanaux préparés avec des ingrédients frais et de qualité. L'esprit californien rencontre le savoir-faire français dans chaque bouchée.</p>
+                    <p class="subtitle">Des Burgers Authentiques, Fait Maison</p>
+                    <p>Découvrez nos burgers artisanaux préparés avec des ingrédients frais et de qualité. Une expérience culinaire unique inspirée des saveurs de la côte californienne.</p>
                     <div class="hero-buttons">
-                        <a href="tel:0143460238" class="btn-primary">Commander Maintenant</a>
-                        <a href="#menu" class="btn-secondary">Voir le Menu</a>
+                        <a href="#menu" class="btn-primary">Voir le Menu</a>
+                        <a href="#contact" class="btn-secondary">Nous Contacter</a>
                     </div>
                 </div>
                 <div class="hero-image">
-                    <div class="burger-visual"></div>
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800" alt="Delicious California Burger">
                 </div>
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section class="features fade-in">
-            <h2 class="section-title">POURQUOI NOUS CHOISIR</h2>
-            <p class="section-subtitle">L'excellence dans chaque détail</p>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🥩</div>
-                    <h3>Viande Premium</h3>
-                    <p>Bœuf 100% français sélectionné avec soin pour une qualité exceptionnelle et un goût incomparable.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌱</div>
+        <!-- Features -->
+        <section id="features" class="features">
+            <div class="features-container">
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🥑</span>
                     <h3>Ingrédients Frais</h3>
-                    <p>Légumes frais du jour, pain artisanal et sauces maison préparées quotidiennement dans notre cuisine.</p>
+                    <p>Nous utilisons uniquement des produits frais et de qualité supérieure pour garantir le meilleur goût.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🚚</div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">👨‍🍳</span>
+                    <h3>Fait Maison</h3>
+                    <p>Chaque burger est préparé avec soin par nos chefs passionnés, avec des recettes authentiques.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🚀</span>
                     <h3>Livraison Rapide</h3>
-                    <p>Commandez en ligne et recevez vos burgers chauds à domicile ou optez pour le click & collect.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">☀️</div>
-                    <h3>Terrasse Chauffée</h3>
-                    <p>Profitez de notre terrasse toute l'année grâce à notre système de chauffage et notre ambiance conviviale.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3>Wi-Fi Gratuit</h3>
-                    <p>Restez connecté pendant votre repas avec notre Wi-Fi haut débit disponible gratuitement.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">♿</div>
-                    <h3>Accessible PMR</h3>
-                    <p>Notre établissement est entièrement accessible aux personnes à mobilité réduite.</p>
+                    <p>Commandez en ligne et recevez votre repas chaud à domicile en un temps record.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Menu Section – NO fade-in class here -->
-        <section class="menu-preview" id="menu">
-            <h2 class="section-title">NOTRE MENU</h2>
-            <p class="section-subtitle">Commandez directement en ligne</p>
-            
-            <!-- Menu Categories -->
-            <div class="menu-categories">
+        <!-- Menu Section -->
+        <section id="menu" class="menu-section">
+            <div class="section-header fade-in">
+                <h2 class="section-title">NOTRE MENU</h2>
+                <p class="section-subtitle">Découvrez nos créations californiennes</p>
+            </div>
+
+            <div class="category-filters fade-in">
                 <button class="category-btn active" data-category="burgers">🍔 Burgers</button>
                 <button class="category-btn" data-category="pizzas">🍕 Pizzas</button>
-                <button class="category-btn" data-category="texmex">🌮 Tex-Mex</button>
+                <button class="category-btn" data-category="sides">🍟 Accompagnements</button>
+                <button class="category-btn" data-category="drinks">🥤 Boissons</button>
                 <button class="category-btn" data-category="desserts">🍰 Desserts</button>
-                <button class="category-btn" data-category="boissons">🥤 Boissons</button>
             </div>
 
-            <!-- Menu Items Container -->
-            <div class="menu-items-container" id="menuItemsContainer">
-                <!-- Items will be dynamically loaded here -->
+            <div id="menuContainer" class="menu-grid">
+                <!-- Menu items will be loaded here by JavaScript -->
             </div>
         </section>
 
-        <!-- Shopping Cart -->
-        <div class="cart-sidebar" id="cartSidebar">
-            <div class="cart-header">
-                <h3>🛒 Mon Panier</h3>
-                <button class="cart-close" id="cartClose">✕</button>
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="contact-container">
+                <div class="section-header">
+                    <h2 class="section-title" style="color: white;">CONTACTEZ-NOUS</h2>
+                    <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Nous sommes là pour vous servir</p>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Informations</h3>
+                        <div class="info-item">
+                            <span class="info-icon">📍</span>
+                            <div class="info-text">
+                                <h4>Adresse</h4>
+                                <p>123 Rue de la Californie<br>75001 Paris, France</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon">📞</span>
+                            <div class="info-text">
+                                <h4>Téléphone</h4>
+                                <p>+33 1 23 45 67 89</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon">⏰</span>
+                            <div class="info-text">
+                                <h4>Horaires</h4>
+                                <p>Lun - Dim: 11h00 - 23h00</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="contact-form">
+                        <h3>Envoyez-nous un message</h3>
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Envoyer</button>
+                    </form>
+                </div>
             </div>
-            <div class="cart-items" id="cartItems">
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <h3 class="logo" style="color: white;">BURGER CALIFORNIA</h3>
+                <div class="social-links">
+                    <a href="#">📘</a>
+                    <a href="#">📷</a>
+                    <a href="#">🐦</a>
+                </div>
+                <p>&copy; 2024 Burger California. Tous droits réservés.</p>
+            </div>
+        </footer>
+
+        <!-- Cart Sidebar -->
+        <div id="cartSidebar" class="cart-sidebar">
+            <div class="cart-header">
+                <h2>Votre Panier</h2>
+                <button id="cartClose" class="cart-close">&times;</button>
+            </div>
+            <div id="cartItems" class="cart-items">
                 <p class="cart-empty">Votre panier est vide</p>
             </div>
             <div class="cart-footer">
@@ -1190,246 +1062,82 @@
                     <span>Total:</span>
                     <span id="cartTotal">0.00€</span>
                 </div>
-                <button class="checkout-btn" id="checkoutBtn">Commander Maintenant</button>
+                <button id="checkoutBtn" class="checkout-btn" disabled>Commander</button>
             </div>
         </div>
 
         <!-- Cart Toggle Button -->
-        <button class="cart-toggle" id="cartToggle">
-            🛒 <span class="cart-count" id="cartCount">0</span>
+        <button id="cartToggle" class="cart-toggle">
+            🛒
+            <span id="cartCount" class="cart-count">0</span>
         </button>
 
-        <!-- Location Section -->
-        <section class="location fade-in" id="location">
-            <h2 class="section-title">VENEZ NOUS RENDRE VISITE</h2>
-            <p class="section-subtitle" style="color: #ccc;">Au cœur du 12ème arrondissement de Paris</p>
-            <div class="location-content">
-                <div class="location-info">
-                    <h3>Informations Pratiques</h3>
-                    
-                    <div class="info-item">
-                        <div class="info-icon">📍</div>
-                        <div class="info-text">
-                            <h4>Adresse</h4>
-                            <p>125 rue de Reuilly<br>75012 Paris, France</p>
-                        </div>
-                    </div>
-
-                    <div class="info-item">
-                        <div class="info-icon">📞</div>
-                        <div class="info-text">
-                            <h4>Téléphone</h4>
-                            <p><a href="tel:0143460238" style="color: var(--california-gold);">01 43 46 02 38</a></p>
-                        </div>
-                    </div>
-
-                    <div class="info-item">
-                        <div class="info-icon">✉️</div>
-                        <div class="info-text">
-                            <h4>Email</h4>
-                            <p>bhuyanbrahim180@gmail.com</p>
-                        </div>
-                    </div>
-
-                    <h3 style="margin-top: 2rem;">Horaires d'Ouverture</h3>
-                    <div class="hours-grid">
-                        <div class="hour-row">
-                            <span>Lundi - Samedi</span>
-                            <span style="color: var(--california-gold);">10:00 - 23:00</span>
-                        </div>
-                        <div class="hour-row">
-                            <span>Dimanche</span>
-                            <span style="color: var(--sunset-orange);">Fermé</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.1978!2d2.3951038!3d48.8404373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDUwJzI1LjYiTiAywrAyMyc0Mi40IkU!5e0!3m2!1sen!2sfr!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="contact fade-in" id="contact">
-            <h2 class="section-title">CONTACTEZ-NOUS</h2>
-            <p class="section-subtitle">Une question ? Une réservation ? On vous répond rapidement !</p>
-            <div class="contact-container">
-                <form class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Votre Nom *</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Votre Email *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Votre Téléphone</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Objet *</label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Votre Message *</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Envoyer le Message</button>
-                </form>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Burger California</h3>
-                    <p>Le goût authentique de la Californie au cœur de Paris depuis 2018.</p>
-                    <div class="social-links">
-                        <a href="https://m.facebook.com/Burger-California-2249180741822550/" target="_blank" class="social-icon">📘</a>
-                        <a href="https://www.ubereats.com/fr-FR/paris/food-delivery/burger-california/" target="_blank" class="social-icon">🍔</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Liens Rapides</h3>
-                    <p><a href="#menu">Menu</a></p>
-                    <p><a href="#location">Localisation</a></p>
-                    <p><a href="#contact">Contact</a></p>
-                    <p><a href="https://cdn.website.dish.co/media/98/9b/1030248/Burger-California-1-1.pdf" target="_blank">Menu PDF</a></p>
-                </div>
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <p>🚚 Livraison à domicile</p>
-                    <p>🏃 Click & Collect</p>
-                    <p>🎉 Événements privés</p>
-                    <p>♿ Accessible PMR</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Paiements Acceptés</h3>
-                    <p>💳 Cartes bancaires</p>
-                    <p>💵 Espèces</p>
-                    <p>🎫 Tickets Restaurant</p>
-                    <p>📱 Paiement sans contact</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>© 2026 Burger California. Tous droits réservés. | Design par Viral Horizon</p>
-            </div>
-        </footer>
-
         <script>
-            // Menu Data (unchanged)
+            let cart = [];
             const menuData = {
                 burgers: [
-                    { name: "Menu California Burger", image: "images/california-burger.jpeg", desc: "Pain maison, steak 160g, salade, sauce California, bacon, oignons confits, cheddar fondu + Frites maison + Boisson", price: 11.90, icon: "🍔" },
-                    { name: "Menu Double Cheese Burger", image: "images/double-cheese.jpeg", desc: "Pain maison, 2 steaks, salade, sauce ketchup, tomate, oignons confits, cornichon, cheddar fondu + Frites maison + Boisson", price: 11.90, icon: "🍔" },
-                    { name: "Menu Truffe Burger", desc: "Pain maison, steak 160g, salade, sauce maison, oignons confits, cornichon, fromage truffe + Frites maison + Boisson", price: 13.90, icon: "🧈" },
-                    { name: "Menu Cheese Burger", desc: "Pain maison, steak, salade, sauce ketchup, tomate, oignons confits, cornichon, cheddar fondu + Frites maison + Boisson", price: 9.90, icon: "🧀" },
-                    { name: "Menu Chili Burger", image: "images/chili-burger.jpeg", desc: "Pain maison, steak, sauce piment, salade, oignons confits, cornichon, cheddar fondu + Frites maison + Boisson", price: 9.90, icon: "🌶️" },
-                    { name: "Menu Chicken Burger", image: "images/chicken-burger.jpeg", desc: "Pain maison, steak chicken, sauce maison, salade, oignons confits, cornichon, cheddar fondu + Frites maison + Boisson", price: 9.90, icon: "🐔" },
-                    { name: "Menu Chicken Avocat Burger", image: "images/avocat-burger.jpeg", desc: "Pain maison, steak chicken, sauce maison, avocat, salade, oignon rouge, cornichon, cheddar fondu + Frites maison + Boisson", price: 10.90, icon: "🥑" },
-                    { name: "Menu Avocat Burger", image: "images/avocat-burger.jpeg", desc: "Pain maison, steak, sauce maison, salade, avocat, oignon rouge, cornichon, cheddar fondu + Frites maison + Boisson", price: 10.90, icon: "🥑" },
-                    { name: "Menu Veggie Burger", desc: "Pain maison, steak veggie, sauce ketchup, salade, tomate, oignons confits, cornichon, cheddar fondu + Frites maison + Boisson", price: 10.90, icon: "🌱" },
-                    { name: "Menu Bacon Burger", image: "images/bacon-burger.jpeg", desc: "Pain maison, steak, sauce BBQ, salade, bacon, oignon rouge, cornichon, cheddar fondu + Frites maison + Boisson", price: 10.90, icon: "🥓" },
-                    { name: "Menu Fish Burger", desc: "Pain maison, fish, sauce mayonnaise, salade, oignons confits, cornichon, cheddar fondu + Frites maison + Boisson", price: 9.90, icon: "🐟" },
-                    { name: "Menu Bleu Burger", desc: "Pain maison, steak, sauce bleu, salade roquette, oignons confits, cornichon, fromage bleu + Frites maison + Boisson", price: 9.90, icon: "🧀" },
-                    { name: "Menu Comté Burger", image: "images/comte-burger.jpeg", desc: "Pain maison, steak, sauce maison, salade, tomate, oignons confits, cornichon, comté + Frites maison + Boisson", price: 11.90, icon: "🧀" },
-                    { name: "Menu Oeuf Burger", desc: "Pain maison, steak, oeuf, sauce maison, salade, oignons confits, cornichon, fromage raclette + Frites maison + Boisson", price: 10.90, icon: "🥚" },
-                    { name: "Menu Mushroom Burger", image: "images/mushroom-burger.png", desc: "Pain maison, steak, sauce maison, salade, oignon rouge, champignons, cornichon, fromage comté + Frites maison + Boisson", price: 11.90, icon: "🍄" }
+                    { name: "California Classic", desc: "Burger signature avec avocat, bacon croustillant et sauce spéciale", price: 12.90, image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400" },
+                    { name: "Sunset BBQ", desc: "Steak haché, cheddar fondu, oignons caramélisés et sauce BBQ maison", price: 13.90, image: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=400" },
+                    { name: "Ocean Blue", desc: "Burger au poisson, coleslaw et sauce tartare", price: 14.50, image: "https://images.unsplash.com/photo-1619740455993-a4fb34928e6f?w=400" },
+                    { name: "Spicy Hollywood", desc: "Double steak, jalapeños, pepper jack cheese et sauce piquante", price: 15.90, image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
                 ],
                 pizzas: [
-                    { name: "Hot California", desc: "Sauce piment, mozzarella, viande hachée, champignons, oignon et olives", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "🌶️" },
-                    { name: "Végétarienne", desc: "Sauce tomate, mozzarella, champignons, artichaut, aubergine et poivrons", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "🥬" },
-                    { name: "Barbecue", desc: "Sauce barbecue, mozzarella, viande hachée et poivron", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "🍖" },
-                    { name: "Marguerite", desc: "Sauce tomate, mozzarella, origan", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "🍕" },
-                    { name: "Reine", desc: "Sauce tomate, mozzarella, champignons et jambon, origan", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "👑" },
-                    { name: "Calzone", desc: "Sauce tomate, mozzarella, jambon, oeuf", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "🥟" },
-                    { name: "4 Fromages", image: "images/4-fromages.jpeg", desc: "Sauce tomate, mozzarella, chèvre, raclette et blue, origan", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "🧀" },
-                    { name: "Orientale", desc: "Sauce tomate, mozzarella, merguez, poivron, oignon, olive et œuf", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "🌍" },
-                    { name: "Mexicaine", image: "images/mexicaine.jpeg", desc: "Sauce tomate, mozzarella, merguez, viande hachée et poivron, origan", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "🇲🇽" },
-                    { name: "Boursin", image: "images/boursin.jpeg", desc: "Sauce tomate, mozzarella, viande hachée et boursin, origan", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "🧀" },
-                    { name: "4 Saisons", desc: "Sauce tomate, mozzarella, jambon, artichaut, champignon, poivron", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "🌈" },
-                    { name: "Emilia", desc: "Sauce tomate, mozzarella, thon, oignon, origan", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "🐟" },
-                    { name: "Chicken", image: "images/chicken.jpeg", desc: "Crème fraiche, mozzarella, poulet et pomme de terre, origan", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "🐔" },
-                    { name: "Chèvre Miel", desc: "Crème fraiche, mozzarella, chèvre et miel", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "🍯" },
-                    { name: "Norvégienne", desc: "Crème fraiche, mozzarella, et saumon fumé", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "🐟" },
-                    { name: "Raclette", image: "images/raclette.jpeg", desc: "Crème fraiche, mozzarella, lardons, pomme de terre et raclette", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "🧀" },
-                    { name: "California", image: "images/california.jpeg", desc: "Crème fraiche, mozzarella, viande hachée, bacon, cheddar, origan", sizes: { junior: 7.90, senior: 10.50, mega: 14.00 }, icon: "🍕" }
+                    { name: "Margherita", desc: "Sauce tomate, mozzarella, basilic frais", price: { junior: 8.90, senior: 11.90, mega: 14.90 }, image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400" },
+                    { name: "Reine", desc: "Sauce tomate, jambon, champignons, mozzarella", price: { junior: 9.90, senior: 12.90, mega: 15.90 }, image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400" },
+                    { name: "4 Fromages", desc: "Mozzarella, gorgonzola, chèvre, emmental", price: { junior: 10.90, senior: 13.90, mega: 16.90 }, image: "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=400" }
                 ],
-                texmex: [
-                    { name: "Nuggets 6 pièces", desc: "6 Nuggets de poulet croustillants", price: 5.00, icon: "🍗" },
-                    { name: "Nuggets 8 pièces", desc: "8 Nuggets de poulet croustillants", price: 6.50, icon: "🍗" },
-                    { name: "Nuggets 10 pièces", desc: "10 Nuggets de poulet croustillants", price: 8.00, icon: "🍗" },
-                    { name: "Menu Nuggets", desc: "6 Nuggets + Frites maison + Boisson 33cl", price: 7.90, icon: "🍗" },
-                    { name: "Tenders 4 pièces", desc: "4 Tenders de poulet", price: 6.00, icon: "🍗" },
-                    { name: "Tenders 6 pièces", desc: "6 Tenders de poulet", price: 7.50, icon: "🍗" },
-                    { name: "Tenders 8 pièces", desc: "8 Tenders de poulet", price: 10.50, icon: "🍗" },
-                    { name: "Menu Tenders", desc: "6 Tenders + Frites maison + Boisson 33cl", price: 8.90, icon: "🍗" },
-                    { name: "Oignons Rings 5 pièces", desc: "5 Anneaux d'oignons frits", price: 4.00, icon: "🧅" },
-                    { name: "Oignons Rings 10 pièces", desc: "10 Anneaux d'oignons frits", price: 7.50, icon: "🧅" },
-                    { name: "Oignons Rings 15 pièces", desc: "15 Anneaux d'oignons frits", price: 10.50, icon: "🧅" },
-                    { name: "Menu Oignons Rings", desc: "6 Oignons Rings + Frites maison + Boisson 33cl", price: 7.90, icon: "🧅" },
-                    { name: "Frites maison", desc: "Portion de frites maison", price: 3.00, icon: "🍟" },
-                    { name: "Frites Cheddar + Bacon", desc: "Frites avec cheddar fondu et bacon", price: 5.00, icon: "🍟" }
+                sides: [
+                    { name: "Frites Maison", desc: "Frites fraîches coupées à la main", price: 3.90, image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400" },
+                    { name: "Onion Rings", desc: "Rondelles d'oignon panées et croustillantes", price: 4.50, image: "https://images.unsplash.com/photo-1639024471283-03518883512d?w=400" },
+                    { name: "Salade César", desc: "Salade romaine, poulet grillé, croûtons, parmesan", price: 6.90, image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400" }
+                ],
+                drinks: [
+                    { name: "Coca-Cola", desc: "33cl", price: 2.50 },
+                    { name: "Limonade Maison", desc: "50cl", price: 3.90 },
+                    { name: "Milkshake", desc: "Vanille, chocolat ou fraise", price: 5.50 }
                 ],
                 desserts: [
-                    { name: "Cookie", desc: "Cookie maison", price: 3.00, icon: "🍪" },
-                    { name: "Gâteau Chocolat", desc: "Moelleux au chocolat", price: 3.00, icon: "🍰" },
-                    { name: "Tarte aux Daims", desc: "Tarte gourmande aux daims", price: 3.00, icon: "🥧" },
-                    { name: "Tiramisu", desc: "Tiramisu traditionnel", price: 3.50, icon: "🍮" },
-                    { name: "Cheesecake", desc: "Cheesecake New York style", price: 3.50, icon: "🍰" }
-                ],
-                boissons: [
-                    { name: "Coca-Cola 33cl", desc: "Coca, Coca Zéro ou Coca Light", price: 1.90, icon: "🥤" },
-                    { name: "Oasis 33cl", desc: "Oasis tropical", price: 1.90, icon: "🥤" },
-                    { name: "Sprite 33cl", desc: "Sprite citron", price: 1.90, icon: "🥤" },
-                    { name: "7-Up 33cl", desc: "7-Up ou 7-Up Mojito", price: 1.90, icon: "🥤" },
-                    { name: "Orangina 33cl", desc: "Orangina", price: 1.90, icon: "🥤" },
-                    { name: "Schweppes 33cl", desc: "Schweppes Tonic", price: 1.90, icon: "🥤" },
-                    { name: "Ice Tea 33cl", desc: "Ice Tea pêche", price: 1.90, icon: "🥤" },
-                    { name: "Café", desc: "Expresso", price: 1.50, icon: "☕" }
+                    { name: "Cheesecake", desc: "New York style avec coulis de fruits rouges", price: 5.90, image: "https://images.unsplash.com/photo-1533134486753-c833f0ed4866?w=400" },
+                    { name: "Brownie", desc: "Chocolat chaud avec glace vanille", price: 4.90, image: "https://images.unsplash.com/photo-1607920591413-4ec007e70023?w=400" }
                 ]
             };
 
-            let cart = [];
-
             function loadMenuItems(category) {
-                const container = document.getElementById('menuItemsContainer');
-                const items = menuData[category] || [];
-
-                if (items.length === 0) {
-                    container.innerHTML = '<p style="text-align: center; color: #999;">Aucun article dans cette catégorie</p>';
-                    return;
-                }
-
+                const container = document.getElementById('menuContainer');
+                const items = menuData[category];
                 let html = '<div class="menu-grid">';
 
-                items.forEach((item) => {
-                    let imageHtml = item.image 
-                        ? `<div class="menu-item-image has-image"><img src="${item.image}" alt="${item.name}" loading="lazy"></div>`
-                        : `<div class="menu-item-image">${item.icon || '🍔'}</div>`;
-
-                    if (item.sizes) {
+                items.forEach(item => {
+                    const imageHtml = item.image ? `<img src="${item.image}" alt="${item.name}" class="menu-item-image">` : '';
+                    
+                    if (category === 'pizzas') {
                         html += `
                             <div class="menu-item">
                                 ${imageHtml}
                                 <div class="menu-item-content">
                                     <h3>${item.name}</h3>
                                     <p>${item.desc}</p>
+                                    <div class="delivery-toggle">
+                                        <input type="checkbox" id="delivery-${item.name.replace(/\s/g, '-')}" class="delivery-checkbox">
+                                        <label for="delivery-${item.name.replace(/\s/g, '-')}">
+                                            <span class="delivery-icon">🚚</span> Livraison
+                                        </label>
+                                    </div>
                                     <div class="pizza-sizes">
-                                        <button class="size-btn active" data-size="junior" data-price="${item.sizes.junior}">
-                                            <span class="size-name">Junior 26cm</span>
-                                            <span class="size-price">${item.sizes.junior.toFixed(2)}€</span>
+                                        <button class="size-btn active" data-size="junior" data-price="${item.price.junior}">
+                                            <span class="size-name">Junior</span>
+                                            <span class="size-detail">26cm</span>
+                                            <span class="size-price">${item.price.junior.toFixed(2)}€</span>
                                         </button>
-                                        <button class="size-btn" data-size="senior" data-price="${item.sizes.senior}">
-                                            <span class="size-name">Senior 31cm</span>
-                                            <span class="size-price">${item.sizes.senior.toFixed(2)}€</span>
+                                        <button class="size-btn" data-size="senior" data-price="${item.price.senior}">
+                                            <span class="size-name">Senior</span>
+                                            <span class="size-detail">31cm</span>
+                                            <span class="size-price">${item.price.senior.toFixed(2)}€</span>
                                         </button>
-                                        <button class="size-btn" data-size="mega" data-price="${item.sizes.mega}">
-                                            <span class="size-name">Méga 34cm</span>
-                                            <span class="size-price">${item.sizes.mega.toFixed(2)}€</span>
+                                        <button class="size-btn" data-size="mega" data-price="${item.price.mega}">
+                                            <span class="size-name">Méga</span>
+                                            <span class="size-detail">34cm</span>
+                                            <span class="size-price">${item.price.mega.toFixed(2)}€</span>
                                         </button>
                                     </div>
                                     <button class="add-to-cart-btn" onclick="addPizzaToCart('${item.name.replace(/'/g, "\\'")}', this)">
@@ -1445,9 +1153,15 @@
                                 <div class="menu-item-content">
                                     <h3>${item.name}</h3>
                                     <p>${item.desc}</p>
+                                    <div class="delivery-toggle">
+                                        <input type="checkbox" id="delivery-${item.name.replace(/\s/g, '-')}" class="delivery-checkbox">
+                                        <label for="delivery-${item.name.replace(/\s/g, '-')}">
+                                            <span class="delivery-icon">🚚</span> Livraison
+                                        </label>
+                                    </div>
                                     <div class="menu-item-footer">
                                         <span class="price">${item.price.toFixed(2)}€</span>
-                                        <button class="add-to-cart-btn" onclick="addToCart('${item.name.replace(/'/g, "\\'")}', ${item.price})">
+                                        <button class="add-to-cart-btn" onclick="addToCart('${item.name.replace(/'/g, "\\'")}', ${item.price}, this)">
                                             Ajouter
                                         </button>
                                     </div>
@@ -1469,12 +1183,25 @@
                 });
             }
 
-            function addToCart(name, price) {
-                const existing = cart.find(i => i.name === name && !i.size);
+            function addToCart(name, price, button) {
+                const menuItem = button.closest('.menu-item');
+                const deliveryCheckbox = menuItem.querySelector('.delivery-checkbox');
+                const isDelivery = deliveryCheckbox.checked;
+                
+                const displayName = isDelivery ? `${name} (Livraison)` : name;
+                
+                const existing = cart.find(i => i.name === name && !i.size && i.isDelivery === isDelivery);
                 if (existing) {
                     existing.quantity++;
                 } else {
-                    cart.push({ name, displayName: name, price: Number(price), quantity: 1, size: null });
+                    cart.push({ 
+                        name, 
+                        displayName, 
+                        price: Number(price), 
+                        quantity: 1, 
+                        size: null,
+                        isDelivery 
+                    });
                 }
                 updateCart();
                 showCartNotification();
@@ -1483,6 +1210,8 @@
             function addPizzaToCart(name, button) {
                 const menuItem = button.closest('.menu-item');
                 const active = menuItem.querySelector('.size-btn.active');
+                const deliveryCheckbox = menuItem.querySelector('.delivery-checkbox');
+                
                 if (!active) {
                     alert("Veuillez sélectionner une taille.");
                     return;
@@ -1490,14 +1219,23 @@
 
                 const size = active.dataset.size;
                 const price = parseFloat(active.dataset.price);
+                const isDelivery = deliveryCheckbox.checked;
                 const sizeNames = { junior: 'Junior (26cm)', senior: 'Senior (31cm)', mega: 'Méga (34cm)' };
-                const displayName = `${name} – ${sizeNames[size]}`;
+                const baseName = `${name} – ${sizeNames[size]}`;
+                const displayName = isDelivery ? `${baseName} (Livraison)` : baseName;
 
-                const existing = cart.find(i => i.name === name && i.size === size);
+                const existing = cart.find(i => i.name === name && i.size === size && i.isDelivery === isDelivery);
                 if (existing) {
                     existing.quantity++;
                 } else {
-                    cart.push({ name, displayName, price: Number(price), quantity: 1, size });
+                    cart.push({ 
+                        name, 
+                        displayName, 
+                        price: Number(price), 
+                        quantity: 1, 
+                        size,
+                        isDelivery 
+                    });
                 }
                 updateCart();
                 showCartNotification();
@@ -1578,11 +1316,17 @@
                     return;
                 }
 
+                // Check if any items have delivery enabled
+                const hasDelivery = cart.some(item => item.isDelivery);
+
                 try {
                     const res = await fetch("/api/create-checkout-session", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ cart })
+                        body: JSON.stringify({ 
+                            cart,
+                            hasDelivery // Pass delivery flag to backend
+                        })
                     });
 
                     const data = await res.json();
@@ -1622,7 +1366,7 @@
                     });
                 });
 
-                // Scroll animations (only for elements that still have .fade-in)
+                // Scroll animations
                 const fadeEls = document.querySelectorAll('.fade-in');
 
                 if ('IntersectionObserver' in window) {
@@ -1642,7 +1386,7 @@
                 // Contact form placeholder
                 document.querySelector('.contact-form')?.addEventListener('submit', e => {
                     e.preventDefault();
-                    alert('Message envoyé ! Nous vous répondons rapidement.');
+                    alert('Merci pour votre message! Nous vous répondrons bientôt.');
                     e.target.reset();
                 });
             });
