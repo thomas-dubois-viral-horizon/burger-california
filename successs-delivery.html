@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commande confirmée – Livraison</title>
+    <style>
+        body { font-family: 'DM Sans', sans-serif; background: #FFF8E7; text-align: center; padding: 4rem 1rem; }
+        h1 { color: #C41E3A; font-size: 2.5rem; }
+        p { max-width: 600px; margin: 1.5rem auto; color: #333; }
+        button { background: #C41E3A; color: white; padding: 1rem 2rem; border: none; border-radius: 50px; font-size: 1.1rem; cursor: pointer; }
+        button:hover { background: #FF6B35; }
+    </style>
+</head>
+<body>
+    <h1>Merci ! Votre paiement est confirmé.</h1>
+    <p>Pour organiser la livraison, nous avons besoin de votre adresse exacte.</p>
+    <button onclick="getLocation()">Autoriser ma localisation</button>
+    <p id="status" style="margin-top: 2rem; color: #666;"></p>
+
+    <script>
+        async function getLocation() {
+            const status = document.getElementById('status');
+            status.textContent = 'Récupération de la localisation…';
+
+            if (!navigator.geolocation) {
+                status.textContent = 'Géolocalisation non supportée par votre navigateur.';
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                const mapsLink = `https://www.google.com/maps?q=${lat},${lon}`;
+
+                // Récupération sécurisée de l'ID de paiement
+                const params = new URLSearchParams(window.location.search);
+                const sessionId = params.get('session_id');
+                let paymentId = sessionId || 'inconnu';
+
+                if (sessionId) {
+                    try {
+                        const res = await fetch(`/api/checkout-session?session_id=${sessionId}`);
+                        const data = await res.json();
+                        if (res.ok && data.payment_intent) paymentId = data.payment_intent;
+                    } catch (e) { }
+                }
+
+                const message = encodeURIComponent(
+`Bonjour Burger California 🍔
+
+Ma commande vient d'être payée (ID: ${paymentId}).
+Adresse de livraison : ${mapsLink}
+
+Merci !`
+                );
+
+                // Remplace par ton numéro WhatsApp du resto (format international sans +)
+                window.location.href = `https://wa.me/33600000000?text=${message}`;
+            }, (error) => {
+                status.innerHTML = 'Localisation refusée.<br>Vous pouvez copier-coller votre adresse ici et nous l’envoyer manuellement.';
+            });
+        }
+    </script>
+</body>
+</html>
