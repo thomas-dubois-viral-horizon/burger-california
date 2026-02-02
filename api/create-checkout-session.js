@@ -2,23 +2,23 @@ import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-function getOrigin(req) {
-  // Prefer explicit origin header
-  const origin =
-    req.headers.origin ||
-    (req.headers.referer ? new URL(req.headers.referer).origin : null) ||
-    "http://localhost:3000";
-
-  return origin;
+function safeOrigin(req) {
+  // Prefer origin header; fallback to referer; fallback localhost
+  try {
+    if (req.headers.origin) return req.headers.origin;
+    if (req.headers.referer) return new URL(req.headers.referer).origin;
+  } catch (_) {}
+  return "http://localhost:3000";
 }
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method Not Allowed" });
+  }
 
   try {
     const { cart } = req.body;
 
-    // Validate cart exists and is an array
     if (!cart || !Array.isArray(cart)) {
       throw new Error("Cart is required and must be an array");
     }
@@ -26,25 +26,14 @@ export default async function handler(req, res) {
       throw new Error("Cart is empty");
     }
 
-    // Detect delivery (preferred: boolean flag; fallback: keyword in name)
-    const hasDelivery = cart.some((item) => {
-      if (item && item.delivery === true) return true;
-      const n = `${item?.displayName || item?.name || ""}`.toLowerCase();
-      return n.includes("delivery") || n.includes("livraison");
-    });
+    const hasDelivery = cart.some((item) => item?.delivery === true);
 
-    // Build line items from cart - accept dynamic products
     const line_items = cart.map((item) => {
-      // Validate required fields
-      if (!item.name && !item.displayName) {
-        throw new Error("Item missing name");
-      }
-      if (item.price === undefined || item.price === null) {
+      if (!item.name && !item.displayName) throw new Error("Item missing name");
+      if (item.price === undefined || item.price === null)
         throw new Error(`Item ${item.name || item.displayName} missing price`);
-      }
-      if (!item.quantity || item.quantity < 1) {
+      if (!item.quantity || item.quantity < 1)
         throw new Error(`Item ${item.name || item.displayName} missing quantity`);
-      }
 
       const name = item.displayName || item.name;
       const priceInCents = Math.round(Number(item.price) * 100);
@@ -63,15 +52,20 @@ export default async function handler(req, res) {
       };
     });
 
-    const origin = getOrigin(req);
+    const origin = safeOrigin(req);
     const successPage = hasDelivery ? "successs-delivery.html" : "success.html";
 
-    // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items,
-      // Put session_id in URL so success page can fetch payment info via your API
       success_url: `${origin}/${successPage}?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/cancel.html`,
-      // Optional but helpful for debugging & downstream logic
-      metadata: {
+      metadata: { has_delivery: hasDelivery ? "1" : "0" },
+    });
+
+    return res.status(200).json({ url: session.url });
+  } catch (e) {
+    console.error("Checkout error:", e);
+    return res.status(400).json({ error: e.message });
+  }
+}
