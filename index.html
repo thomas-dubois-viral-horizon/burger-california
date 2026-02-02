@@ -166,14 +166,8 @@
             }
 
             @keyframes slideInLeft {
-                from {
-                    opacity: 0;
-                    transform: translateX(-50px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
+                from { opacity: 0; transform: translateX(-50px); }
+                to { opacity: 1; transform: translateX(0); }
             }
 
             .hero-text .subtitle {
@@ -235,14 +229,8 @@
             }
 
             @keyframes slideInRight {
-                from {
-                    opacity: 0;
-                    transform: translateX(50px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
+                from { opacity: 0; transform: translateX(50px); }
+                to { opacity: 1; transform: translateX(0); }
             }
 
             .burger-visual {
@@ -351,7 +339,7 @@
                 line-height: 1.7;
             }
 
-            /* Menu Preview – NO fade-in here */
+            /* Menu Preview */
             .menu-preview {
                 padding: 6rem 5%;
                 background: linear-gradient(180deg, var(--cream) 0%, white 100%);
@@ -472,6 +460,7 @@
                 align-items: center;
                 margin-top: auto;
                 gap: 1rem;
+                flex-wrap: wrap;
             }
 
             .price {
@@ -731,6 +720,7 @@
             .checkout-btn:disabled {
                 background: #ccc;
                 cursor: not-allowed;
+                transform: none;
             }
 
             /* Cart Toggle Button */
@@ -1032,17 +1022,17 @@
                     right: -100%;
                 }
 
-                .menu-categories {
-                    size: 1rem;
-                }
-
-                .category-btn {
-                    padding: 0.8rem 1.5rem;
-                    font-size: 0.5rem;
-                }
-
                 .menu-grid {
                     grid-template-columns: 1fr;
+                }
+
+                .menu-item-footer {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+
+                .menu-item-footer > div {
+                    justify-content: center;
                 }
             }
 
@@ -1073,7 +1063,6 @@
                 }
             }
 
-            /* Scroll animations – kept for other sections */
             .fade-in {
                 opacity: 0;
                 transform: translateY(30px);
@@ -1156,10 +1145,10 @@
             </div>
         </section>
 
-        <!-- Menu Section – NO fade-in class here -->
+        <!-- Menu Section -->
         <section class="menu-preview" id="menu">
             <h2 class="section-title">NOTRE MENU</h2>
-            <p class="section-subtitle">Commandez directement en ligne (Pour les livraisons à domicile minimum 20€ et commande à passer par appel au bas de la page.)</p>
+            <p class="section-subtitle">Commandez en ligne pour retrait sur place ou livraison à domicile (minimum 20 € pour la livraison).</p>
             
             <!-- Menu Categories -->
             <div class="menu-categories">
@@ -1190,13 +1179,13 @@
                     <span>Total:</span>
                     <span id="cartTotal">0.00€</span>
                 </div>
-                <button class="checkout-btn" id="checkoutBtn">Commander Maintenant</button>
+                <button class="checkout-btn" id="checkoutBtn" disabled>Commander Maintenant</button>
             </div>
         </div>
 
         <!-- Cart Toggle Button -->
         <button class="cart-toggle" id="cartToggle">
-            🛒 <span class="cart-count" id="cartCount">0</span>
+            🛒 <span class="cart-count" id="cartCount"></span>
         </button>
 
         <!-- Location Section -->
@@ -1319,7 +1308,7 @@
         </footer>
 
         <script>
-            // Menu Data (unchanged)
+            // Menu Data
             const menuData = {
                 burgers: [
                     { name: "Menu California Burger", desc: "Pain maison, steak, salade, sauce California, oignons confits, cheddar fondu + Frites maison + Boisson", price: 12.90, icon: "🍔" },
@@ -1405,11 +1394,10 @@
                 let html = '<div class="menu-grid">';
 
                 items.forEach((item) => {
-                    let imageHtml = item.image 
-                        ? `<div class="menu-item-image has-image"><img src="${item.image}" alt="${item.name}" loading="lazy"></div>`
-                        : `<div class="menu-item-image">${item.icon || '🍔'}</div>`;
+                    let imageHtml = `<div class="menu-item-image">${item.icon || '🍔'}</div>`;
 
                     if (item.sizes) {
+                        // Pizzas – deux boutons
                         html += `
                             <div class="menu-item">
                                 ${imageHtml}
@@ -1430,13 +1418,15 @@
                                             <span class="size-price">${item.sizes.mega.toFixed(2)}€</span>
                                         </button>
                                     </div>
-                                    <button class="add-to-cart-btn" onclick="addPizzaToCart('${item.name.replace(/'/g, "\\'")}', this)">
-                                        Ajouter au panier
-                                    </button>
+                                    <div style="display: flex; gap: 1rem; justify-content: flex-end; flex-wrap: wrap; margin-top: auto;">
+                                        <button class="add-to-cart-btn" onclick="addPizzaToCart('${item.name.replace(/'/g, "\\'")}', this, false)">À Emporter</button>
+                                        <button class="add-to-cart-btn" style="background: var(--sunset-orange);" onclick="addPizzaToCart('${item.name.replace(/'/g, "\\'")}', this, true)">Livraison</button>
+                                    </div>
                                 </div>
                             </div>
                         `;
                     } else {
+                        // Autres articles – deux boutons
                         html += `
                             <div class="menu-item">
                                 ${imageHtml}
@@ -1445,9 +1435,10 @@
                                     <p>${item.desc}</p>
                                     <div class="menu-item-footer">
                                         <span class="price">${item.price.toFixed(2)}€</span>
-                                        <button class="add-to-cart-btn" onclick="addToCart('${item.name.replace(/'/g, "\\'")}', ${item.price})">
-                                            Ajouter
-                                        </button>
+                                        <div style="display: flex; gap: 1rem;">
+                                            <button class="add-to-cart-btn" onclick="addToCart('${item.name.replace(/'/g, "\\'")}', ${item.price}, false)">À Emporter</button>
+                                            <button class="add-to-cart-btn" style="background: var(--sunset-orange);" onclick="addToCart('${item.name.replace(/'/g, "\\'")}', ${item.price}, true)">Livraison</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1458,47 +1449,68 @@
                 html += '</div>';
                 container.innerHTML = html;
 
-                // Size buttons logic
+                // Gestion des boutons de taille pour pizzas
                 document.querySelectorAll('.size-btn').forEach(btn => {
                     btn.addEventListener('click', function() {
-                        this.parentElement.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+                        this.closest('.pizza-sizes').querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
                         this.classList.add('active');
                     });
                 });
             }
 
-            function addToCart(name, price) {
-                const existing = cart.find(i => i.name === name && !i.size);
+            function addToCart(name, price, isDelivery = false) {
+                const suffix = isDelivery ? " - Livraison" : " - À Emporter";
+                const displayName = name + suffix;
+                const existing = cart.find(i => i.name === name && i.delivery === isDelivery && i.size === null);
                 if (existing) {
                     existing.quantity++;
                 } else {
-                    cart.push({ name, displayName: name, price: Number(price), quantity: 1, size: null });
+                    cart.push({ name, displayName, price: Number(price), quantity: 1, size: null, delivery: isDelivery });
                 }
                 updateCart();
                 showCartNotification();
             }
 
-            function addPizzaToCart(name, button) {
+            function addPizzaToCart(name, button, isDelivery = false) {
                 const menuItem = button.closest('.menu-item');
-                const active = menuItem.querySelector('.size-btn.active');
-                if (!active) {
+                const activeSize = menuItem.querySelector('.size-btn.active');
+                if (!activeSize) {
                     alert("Veuillez sélectionner une taille.");
                     return;
                 }
-
-                const size = active.dataset.size;
-                const price = parseFloat(active.dataset.price);
+                const size = activeSize.dataset.size;
+                const price = parseFloat(activeSize.dataset.price);
                 const sizeNames = { junior: 'Junior (26cm)', senior: 'Senior (31cm)', mega: 'Méga (34cm)' };
-                const displayName = `${name} – ${sizeNames[size]}`;
+                const suffix = isDelivery ? " - Livraison" : " - À Emporter";
+                const displayName = `${name} – ${sizeNames[size]}${suffix}`;
 
-                const existing = cart.find(i => i.name === name && i.size === size);
+                const existing = cart.find(i => i.name === name && i.size === size && i.delivery === isDelivery);
                 if (existing) {
                     existing.quantity++;
                 } else {
-                    cart.push({ name, displayName, price: Number(price), quantity: 1, size });
+                    cart.push({ name, displayName, price: Number(price), quantity: 1, size, delivery: isDelivery });
                 }
                 updateCart();
                 showCartNotification();
+            }
+
+            function updateQuantity(idx, delta) {
+                cart[idx].quantity += delta;
+                if (cart[idx].quantity <= 0) {
+                    cart.splice(idx, 1);
+                }
+                updateCart();
+            }
+
+            function removeFromCart(idx) {
+                cart.splice(idx, 1);
+                updateCart();
+            }
+
+            function showCartNotification() {
+                const btn = document.getElementById('cartToggle');
+                btn.style.transform = 'scale(1.2)';
+                setTimeout(() => btn.style.transform = 'scale(1)', 200);
             }
 
             function updateCart() {
@@ -1509,9 +1521,10 @@
 
                 if (cart.length === 0) {
                     itemsEl.innerHTML = '<p class="cart-empty">Votre panier est vide</p>';
-                    countEl.textContent = '0';
+                    countEl.textContent = '';
                     totalEl.textContent = '0.00€';
                     checkoutBtn.disabled = true;
+                    checkoutBtn.textContent = 'Commander Maintenant';
                     return;
                 }
 
@@ -1527,7 +1540,7 @@
                     html += `
                         <div class="cart-item">
                             <div class="cart-item-header">
-                                <div class="cart-item-name">${item.displayName || item.name}</div>
+                                <div class="cart-item-name">${item.displayName}</div>
                                 <button class="cart-item-remove" onclick="removeFromCart(${idx})">✕</button>
                             </div>
                             <div class="cart-item-footer">
@@ -1545,25 +1558,15 @@
                 itemsEl.innerHTML = html;
                 countEl.textContent = count;
                 totalEl.textContent = total.toFixed(2) + '€';
-                checkoutBtn.disabled = false;
-            }
 
-            function updateQuantity(idx, delta) {
-                if (!cart[idx]) return;
-                cart[idx].quantity += delta;
-                if (cart[idx].quantity <= 0) cart.splice(idx, 1);
-                updateCart();
-            }
-
-            function removeFromCart(idx) {
-                cart.splice(idx, 1);
-                updateCart();
-            }
-
-            function showCartNotification() {
-                const btn = document.getElementById('cartToggle');
-                btn.style.transform = 'scale(1.2)';
-                setTimeout(() => btn.style.transform = 'scale(1)', 180);
+                const hasDelivery = cart.some(i => i.delivery);
+                if (hasDelivery && total < 20) {
+                    checkoutBtn.disabled = true;
+                    checkoutBtn.textContent = 'Minimum 20€ pour livraison';
+                } else {
+                    checkoutBtn.disabled = false;
+                    checkoutBtn.textContent = 'Commander Maintenant';
+                }
             }
 
             function toggleCart() {
@@ -1576,23 +1579,31 @@
                     return;
                 }
 
+                const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                const hasDelivery = cart.some(i => i.delivery);
+
+                if (hasDelivery && total < 20) {
+                    alert("Le minimum pour une commande en livraison est de 20 €.");
+                    return;
+                }
+
                 try {
-                    const res = await fetch("/api/create-checkout-session", {
+                    const response = await fetch("/api/create-checkout-session", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ cart })
                     });
 
-                    const data = await res.json();
+                    const data = await response.json();
 
-                    if (!res.ok || data.error || !data.url) {
+                    if (!response.ok || data.error || !data.url) {
                         alert(data.error || "Erreur lors de la création de la session de paiement");
                         return;
                     }
 
                     window.location.href = data.url;
                 } catch (err) {
-                    alert("Erreur paiement : " + err.message);
+                    alert("Erreur réseau : " + err.message);
                 }
             }
 
@@ -1611,36 +1622,30 @@
                 document.getElementById('cartClose').addEventListener('click', toggleCart);
                 document.getElementById('checkoutBtn').addEventListener('click', checkout);
 
-                // Smooth scroll for anchors
-                document.querySelectorAll('a[href^="#"]').forEach(a => {
-                    a.addEventListener('click', e => {
+                // Smooth scroll
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', e => {
                         e.preventDefault();
-                        const target = document.querySelector(a.getAttribute('href'));
-                        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
                     });
                 });
 
-                // Scroll animations (only for elements that still have .fade-in)
+                // Fade-in animations
                 const fadeEls = document.querySelectorAll('.fade-in');
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, { threshold: 0.1 });
 
-                if ('IntersectionObserver' in window) {
-                    const observer = new IntersectionObserver(entries => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                entry.target.classList.add('visible');
-                            }
-                        });
-                    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-                    fadeEls.forEach(el => observer.observe(el));
-                } else {
-                    fadeEls.forEach(el => el.classList.add('visible'));
-                }
+                fadeEls.forEach(el => observer.observe(el));
 
                 // Contact form placeholder
                 document.querySelector('.contact-form')?.addEventListener('submit', e => {
                     e.preventDefault();
-                    alert('Message envoyé ! Nous vous répondons rapidement.');
+                    alert('Message envoyé ! Nous vous répondrons rapidement.');
                     e.target.reset();
                 });
             });
