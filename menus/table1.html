@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notre Menu - Commandez en ligne</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .category-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn.active {
+            background: linear-gradient(135deg, #C41E3A 0%, #8B1426 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .menu-card {
+            transition: all 0.3s ease;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(196, 30, 58, 0.2);
+        }
+        
+        .add-btn {
+            background: linear-gradient(135deg, #C41E3A 0%, #8B1426 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .add-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(196, 30, 58, 0.4);
+        }
+        
+        .cart-badge {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .icon-bg {
+            background: linear-gradient(135deg, #FF6B6B 0%, #C41E3A 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #C41E3A 0%, #FF6B6B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Menu data
+        const menuData = {
+            burgers: [
+                {
+                    id: 1,
+                    name: "Menu California Burger",
+                    description: "Pain maison, double steak, sauce maison, oignons confits, salade, cornichon, cheddar fondu + Frites maison + Boisson",
+                    price: 12.90,
+                    image: "🍔",
+                    category: "burgers"
+                },
+                {
+                    id: 2,
+                    name: "Menu Truffe Burger",
+                    description: "Pain maison, steak 160g, salade, sauce maison, oignons confits, cornichon, fromage truffe + Frites maison + Boisson",
+                    price: 13.90,
+                    image: "🧈",
+                    category: "burgers"
+                },
+                {
+                    id: 3,
+                    name: "Menu Cheese Burger",
+                    description: "Pain maison, steak, salade, sauce ketchup, tomate, oignons confits, cornichon, cheddar fondu + Frites maison + Boisson",
+                    price: 9.90,
+                    image: "🧀",
+                    category: "burgers"
+                },
+                {
+                    id: 4,
+                    name: "Menu Chili Burger",
+                    description: "Pain maison, steak, sauce piment, salade, oignons confits, cornichon, cheddar fondu + Frites maison + Boisson",
+                    price: 9.90,
+                    image: "🍔",
+                    category: "burgers",
+                    hasPhoto: true
+                },
+                {
+                    id: 5,
+                    name: "Menu Chicken Burger",
+                    description: "Pain maison, steak chicken, sauce maison, salade, oignons confits, cornichon, cheddar fondu + Frites maison + Boisson",
+                    price: 9.90,
+                    image: "🍔",
+                    category: "burgers",
+                    hasPhoto: true
+                },
+                {
+                    id: 6,
+                    name: "Menu Chicken Avocat Burger",
+                    description: "Pain maison, steak chicken, sauce maison, avocat, salade, oignon rouge, cornichon, cheddar fondu + Frites maison + Boisson",
+                    price: 10.90,
+                    image: "🍔",
+                    category: "burgers",
+                    hasPhoto: true
+                },
+                {
+                    id: 7,
+                    name: "Menu Avocat Burger",
+                    description: "Pain maison, steak, sauce maison, salade, avocat, oignon rouge, cornichon, cheddar fondu + Frites maison + Boisson",
+                    price: 10.90,
+                    image: "🍔",
+                    category: "burgers",
+                    hasPhoto: true
+                },
+                {
+                    id: 8,
+                    name: "Menu Veggie Burger",
+                    description: "Pain maison, steak veggie, sauce ketchup, salade, tomate, oignons confits, cornichon, cheddar fondu + Frites maison + Boisson",
+                    price: 9.90,
+                    image: "🌱",
+                    category: "burgers"
+                },
+                {
+                    id: 9,
+                    name: "Menu Bacon Burger",
+                    description: "Pain maison, sauce BBQ, salade, bacon, oignon rouge, cornichon, cheddar fondu + Frites maison + Boisson",
+                    price: 10.90,
+                    image: "🍔",
+                    category: "burgers",
+                    hasPhoto: true
+                }
+            ],
+            pizzas: [
+                {
+                    id: 10,
+                    name: "Pizza Margherita",
+                    description: "Sauce tomate, mozzarella, basilic frais",
+                    price: 8.90,
+                    image: "🍕",
+                    category: "pizzas"
+                },
+                {
+                    id: 11,
+                    name: "Pizza 4 Fromages",
+                    description: "Mozzarella, gorgonzola, chèvre, emmental",
+                    price: 11.90,
+                    image: "🍕",
+                    category: "pizzas"
+                }
+            ],
+            texmex: [
+                {
+                    id: 12,
+                    name: "Tacos Poulet",
+                    description: "Poulet mariné, guacamole, salsa, fromage",
+                    price: 9.90,
+                    image: "🌮",
+                    category: "texmex"
+                },
+                {
+                    id: 13,
+                    name: "Burrito Boeuf",
+                    description: "Boeuf haché, riz, haricots, fromage, salsa",
+                    price: 10.90,
+                    image: "🌯",
+                    category: "texmex"
+                }
+            ],
+            desserts: [
+                {
+                    id: 14,
+                    name: "Brownie Chocolat",
+                    description: "Brownie maison au chocolat noir",
+                    price: 4.90,
+                    image: "🍫",
+                    category: "desserts"
+                },
+                {
+                    id: 15,
+                    name: "Tiramisu",
+                    description: "Tiramisu traditionnel au café",
+                    price: 5.90,
+                    image: "🍰",
+                    category: "desserts"
+                }
+            ],
+            boissons: [
+                {
+                    id: 16,
+                    name: "Coca-Cola",
+                    description: "33cl",
+                    price: 2.50,
+                    image: "🥤",
+                    category: "boissons"
+                },
+                {
+                    id: 17,
+                    name: "Eau Minérale",
+                    description: "50cl",
+                    price: 2.00,
+                    image: "💧",
+                    category: "boissons"
+                }
+            ]
+        };
+
+        function App() {
+            const [activeCategory, setActiveCategory] = useState('burgers');
+            const [cart, setCart] = useState([]);
+            const [showCart, setShowCart] = useState(false);
+            const [tableNumber, setTableNumber] = useState(null);
+
+            useEffect(() => {
+                // Get table number from URL
+                const params = new URLSearchParams(window.location.search);
+                const table = params.get('table');
+                setTableNumber(table || '1');
+
+                // Load cart from storage
+                const loadCart = async () => {
+                    try {
+                        const result = await window.storage.get('cart');
+                        if (result && result.value) {
+                            setCart(JSON.parse(result.value));
+                        }
+                    } catch (error) {
+                        console.log('No cart saved');
+                    }
+                };
+                loadCart();
+            }, []);
+
+            useEffect(() => {
+                // Save cart to storage
+                const saveCart = async () => {
+                    try {
+                        await window.storage.set('cart', JSON.stringify(cart));
+                    } catch (error) {
+                        console.error('Error saving cart:', error);
+                    }
+                };
+                if (cart.length > 0) {
+                    saveCart();
+                }
+            }, [cart]);
+
+            const categories = [
+                { id: 'burgers', name: 'Burgers', icon: '🍔' },
+                { id: 'pizzas', name: 'Pizzas', icon: '🍕' },
+                { id: 'texmex', name: 'Tex-Mex', icon: '🌮' },
+                { id: 'desserts', name: 'Desserts', icon: '🍰' },
+                { id: 'boissons', name: 'Boissons', icon: '🥤' }
+            ];
+
+            const addToCart = (item) => {
+                const existingItem = cart.find(cartItem => cartItem.id === item.id);
+                if (existingItem) {
+                    setCart(cart.map(cartItem =>
+                        cartItem.id === item.id
+                            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+                            : cartItem
+                    ));
+                } else {
+                    setCart([...cart, { ...item, quantity: 1 }]);
+                }
+            };
+
+            const removeFromCart = (itemId) => {
+                setCart(cart.filter(item => item.id !== itemId));
+            };
+
+            const updateQuantity = (itemId, change) => {
+                setCart(cart.map(item => {
+                    if (item.id === itemId) {
+                        const newQuantity = item.quantity + change;
+                        return newQuantity > 0 ? { ...item, quantity: newQuantity } : item;
+                    }
+                    return item;
+                }).filter(item => item.quantity > 0));
+            };
+
+            const getTotalPrice = () => {
+                return cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
+            };
+
+            const sendToWhatsApp = () => {
+                const phoneNumber = "33123456789"; // Replace with actual WhatsApp number
+                
+                let message = `🍽️ *NOUVELLE COMMANDE - TABLE ${tableNumber}*\n\n`;
+                message += `📋 *Détails de la commande:*\n\n`;
+                
+                cart.forEach(item => {
+                    message += `• ${item.quantity}x ${item.name}\n`;
+                    message += `  Prix: ${(item.price * item.quantity).toFixed(2)}€\n\n`;
+                });
+                
+                message += `💰 *TOTAL: ${getTotalPrice()}€*\n\n`;
+                message += `📍 Table: ${tableNumber}`;
+                
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+                
+                window.open(whatsappUrl, '_blank');
+            };
+
+            const currentItems = menuData[activeCategory] || [];
+
+            return (
+                <div className="min-h-screen pb-24">
+                    {/* Header */}
+                    <div className="bg-white shadow-md sticky top-0 z-50">
+                        <div className="max-w-7xl mx-auto px-4 py-6">
+                            <h1 className="text-4xl font-bold text-center gradient-text mb-2">NOTRE MENU</h1>
+                            <p className="text-center text-gray-600">Commandez directement en ligne</p>
+                            {tableNumber && (
+                                <div className="text-center mt-2">
+                                    <span className="inline-block bg-red-100 text-red-700 px-4 py-1 rounded-full text-sm font-semibold">
+                                        Table {tableNumber}
+                                    </span>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Categories */}
+                        <div className="max-w-7xl mx-auto px-4 pb-4">
+                            <div className="flex gap-3 overflow-x-auto pb-2">
+                                {categories.map(cat => (
+                                    <button
+                                        key={cat.id}
+                                        onClick={() => setActiveCategory(cat.id)}
+                                        className={`category-btn flex items-center gap-2 px-6 py-3 rounded-full border-2 border-red-700 font-semibold whitespace-nowrap ${
+                                            activeCategory === cat.id ? 'active' : 'bg-white text-red-700'
+                                        }`}
+                                    >
+                                        <span>{cat.icon}</span>
+                                        <span>{cat.name}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Menu Items */}
+                    <div className="max-w-7xl mx-auto px-4 py-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {currentItems.map(item => (
+                                <div key={item.id} className="menu-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                                    <div className={`h-48 flex items-center justify-center text-6xl ${
+                                        item.hasPhoto ? 'bg-gray-800' : 'icon-bg'
+                                    }`}>
+                                        {item.hasPhoto ? '🍔🍟' : item.image}
+                                    </div>
+                                    <div className="p-6">
+                                        <h3 className="text-xl font-bold text-red-700 mb-2">{item.name}</h3>
+                                        <p className="text-gray-600 text-sm mb-4 min-h-[60px]">{item.description}</p>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-2xl font-bold gradient-text">{item.price.toFixed(2)}€</span>
+                                            <button
+                                                onClick={() => addToCart(item)}
+                                                className="add-btn text-white px-6 py-2 rounded-full font-semibold"
+                                            >
+                                                Ajouter
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Cart Button */}
+                    {cart.length > 0 && (
+                        <button
+                            onClick={() => setShowCart(!showCart)}
+                            className="fixed bottom-6 right-6 bg-gradient-to-r from-red-700 to-red-600 text-white px-8 py-4 rounded-full shadow-2xl font-bold text-lg flex items-center gap-3 hover:scale-105 transition-transform z-50"
+                        >
+                            <span>🛒</span>
+                            <span>Panier ({cart.length})</span>
+                            <span className="cart-badge bg-white text-red-700 px-3 py-1 rounded-full text-sm">
+                                {getTotalPrice()}€
+                            </span>
+                        </button>
+                    )}
+
+                    {/* Cart Modal */}
+                    {showCart && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end md:items-center justify-center p-4">
+                            <div className="bg-white rounded-t-3xl md:rounded-3xl w-full md:max-w-2xl max-h-[80vh] overflow-hidden">
+                                <div className="p-6 border-b sticky top-0 bg-white">
+                                    <div className="flex justify-between items-center">
+                                        <h2 className="text-2xl font-bold gradient-text">Votre Panier</h2>
+                                        <button
+                                            onClick={() => setShowCart(false)}
+                                            className="text-gray-500 hover:text-red-700 text-3xl"
+                                        >
+                                            ×
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="p-6 overflow-y-auto max-h-[50vh]">
+                                    {cart.map(item => (
+                                        <div key={item.id} className="flex items-center gap-4 mb-4 pb-4 border-b">
+                                            <div className="flex-1">
+                                                <h3 className="font-semibold text-gray-800">{item.name}</h3>
+                                                <p className="text-red-700 font-bold">{item.price.toFixed(2)}€</p>
+                                            </div>
+                                            <div className="flex items-center gap-3">
+                                                <button
+                                                    onClick={() => updateQuantity(item.id, -1)}
+                                                    className="w-8 h-8 bg-gray-200 rounded-full font-bold hover:bg-red-100"
+                                                >
+                                                    -
+                                                </button>
+                                                <span className="font-bold w-8 text-center">{item.quantity}</span>
+                                                <button
+                                                    onClick={() => updateQuantity(item.id, 1)}
+                                                    className="w-8 h-8 bg-red-700 text-white rounded-full font-bold hover:bg-red-800"
+                                                >
+                                                    +
+                                                </button>
+                                            </div>
+                                            <button
+                                                onClick={() => removeFromCart(item.id)}
+                                                className="text-red-600 hover:text-red-800 ml-2"
+                                            >
+                                                🗑️
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="p-6 border-t bg-gray-50">
+                                    <div className="flex justify-between items-center mb-4">
+                                        <span className="text-xl font-bold">Total:</span>
+                                        <span className="text-3xl font-bold gradient-text">{getTotalPrice()}€</span>
+                                    </div>
+                                    <button
+                                        onClick={sendToWhatsApp}
+                                        className="w-full bg-gradient-to-r from-green-600 to-green-500 text-white py-4 rounded-full font-bold text-lg flex items-center justify-center gap-3 hover:scale-105 transition-transform"
+                                    >
+                                        <span>📱</span>
+                                        <span>Commander sur WhatsApp</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</body>
+</html>
