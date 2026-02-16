@@ -33,7 +33,7 @@
                 const lon = position.coords.longitude;
                 const mapsLink = `https://www.google.com/maps?q=${lat},${lon}`;
 
-                // Récupération sécurisée de l'ID de paiement
+                // Récupération de l'ID paiement
                 const params = new URLSearchParams(window.location.search);
                 const sessionId = params.get('session_id');
                 let paymentId = sessionId || 'inconnu';
@@ -46,16 +46,39 @@
                     } catch (e) { }
                 }
 
+                // Récupération du panier (localStorage)
+                let orderItems = [];
+                let recap = "";
+                let total = 0;
+                try {
+                    const lastOrder = localStorage.getItem('lastOrder');
+                    if (lastOrder) {
+                        orderItems = JSON.parse(lastOrder);
+                        localStorage.removeItem('lastOrder'); // nettoyage
+                    }
+                } catch (e) {}
+
+                if (orderItems.length > 0) {
+                    recap = "\n*Récapitulatif de ma commande :*\n";
+                    orderItems.forEach(item => {
+                        const itemTotal = (item.price * item.quantity).toFixed(2);
+                        recap += `• ${item.quantity}x ${item.displayName} → ${itemTotal}€\n`;
+                        total += item.price * item.quantity;
+                    });
+                    recap += `\n*Total : ${total.toFixed(2)}€*\n`;
+                }
+
                 const message = encodeURIComponent(
 `Bonjour Burger California 🍔
 
 Ma commande vient d'être payée (ID: ${paymentId}).
-Adresse de livraison : ${mapsLink}
 
+Adresse de livraison : ${mapsLink}
+${recap}
 Merci !`
                 );
 
-                // Remplace par ton numéro WhatsApp du resto (format international sans +)
+                // Remplace par ton vrai numéro WhatsApp
                 window.location.href = `https://wa.me/33751473122?text=${message}`;
             }, (error) => {
                 status.innerHTML = 'Localisation refusée.<br>Vous pouvez copier-coller votre adresse ici et nous l’envoyer manuellement.';
