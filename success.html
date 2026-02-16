@@ -143,12 +143,38 @@
     </div>
 
     <script>
-        // Get session ID from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const sessionId = urlParams.get('session_id');
-        if (sessionId) {
-            document.getElementById('sessionId').textContent = sessionId.substring(0, 20) + '...';
+        async function openWhatsApp() {
+            const params = new URLSearchParams(window.location.search);
+            const sessionId = params.get('session_id');
+            let paymentId = sessionId || 'inconnu';
+
+            if (sessionId) {
+                try {
+                    const res = await fetch(`/api/checkout-session?session_id=${sessionId}`);
+                    const data = await res.json();
+                    if (res.ok && data.payment_intent) paymentId = data.payment_intent;
+                } catch (e) { }
+            }
+
+            const message = encodeURIComponent(
+`Bonjour Burger California 🍔
+
+Ma commande vient d'être payée (ID: ${paymentId}).
+
+Je passe chercher ma commande (sur place / à emporter).
+
+Merci !`
+            );
+
+            // ← Change ce numéro par le vrai WhatsApp du resto
+            const waUrl = `https://wa.me/33751473122?text=${message}`;
+            window.open(waUrl, '_blank');
         }
+
+        // Automatisation : ouvre WhatsApp 2 secondes après le chargement de la page
+        window.addEventListener('load', () => {
+            setTimeout(openWhatsApp, 2000);
+        });
     </script>
 </body>
 </html>
