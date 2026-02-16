@@ -5,12 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paiement Réussi - Burger California</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #FFF8E7 0%, #FFE5B4 100%);
@@ -20,7 +15,6 @@
             justify-content: center;
             padding: 20px;
         }
-
         .success-container {
             background: white;
             border-radius: 20px;
@@ -30,10 +24,8 @@
             max-width: 500px;
             width: 100%;
         }
-
         .checkmark {
-            width: 80px;
-            height: 80px;
+            width: 80px; height: 80px;
             border-radius: 50%;
             background: #4CAF50;
             display: flex;
@@ -42,37 +34,11 @@
             margin: 0 auto 30px;
             animation: scaleIn 0.5s ease-out;
         }
+        @keyframes scaleIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .checkmark::after { content: "✓"; color: white; font-size: 50px; font-weight: bold; }
 
-        @keyframes scaleIn {
-            from {
-                transform: scale(0);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .checkmark::after {
-            content: "✓";
-            color: white;
-            font-size: 50px;
-            font-weight: bold;
-        }
-
-        h1 {
-            color: #C41E3A;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        p {
-            color: #666;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
+        h1 { color: #C41E3A; font-size: 2.5rem; margin-bottom: 20px; }
+        p { color: #666; font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; }
 
         .btn-home {
             display: inline-block;
@@ -86,42 +52,10 @@
             transition: all 0.3s;
             box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
         }
+        .btn-home:hover { background: #FF6B35; transform: translateY(-2px); }
 
-        .btn-home:hover {
-            background: #FF6B35;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
-        }
-
-        .order-details {
-            background: #f9f9f9;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 30px 0;
-            text-align: left;
-        }
-
-        .order-details h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .detail-row:last-child {
-            border-bottom: none;
-        }
-
-        .emoji {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
+        .order-details { background: #f9f9f9; border-radius: 10px; padding: 20px; margin: 30px 0; text-align: left; }
+        .emoji { font-size: 3rem; margin-bottom: 20px; }
     </style>
 </head>
 <body>
@@ -134,8 +68,7 @@
         <div class="order-details">
             <h3>📧 Confirmation envoyée</h3>
             <p style="font-size: 0.95rem; color: #666;">
-                Un email de confirmation a été envoyé à votre adresse. 
-                Vous recevrez bientôt les détails de livraison.
+                Un email de confirmation a été envoyé à votre adresse.
             </p>
         </div>
 
@@ -148,32 +81,57 @@
             const sessionId = params.get('session_id');
             let paymentId = sessionId || 'inconnu';
 
+            // Récupération du vrai Payment Intent
             if (sessionId) {
                 try {
                     const res = await fetch(`/api/checkout-session?session_id=${sessionId}`);
                     const data = await res.json();
                     if (res.ok && data.payment_intent) paymentId = data.payment_intent;
-                } catch (e) { }
+                } catch (e) {}
+            }
+
+            // Récupération du panier depuis localStorage
+            let orderItems = [];
+            try {
+                const lastOrder = localStorage.getItem('lastOrder');
+                if (lastOrder) {
+                    orderItems = JSON.parse(lastOrder);
+                    localStorage.removeItem('lastOrder'); // Nettoyage
+                }
+            } catch (e) {}
+
+            // Construction du récapitulatif
+            let recap = "";
+            let total = 0;
+
+            if (orderItems.length > 0) {
+                recap = "\n*Récapitulatif de ma commande :*\n";
+                orderItems.forEach(item => {
+                    const itemTotal = (item.price * item.quantity).toFixed(2);
+                    recap += `• ${item.quantity}x ${item.displayName} → ${itemTotal}€\n`;
+                    total += item.price * item.quantity;
+                });
+                recap += `\n*Total : ${total.toFixed(2)}€*\n`;
             }
 
             const message = encodeURIComponent(
 `Bonjour Burger California 🍔
 
-Ma commande vient d'être payée (ID: ${paymentId}).
+Ma commande vient d'être payée avec succès ! (ID: ${paymentId})
 
-Je passe chercher ma commande (sur place / à emporter).
+${recap}
+Je passe chercher ma commande *(sur place / à emporter)*.
 
-Merci !`
+Merci beaucoup !`
             );
 
-            // ← Change ce numéro par le vrai WhatsApp du resto
-            const waUrl = `https://wa.me/33751473122?text=${message}`;
-            window.open(waUrl, '_blank');
+            // Remplace par ton numéro WhatsApp
+            window.open(`https://wa.me/33751473122?text=${message}`, '_blank');
         }
 
-        // Automatisation : ouvre WhatsApp 2 secondes après le chargement de la page
+        // Ouvre WhatsApp automatiquement 1.8 secondes après chargement
         window.addEventListener('load', () => {
-            setTimeout(openWhatsApp, 2000);
+            setTimeout(openWhatsApp, 1800);
         });
     </script>
 </body>
