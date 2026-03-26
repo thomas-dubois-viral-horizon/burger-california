@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>La Capanna - Restaurant Italien Paris 14 | Pizzas & Pasta Maison</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --terracotta: #C94A2A;
+                --gold: #C8973A;
+                --cream: #FAF6EE;
+                --parchment: #F0E8D5;
+                --dark: #1C1A16;
+                --bark: #3D2B1F;
+                --sage: #6B7C5E;
+                --muted: #5C5347;
+                --light-sage: #E8EDE3;
+            }
+
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+
+            html { scroll-behavior: smooth; }
+
+            body {
+                font-family: 'Jost', sans-serif;
+                background: var(--cream);
+                color: var(--dark);
+                overflow-x: hidden;
+                line-height: 1.6;
+            }
+
+            /* ——— NAV ——— */
+            nav {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                background: rgba(250, 246, 238, 0.96);
+                backdrop-filter: blur(12px);
+                z-index: 1000;
+                padding: 1.2rem 5%;
+                border-bottom: 1px solid rgba(200, 151, 58, 0.2);
+            }
+
+            .nav-container {
+                max-width: 1300px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .logo {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.7rem;
+                color: var(--terracotta);
+                text-decoration: none;
+                letter-spacing: 1px;
+                font-style: italic;
+                font-weight: 700;
+            }
+
+            .logo span {
+                display: block;
+                font-family: 'Jost', sans-serif;
+                font-size: 0.55rem;
+                font-style: normal;
+                letter-spacing: 4px;
+                text-transform: uppercase;
+                color: var(--gold);
+                font-weight: 500;
+                margin-top: -4px;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 2.5rem;
+                list-style: none;
+            }
+
+            .nav-links a {
+                color: var(--bark);
+                text-decoration: none;
+                font-weight: 400;
+                font-size: 0.9rem;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                transition: color 0.3s;
+                position: relative;
+            }
+
+            .nav-links a::after {
+                content: '';
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 0;
+                height: 1px;
+                background: var(--terracotta);
+                transition: width 0.3s;
+            }
+
+            .nav-links a:hover { color: var(--terracotta); }
+            .nav-links a:hover::after { width: 100%; }
+
+            .cta-button {
+                background: var(--terracotta);
+                color: white;
+                padding: 0.7rem 1.8rem;
+                border-radius: 2px;
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 0.85rem;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                transition: all 0.3s;
+            }
+
+            .cta-button:hover {
+                background: var(--bark);
+                transform: translateY(-1px);
+            }
+
+            /* ——— HERO ——— */
+            .hero {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                padding: 8rem 5% 5rem;
+                background: var(--cream);
+                overflow: hidden;
+            }
+
+            .hero-bg-text {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-family: 'Playfair Display', serif;
+                font-size: clamp(8rem, 20vw, 20rem);
+                color: rgba(200, 151, 58, 0.06);
+                font-weight: 900;
+                white-space: nowrap;
+                pointer-events: none;
+                user-select: none;
+                letter-spacing: -2px;
+            }
+
+            .hero-decor-line {
+                position: absolute;
+                top: 0;
+                right: 15%;
+                width: 1px;
+                height: 100%;
+                background: linear-gradient(180deg, transparent, rgba(200, 151, 58, 0.3), transparent);
+            }
+
+            .hero-content {
+                max-width: 1300px;
+                width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 6rem;
+                align-items: center;
+                z-index: 1;
+            }
+
+            .hero-text {
+                animation: fadeUp 1s ease-out both;
+            }
+
+            @keyframes fadeUp {
+                from { opacity: 0; transform: translateY(40px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            .hero-eyebrow {
+                font-size: 0.75rem;
+                letter-spacing: 5px;
+                text-transform: uppercase;
+                color: var(--gold);
+                font-weight: 500;
+                margin-bottom: 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .hero-eyebrow::before {
+                content: '';
+                display: block;
+                width: 40px;
+                height: 1px;
+                background: var(--gold);
+            }
+
+            .hero-text h1 {
+                font-family: 'Playfair Display', serif;
+                font-size: clamp(2.8rem, 6vw, 5.5rem);
+                line-height: 1.05;
+                color: var(--bark);
+                margin-bottom: 0.5rem;
+                font-weight: 900;
+                animation: fadeUp 1s ease-out 0.1s both;
+            }
+
+            .hero-text h1 em {
+                font-style: italic;
+                color: var(--terracotta);
+            }
+
+            .hero-text .subtitle {
+                font-family: 'Cormorant Garamond', serif;
+                font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+                color: var(--muted);
+                font-style: italic;
+                margin-bottom: 2rem;
+                animation: fadeUp 1s ease-out 0.2s both;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+                color: var(--muted);
+                max-width: 480px;
+                margin-bottom: 3rem;
+                line-height: 1.8;
+                animation: fadeUp 1s ease-out 0.3s both;
+            }
+
+            .hero-buttons {
+                display: flex;
+                gap: 1.2rem;
+                animation: fadeUp 1s ease-out 0.4s both;
+                flex-wrap: wrap;
+            }
+
+            .btn-primary {
+                background: var(--terracotta);
+                color: white;
+                padding: 1rem 2.5rem;
+                border-radius: 2px;
+                font-weight: 500;
+                text-decoration: none;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                font-size: 0.85rem;
+                transition: all 0.3s;
+                box-shadow: 0 8px 25px rgba(201, 74, 42, 0.25);
+            }
+
+            .btn-primary:hover {
+                background: var(--bark);
+                transform: translateY(-2px);
+                box-shadow: 0 12px 30px rgba(201, 74, 42, 0.3);
+            }
+
+            .btn-secondary {
+                border: 1.5px solid var(--bark);
+                color: var(--bark);
+                padding: 1rem 2.5rem;
+                border-radius: 2px;
+                font-weight: 500;
+                text-decoration: none;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                font-size: 0.85rem;
+                transition: all 0.3s;
+                background: transparent;
+            }
+
+            .btn-secondary:hover {
+                background: var(--bark);
+                color: white;
+            }
+
+            .hero-visual {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: fadeUp 1s ease-out 0.2s both;
+            }
+
+            .hero-plate {
+                width: min(420px, 90%);
+                height: min(420px, 90vw);
+                background: linear-gradient(145deg, var(--parchment) 0%, #E8D9BD 100%);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 9rem;
+                box-shadow: 0 30px 80px rgba(61, 43, 31, 0.2), inset 0 0 60px rgba(200, 151, 58, 0.08);
+                position: relative;
+                animation: slowRotate 30s linear infinite;
+                overflow: hidden;
+            }
+
+            @keyframes slowRotate {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+
+            .hero-plate-inner {
+                animation: slowRotate 30s linear infinite reverse;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+            }
+
+            .hero-plate::before {
+                content: '';
+                position: absolute;
+                inset: 15px;
+                border-radius: 50%;
+                border: 1px solid rgba(200, 151, 58, 0.25);
+            }
+
+            .hero-plate::after {
+                content: '';
+                position: absolute;
+                inset: 25px;
+                border-radius: 50%;
+                border: 1px solid rgba(200, 151, 58, 0.1);
+            }
+
+            /* Bouncing Pizza - Same style as Burger California */
+            .pizza-visual {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                padding: 45px;
+                z-index: 2;
+            }
+
+            .bouncing-pizza {
+                width: 75%;
+                height: auto;
+                max-width: 280px;
+                object-fit: contain;
+                animation: bounce 2.2s ease-in-out infinite;
+                filter: drop-shadow(0 20px 35px rgba(0,0,0,0.25));
+            }
+
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-25px); }
+            }
+
+            .hero-badge {
+                position: absolute;
+                top: 20px;
+                right: -10px;
+                background: var(--terracotta);
+                color: white;
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.65rem;
+                font-weight: 600;
+                letter-spacing: 0.5px;
+                text-align: center;
+                text-transform: uppercase;
+                box-shadow: 0 8px 20px rgba(201, 74, 42, 0.3);
+                animation: slowRotate 30s linear infinite reverse;
+                z-index: 3;
+            }
+
+            .hero-badge strong {
+                font-size: 1.4rem;
+                font-weight: 700;
+                display: block;
+                line-height: 1.1;
+            }
+
+            .hero-stats {
+                display: flex;
+                gap: 2.5rem;
+                margin-top: 3rem;
+                padding-top: 2.5rem;
+                border-top: 1px solid rgba(61, 43, 31, 0.12);
+                animation: fadeUp 1s ease-out 0.5s both;
+            }
+
+            .stat {
+                text-align: left;
+            }
+
+            .stat-number {
+                font-family: 'Playfair Display', serif;
+                font-size: 2rem;
+                font-weight: 700;
+                color: var(--terracotta);
+                line-height: 1;
+            }
+
+            .stat-label {
+                font-size: 0.75rem;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin-top: 4px;
+            }
+
+            /* ——— FEATURES ——— */
+            .features {
+                padding: 7rem 5%;
+                background: var(--bark);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .features::before {
+                content: '';
+                position: absolute;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C8973A' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+                opacity: 1;
+            }
+
+            .features .section-title {
+                color: var(--parchment);
+            }
+
+            .features .section-subtitle {
+                color: rgba(240, 232, 213, 0.6);
+            }
+
+            .section-title {
+                font-family: 'Playfair Display', serif;
+                font-size: clamp(2rem, 4vw, 3.2rem);
+                text-align: center;
+                color: var(--bark);
+                margin-bottom: 0.8rem;
+                font-weight: 700;
+            }
+
+            .section-subtitle {
+                text-align: center;
+                color: var(--muted);
+                margin-bottom: 4rem;
+                font-size: 1rem;
+                font-family: 'Cormorant Garamond', serif;
+                font-style: italic;
+                font-size: 1.2rem;
+            }
+
+            .features-grid {
+                max-width: 1100px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 2.5rem;
+                position: relative;
+                z-index: 1;
+            }
+
+            .feature-card {
+                text-align: center;
+                padding: 2.5rem 2rem;
+                border: 1px solid rgba(200, 151, 58, 0.2);
+                border-radius: 4px;
+                transition: all 0.4s;
+                background: rgba(255,255,255,0.03);
+            }
+
+            .feature-card:hover {
+                background: rgba(200, 151, 58, 0.07);
+                border-color: rgba(200, 151, 58, 0.4);
+                transform: translateY(-6px);
+            }
+
+            .feature-icon {
+                font-size: 3rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .feature-card h3 {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.3rem;
+                color: var(--gold);
+                margin-bottom: 0.8rem;
+                font-weight: 700;
+            }
+
+            .feature-card p {
+                color: rgba(240, 232, 213, 0.65);
+                line-height: 1.7;
+                font-size: 0.95rem;
+            }
+
+            /* ——— MENU ——— */
+            .menu-preview {
+                padding: 7rem 5%;
+                background: var(--cream);
+            }
+
+            .menu-categories {
+                max-width: 1100px;
+                margin: 0 auto 3rem;
+                display: flex;
+                justify-content: center;
+                gap: 0.8rem;
+                flex-wrap: wrap;
+            }
+
+            .category-btn {
+                background: transparent;
+                border: 1.5px solid rgba(61, 43, 31, 0.25);
+                color: var(--bark);
+                padding: 0.8rem 1.8rem;
+                border-radius: 2px;
+                font-weight: 500;
+                font-size: 0.8rem;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                cursor: pointer;
+                transition: all 0.3s;
+                font-family: 'Jost', sans-serif;
+            }
+
+            .category-btn:hover {
+                background: var(--bark);
+                color: var(--cream);
+                border-color: var(--bark);
+            }
+
+            .category-btn.active {
+                background: var(--terracotta);
+                border-color: var(--terracotta);
+                color: white;
+            }
+
+            .menu-items-container {
+                max-width: 1100px;
+                margin: 0 auto;
+                min-height: 400px;
+            }
+
+            .menu-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                gap: 2rem;
+            }
+
+            .menu-item {
+                background: white;
+                border-radius: 4px;
+                overflow: hidden;
+                border: 1px solid rgba(61, 43, 31, 0.08);
+                transition: all 0.35s;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .menu-item:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 20px 50px rgba(61, 43, 31, 0.1);
+                border-color: rgba(200, 151, 58, 0.3);
+            }
+
+            .menu-item-image {
+                width: 100%;
+                height: 180px;
+                background: linear-gradient(135deg, var(--parchment) 0%, #DDD0B5 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 4rem;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .menu-item-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .menu-item-image.has-image { background: #1C1A16; }
+
+            .menu-item-content {
+                padding: 1.5rem;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .menu-item-content h3 {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.2rem;
+                color: var(--bark);
+                margin-bottom: 0.4rem;
+                font-weight: 700;
+            }
+
+            .menu-item-content p {
+                color: var(--muted);
+                font-size: 0.9rem;
+                line-height: 1.6;
+                flex: 1;
+                margin-bottom: 1rem;
+                font-family: 'Cormorant Garamond', serif;
+                font-size: 1.05rem;
+            }
+
+            .menu-item-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: auto;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .price {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.6rem;
+                font-weight: 700;
+                color: var(--gold);
+            }
+
+            .add-to-cart-btn {
+                background: var(--terracotta);
+                color: white;
+                border: none;
+                padding: 0.7rem 1.5rem;
+                border-radius: 2px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s;
+                font-family: 'Jost', sans-serif;
+                font-size: 0.8rem;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+            }
+
+            .add-to-cart-btn:hover {
+                background: var(--bark);
+                transform: scale(1.03);
+            }
+
+            /* Pizza sizes */
+            .pizza-sizes {
+                display: flex;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .size-btn {
+                flex: 1;
+                background: var(--parchment);
+                border: 1.5px solid transparent;
+                padding: 0.6rem 0.4rem;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.3s;
+                font-family: 'Jost', sans-serif;
+                font-weight: 500;
+                font-size: 0.8rem;
+            }
+
+            .size-btn:hover { border-color: var(--gold); }
+            .size-btn.active { background: var(--gold); color: white; border-color: var(--gold); }
+            .size-btn .size-name { display: block; font-size: 0.75rem; }
+            .size-btn .size-price { display: block; font-size: 1rem; font-weight: 700; }
+
+            /* ——— CART ——— */
+            .cart-sidebar {
+                position: fixed;
+                right: -420px;
+                top: 0;
+                width: 420px;
+                height: 100vh;
+                background: white;
+                box-shadow: -8px 0 40px rgba(0,0,0,0.15);
+                z-index: 2000;
+                transition: right 0.35s ease;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .cart-sidebar.open { right: 0; }
+
+            .cart-header {
+                padding: 2rem;
+                background: var(--bark);
+                color: white;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .cart-header h3 {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.4rem;
+                font-weight: 700;
+                margin: 0;
+            }
+
+            .cart-close {
+                background: transparent;
+                border: none;
+                color: rgba(255,255,255,0.7);
+                font-size: 1.5rem;
+                cursor: pointer;
+                width: 36px; height: 36px;
+                display: flex; align-items: center; justify-content: center;
+                border-radius: 50%;
+                transition: all 0.3s;
+            }
+
+            .cart-close:hover { background: rgba(255,255,255,0.15); color: white; }
+
+            .cart-items { flex: 1; overflow-y: auto; padding: 1.5rem; }
+            .cart-empty { text-align: center; color: #aaa; padding: 3rem 1rem; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; }
+
+            .cart-item {
+                background: var(--cream);
+                padding: 1rem;
+                border-radius: 4px;
+                margin-bottom: 1rem;
+                border: 1px solid rgba(61, 43, 31, 0.08);
+            }
+
+            .cart-item-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }
+            .cart-item-name { font-weight: 600; color: var(--bark); font-size: 0.95rem; }
+            .cart-item-remove { background: transparent; border: none; color: #bbb; cursor: pointer; font-size: 1.1rem; padding: 0; }
+            .cart-item-remove:hover { color: var(--terracotta); }
+            .cart-item-footer { display: flex; justify-content: space-between; align-items: center; }
+            .quantity-controls { display: flex; align-items: center; gap: 0.8rem; }
+            .qty-btn { background: var(--bark); color: white; border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+            .qty-btn:hover { background: var(--terracotta); }
+            .qty-display { font-weight: 700; font-size: 1rem; min-width: 24px; text-align: center; }
+            .cart-item-price { font-weight: 700; font-size: 1.1rem; color: var(--gold); font-family: 'Playfair Display', serif; }
+
+            .cart-footer { padding: 1.5rem 2rem; border-top: 1px solid var(--parchment); }
+            .cart-total { display: flex; justify-content: space-between; font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--bark); font-family: 'Playfair Display', serif; }
+            .cart-total span:last-child { color: var(--terracotta); }
+
+            .checkout-btn {
+                width: 100%;
+                background: var(--terracotta);
+                color: white;
+                border: none;
+                padding: 1.1rem;
+                border-radius: 2px;
+                font-weight: 500;
+                font-size: 0.9rem;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                cursor: pointer;
+                transition: all 0.3s;
+                font-family: 'Jost', sans-serif;
+            }
+
+            .checkout-btn:hover { background: var(--bark); transform: translateY(-2px); }
+            .checkout-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+
+            .cart-toggle {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                width: 65px; height: 65px;
+                background: var(--bark);
+                color: white;
+                border: none;
+                border-radius: 50%;
+                font-size: 1.6rem;
+                cursor: pointer;
+                box-shadow: 0 8px 25px rgba(28, 26, 22, 0.35);
+                z-index: 1500;
+                transition: all 0.3s;
+                display: flex; align-items: center; justify-content: center;
+            }
+
+            .cart-toggle:hover { background: var(--terracotta); transform: scale(1.08); }
+
+            .cart-count {
+                position: absolute;
+                top: -4px; right: -4px;
+                background: var(--gold);
+                color: var(--dark);
+                width: 25px; height: 25px;
+                border-radius: 50%;
+                display: flex; align-items: center; justify-content: center;
+                font-size: 0.8rem;
+                font-weight: 700;
+            }
+
+            .cart-count:empty { display: none; }
+
+            /* ——— LOCATION ——— */
+            .location {
+                padding: 7rem 5%;
+                background: var(--parchment);
+            }
+
+            .location-content {
+                max-width: 1100px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 5rem;
+                align-items: start;
+            }
+
+            .location-info h3 {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.8rem;
+                color: var(--bark);
+                margin-bottom: 2rem;
+            }
+
+            .info-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 1.2rem;
+                margin-bottom: 2rem;
+            }
+
+            .info-icon { font-size: 1.8rem; color: var(--terracotta); flex-shrink: 0; margin-top: 2px; }
+
+            .info-text h4 { color: var(--bark); font-weight: 600; margin-bottom: 0.3rem; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
+            .info-text p { color: var(--muted); font-size: 0.95rem; }
+
+            .hours-grid { margin-top: 1.5rem; }
+
+            .hour-row {
+                display: flex;
+                justify-content: space-between;
+                padding: 0.8rem 1rem;
+                border-bottom: 1px solid rgba(61, 43, 31, 0.08);
+                font-size: 0.9rem;
+            }
+
+            .hour-row:last-child { border-bottom: none; }
+            .hour-row .day { color: var(--bark); font-weight: 500; }
+            .hour-row .time { color: var(--muted); }
+            .hour-row.today { background: rgba(201, 74, 42, 0.06); border-radius: 4px; }
+            .hour-row.today .day { color: var(--terracotta); font-weight: 600; }
+            .hour-row.closed .time { color: #c4b8a8; }
+
+            .map-container {
+                width: 100%;
+                height: 430px;
+                border-radius: 4px;
+                overflow: hidden;
+                box-shadow: 0 20px 60px rgba(61, 43, 31, 0.15);
+            }
+
+            .map-container iframe { width: 100%; height: 100%; border: none; }
+
+            /* ——— CONTACT ——— */
+            .contact {
+                padding: 7rem 5%;
+                background: var(--cream);
+            }
+
+            .contact-container { max-width: 720px; margin: 0 auto; }
+
+            .contact-form {
+                background: white;
+                padding: 3rem;
+                border-radius: 4px;
+                border: 1px solid rgba(61, 43, 31, 0.08);
+                box-shadow: 0 10px 40px rgba(61, 43, 31, 0.06);
+            }
+
+            .form-group { margin-bottom: 1.8rem; }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: var(--bark);
+                font-weight: 500;
+                font-size: 0.8rem;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                width: 100%;
+                padding: 0.9rem 1rem;
+                border: 1.5px solid rgba(61, 43, 31, 0.15);
+                border-radius: 2px;
+                font-family: 'Jost', sans-serif;
+                font-size: 0.95rem;
+                color: var(--dark);
+                transition: border-color 0.3s;
+                background: white;
+            }
+
+            .form-group input:focus,
+            .form-group select:focus,
+            .form-group textarea:focus {
+                outline: none;
+                border-color: var(--terracotta);
+            }
+
+            .form-group textarea { resize: vertical; min-height: 130px; }
+
+            .submit-btn {
+                background: var(--terracotta);
+                color: white;
+                border: none;
+                padding: 1.1rem 3rem;
+                border-radius: 2px;
+                font-weight: 500;
+                font-size: 0.9rem;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                cursor: pointer;
+                width: 100%;
+                transition: all 0.3s;
+                font-family: 'Jost', sans-serif;
+            }
+
+            .submit-btn:hover { background: var(--bark); transform: translateY(-2px); }
+
+            /* ——— FOOTER ——— */
+            footer {
+                background: var(--dark);
+                color: white;
+                padding: 4rem 5% 2rem;
+            }
+
+            .footer-content {
+                max-width: 1100px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 2fr 1fr 1fr;
+                gap: 4rem;
+                padding-bottom: 3rem;
+                border-bottom: 1px solid rgba(255,255,255,0.08);
+                margin-bottom: 2rem;
+            }
+
+            .footer-brand .logo-foot {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.8rem;
+                color: var(--gold);
+                font-style: italic;
+                display: block;
+                margin-bottom: 1rem;
+            }
+
+            .footer-brand p { color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.8; max-width: 280px; }
+
+            .footer-section h4 {
+                color: var(--gold);
+                font-size: 0.75rem;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                font-weight: 500;
+                margin-bottom: 1.5rem;
+            }
+
+            .footer-section a,
+            .footer-section p {
+                color: rgba(255,255,255,0.5);
+                text-decoration: none;
+                font-size: 0.9rem;
+                line-height: 2.2;
+                display: block;
+                transition: color 0.3s;
+            }
+
+            .footer-section a:hover { color: var(--gold); }
+
+            .social-links { display: flex; gap: 1rem; margin-top: 1.5rem; }
+
+            .social-icon {
+                width: 40px; height: 40px;
+                border: 1px solid rgba(255,255,255,0.15);
+                border-radius: 50%;
+                display: flex; align-items: center; justify-content: center;
+                font-size: 1.1rem;
+                transition: all 0.3s;
+                color: rgba(255,255,255,0.5);
+                text-decoration: none;
+            }
+
+            .social-icon:hover { border-color: var(--gold); color: var(--gold); background: rgba(200, 151, 58, 0.1); }
+
+            .copyright {
+                max-width: 1100px;
+                margin: 0 auto;
+                text-align: center;
+                color: rgba(255,255,255,0.25);
+                font-size: 0.8rem;
+                letter-spacing: 0.5px;
+            }
+
+            /* ——— FADE IN ——— */
+            .fade-in { opacity: 0; transform: translateY(25px); transition: opacity 0.6s, transform 0.6s; }
+            .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+            /* ——— RESPONSIVE ——— */
+            @media (max-width: 968px) {
+                .nav-links { display: none; }
+                .hero-content { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+                .hero-text p { max-width: 100%; }
+                .hero-buttons { justify-content: center; }
+                .hero-eyebrow { justify-content: center; }
+                .hero-stats { justify-content: center; }
+                .hero-visual { order: -1; }
+                .hero-plate { max-width: 320px; height: 320px; }
+                .location-content { grid-template-columns: 1fr; gap: 3rem; }
+                .footer-content { grid-template-columns: 1fr; gap: 2rem; }
+                .cart-sidebar { width: 100%; right: -100%; }
+                .menu-grid { grid-template-columns: 1fr; }
+                .menu-item-footer { flex-direction: column; align-items: stretch; }
+            }
+
+            @media (max-width: 640px) {
+                .contact-form { padding: 2rem 1.5rem; }
+                .cart-toggle { width: 58px; height: 58px; font-size: 1.4rem; bottom: 20px; right: 20px; }
+                .bouncing-pizza { max-width: 220px; }
+            }
+        </style>
+    </head>
+    <body>
+
+        <!-- Navigation -->
+        <nav>
+            <div class="nav-container">
+                <a href="#" class="logo">
+                    La Capanna
+                    <span>Restaurant Italien · Paris XIV</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#location">Localisation</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="tel:0187222268" class="cta-button">Commander</a>
+            </div>
+        </nav>
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-bg-text">ITALIA</div>
+            <div class="hero-decor-line"></div>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-eyebrow">Rue Daguerre, Paris 14e</div>
+                    <h1>L'Italie<br><em>dans votre assiette</em></h1>
+                    <p class="subtitle">Pizzas & Pasta maison depuis le cœur de Montparnasse</p>
+                    <p>Pizzas artisanales à pâte fraîche, pasta faite maison, antipasti généreux — tout préparé avec des produits frais et le savoir-faire d'une vraie cuisine italienne. Sur place ou à emporter.</p>
+                    <div class="hero-buttons">
+                        <a href="#menu" class="btn-primary">Voir le Menu</a>
+                        <a href="#location" class="btn-secondary">Nous Trouver</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">4.6★</div>
+                            <div class="stat-label">Note Google</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">150+</div>
+                            <div class="stat-label">Avis clients</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Fait maison</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-plate">
+                        <div class="hero-plate-inner">
+                            <div class="pizza-visual">
+                                <img src="https://i.postimg.cc/pL565LGK/image-removebg-preview-(49).png" 
+                                     alt="Pizza Margherita" 
+                                     class="bouncing-pizza">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features fade-in">
+            <h2 class="section-title">Pourquoi La Capanna ?</h2>
+            <p class="section-subtitle">Une trattoria authentique à deux pas du métro Mouton-Duvernet</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌿</div>
+                    <h3>Produits Frais</h3>
+                    <p>Nous sélectionnons chaque jour des ingrédients frais et de qualité pour vous offrir les saveurs authentiques de l'Italie.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍🍳</div>
+                    <h3>Tout Fait Maison</h3>
+                    <p>Pâtes fraîches, sauces tomate, antipasti — tout est préparé artisanalement sur place, comme en Italie.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛵</div>
+                    <h3>Sur Place & À Emporter</h3>
+                    <p>Profitez d'un repas chaleureux en salle ou commandez à emporter. La livraison est aussi disponible via Uber Eats.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3>Ticket Restaurant Accepté</h3>
+                    <p>Swile, Pluxee et Ticket Restaurant sont acceptés. Parfait pour le déjeuner de la semaine à un prix accessible.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu -->
+        <section class="menu-preview" id="menu">
+            <h2 class="section-title fade-in">Notre Menu</h2>
+            <p class="section-subtitle fade-in">Préparé chaque jour avec amour et des produits frais</p>
+            <div class="menu-categories fade-in">
+                <button class="category-btn active" data-category="pizzas">🍕 Pizzas</button>
+                <button class="category-btn" data-category="pasta">🍝 Pasta</button>
+                <button class="category-btn" data-category="antipasti">🥗 Antipasti</button>
+                <button class="category-btn" data-category="menus">🍽️ Menus</button>
+                <button class="category-btn" data-category="desserts">🍮 Desserts</button>
+            </div>
+            <div class="menu-items-container fade-in">
+                <div class="menu-grid" id="menuGrid"></div>
+            </div>
+        </section>
+
+        <!-- Location -->
+        <section class="location fade-in" id="location">
+            <h2 class="section-title">Où Nous Trouver</h2>
+            <p class="section-subtitle" style="color: var(--muted);">À deux pas du métro Mouton-Duvernet et du marché Daguerre</p>
+            <div class="location-content">
+                <div class="location-info">
+                    <h3>La Capanna</h3>
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-text">
+                            <h4>Adresse</h4>
+                            <p>45 Rue Daguerre<br>75014 Paris</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-text">
+                            <h4>Téléphone</h4>
+                            <p><a href="tel:0187222268" style="color: var(--terracotta); text-decoration: none;">01 87 22 22 68</a></p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">🚇</div>
+                        <div class="info-text">
+                            <h4>Accès</h4>
+                            <p>Métro Mouton-Duvernet (ligne 13)<br>Bus 38, 68</p>
+                        </div>
+                    </div>
+                    <div class="hours-grid">
+                        <div class="hour-row"><span class="day">Lundi</span><span class="time">10h00 – 22h00</span></div>
+                        <div class="hour-row"><span class="day">Mardi</span><span class="time">10h00 – 22h00</span></div>
+                        <div class="hour-row"><span class="day">Mercredi</span><span class="time">10h00 – 22h00</span></div>
+                        <div class="hour-row today"><span class="day">Jeudi ✦</span><span class="time">10h00 – 22h00</span></div>
+                        <div class="hour-row"><span class="day">Vendredi</span><span class="time">10h00 – 22h00</span></div>
+                        <div class="hour-row"><span class="day">Samedi</span><span class="time">10h00 – 22h00</span></div>
+                        <div class="hour-row closed"><span class="day">Dimanche</span><span class="time">Fermé</span></div>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.0!2d2.3276238!3d48.8346974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6713797e03dc7%3A0x3b86da825efb9ca0!2sLa%20Capanna!5e0!3m2!1sfr!2sfr!4v1700000000000!5m2!1sfr!2sfr"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="contact fade-in" id="contact">
+            <div class="contact-container">
+                <h2 class="section-title">Nous Contacter</h2>
+                <p class="section-subtitle">Une question ? Une commande spéciale ? Écrivez-nous.</p>
+                <div class="contact-form">
+                    <form class="contact-form-inner">
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <input type="text" id="name" placeholder="Jean Dupont" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="jean@exemple.fr" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel" id="phone" placeholder="06 00 00 00 00">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <select id="subject">
+                                <option value="Commande spéciale">Commande spéciale</option>
+                                <option value="Réservation">Réservation de table</option>
+                                <option value="Information">Renseignement menu</option>
+                                <option value="Traiteur">Prestation traiteur</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" placeholder="Votre message..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Envoyer le message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-foot">La Capanna</span>
+                    <p>Restaurant italien authentique au cœur du 14e arrondissement de Paris. Pizzas artisanales, pasta fraîche et saveurs du sud de l'Italie depuis des années.</p>
+                    <div class="social-links">
+                        <a class="social-icon" href="#" title="Instagram">📸</a>
+                        <a class="social-icon" href="#" title="Facebook">👤</a>
+                        <a class="social-icon" href="https://www.ubereats.com/fr/store/la-capanna/FmrshwOfR4CCBWfG7C8Xzw" title="Uber Eats" target="_blank">🛵</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <a href="#menu">Menu</a>
+                    <a href="#location">Localisation</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>45 Rue Daguerre</p>
+                    <p>75014 Paris</p>
+                    <a href="tel:0187222268">01 87 22 22 68</a>
+                    <p>Lun–Sam : 10h–22h</p>
+                </div>
+            </div>
+            <p class="copyright">© 2025 La Capanna — Restaurant Italien Paris 14 · Tous droits réservés</p>
+        </footer>
+
+        <!-- Cart Toggle -->
+        <button class="cart-toggle" id="cartToggle">
+            🛒
+            <span class="cart-count" id="cartCount"></span>
+        </button>
+
+        <!-- Cart Sidebar -->
+        <div class="cart-sidebar" id="cartSidebar">
+            <div class="cart-header">
+                <h3>Votre Commande</h3>
+                <button class="cart-close" id="cartClose">✕</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="cart-empty">Votre panier est vide</p>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total</span>
+                    <span id="cartTotal">0.00€</span>
+                </div>
+                <button class="checkout-btn" id="checkoutBtn" disabled>Commander Maintenant</button>
+            </div>
+        </div>
+
+        <script>
+            /* ——— MENU DATA ——— */
+            const menuData = {
+                pizzas: [
+                    {
+                        name: "Margherita", emoji: "<img src='https://i.postimg.cc/pL565LGK/image-removebg-preview-(49).png' alt='Margherita' style='object-fit: contain; padding: 25px;'>",
+                        desc: "Sauce tomate maison, mozzarella fior di latte, basilic frais. La classique.",
+                        sizes: { petite: { label: "26cm", price: 10.50 }, grande: { label: "33cm", price: 13.50 } }
+                    },
+                    {
+                        name: "4 Fromages", emoji: "<img src='https://i.postimg.cc/pL565LGK/image-removebg-preview-(49).png' alt='4 Fromages' style='object-fit: contain; padding: 25px;'>",
+                        desc: "Mozzarella, gorgonzola, parmesan, chèvre frais. Pour les amateurs.",
+                        sizes: { petite: { label: "26cm", price: 11.50 }, grande: { label: "33cm", price: 14.50 } }
+                    },
+                    {
+                        name: "Reine", emoji: "<img src='https://i.postimg.cc/pL565LGK/image-removebg-preview-(49).png' alt='Reine' style='object-fit: contain; padding: 25px;'>",
+                        desc: "Sauce tomate, mozzarella, jambon blanc, champignons de Paris.",
+                        sizes: { petite: { label: "26cm", price: 11.50 }, grande: { label: "33cm", price: 14.50 } }
+                    },
+                    {
+                        name: "Végétarienne", emoji: "<img src='https://i.postimg.cc/pL565LGK/image-removebg-preview-(49).png' alt='Végétarienne' style='object-fit: contain; padding: 25px;'>",
+                        desc: "Légumes grillés de saison, mozzarella, sauce tomate basilic. Fait maison.",
+                        sizes: { petite: { label: "26cm", price: 11.00 }, grande: { label: "33cm", price: 13.50 } }
+                    },
+                    {
+                        name: "Diavola", emoji: "<img src='https://i.postimg.cc/pL565LGK/image-removebg-preview-(49).png' alt='Diavola' style='object-fit: contain; padding: 25px;'>",
+                        desc: "Sauce tomate épicée, mozzarella, salami piquant, olives noires.",
+                        sizes: { petite: { label: "26cm", price: 11.50 }, grande: { label: "33cm", price: 14.50 } }
+                    },
+                    {
+                        name: "Calzone", emoji: "<img src='https://i.postimg.cc/pL565LGK/image-removebg-preview-(49).png' alt='Calzone' style='object-fit: contain; padding: 25px;'>",
+                        desc: "Pizza pliée farcie : ricotta, mozzarella, jambon, champignons. Croustillante.",
+                        sizes: { petite: { label: "Normale", price: 13.00 }, grande: { label: "Grande", price: 15.50 } }
+                    },
+                ],
+                pasta: [
+                    { name: "Spaghetti Bolognese", emoji: "<img src='https://i.postimg.cc/XJy2pjVj/image-removebg-preview-(50).png' alt='Spaghetti Bolognese' style='object-fit: contain; padding: 25px;'>", desc: "Sauce bolognaise maison mijotée, viande de bœuf, tomates fraîches, herbes.", price: 11.50 },
+                    { name: "Penne all'Arrabbiata", emoji: "<img src='https://i.postimg.cc/XJy2pjVj/image-removebg-preview-(50).png' alt='Penne all'Arrabbiata' style='object-fit: contain; padding: 25px;'>", desc: "Sauce tomate épicée à l'ail et piment, basilic frais. Simple et parfait.", price: 10.00 },
+                    { name: "Tagliatelle au Saumon", emoji: "<img src='https://i.postimg.cc/XJy2pjVj/image-removebg-preview-(50).png' alt='Tagliatelle au Saumon' style='object-fit: contain; padding: 25px;'>", desc: "Tagliatelle fraîches maison, saumon fumé, crème légère, aneth.", price: 13.50 },
+                    { name: "Gnocchi à la Gorgonzola", emoji: "<img src='https://i.postimg.cc/XJy2pjVj/image-removebg-preview-(50).png' alt='Gnocchi à la Gorgonzola' style='object-fit: contain; padding: 25px;'>", desc: "Gnocchi de pomme de terre maison, sauce gorgonzola crémeuse, noix.", price: 12.50 },
+                    { name: "Lasagne Maison", emoji: "<img src='https://i.postimg.cc/XJy2pjVj/image-removebg-preview-(50).png' alt='Lasagne Maison' style='object-fit: contain; padding: 25px;'>", desc: "Lasagne traditionnelles bolognaise, béchamel maison, parmesan râpé.", price: 13.00 },
+                    { name: "Rigatoni Poulet Pesto", emoji: "<img src='https://i.postimg.cc/XJy2pjVj/image-removebg-preview-(50).png' alt='Rigatoni Poulet Pesto' style='object-fit: contain; padding: 25px;'>", desc: "Rigatoni al dente, poulet grillé, pesto maison, tomates cerises, parmesan.", price: 13.00 },
+                ],
+                antipasti: [
+                    { name: "Salade Caprese", emoji: "🍅", desc: "Mozzarella di Bufala, tomates cerises, légumes grillés. Fait maison.", price: 8.50 },
+                    { name: "Burrata Bio", emoji: "🌿", desc: "Lit de roquette, burrata bio, tomates cerises, copeaux de parmesan.", price: 8.50 },
+                    { name: "Antipasti Mixte", emoji: "🫙", desc: "Légumes grillés : courgettes, aubergines, patates douces, endives et fenouil.", price: 8.50 },
+                    { name: "Charcuterie Italienne", emoji: "🥩", desc: "Sélection de charcuteries importées : bresaola, coppa, jambon de Parme.", price: 11.00 },
+                    { name: "Bruschetta Maison", emoji: "🥖", desc: "Pain grillé, tomates fraîches, basilic, ail, huile d'olive extra vierge.", price: 6.50 },
+                    { name: "Soupe Minestrone", emoji: "🍲", desc: "Soupe de légumes italienne traditionnelle, légumes de saison, croûtons.", price: 7.50 },
+                ],
+                menus: [
+                    { name: "Menu Pasta", emoji: "🍝", desc: "Pasta au choix + dessert + boisson 33cl. Le menu du midi idéal.", price: 9.50 },
+                    { name: "Menu Pizza", emoji: "🍕", desc: "Pizza Margherita 33cm + dessert + boisson 33cl. Saveur garantie.", price: 13.50 },
+                    { name: "Menu Enfant", emoji: "👶", desc: "Petite pizza ou pasta + dessert + jus de fruit. Pour les 12 ans et moins.", price: 8.00 },
+                    { name: "Plateau Traiteur", emoji: "🫙", desc: "Commande traiteur sur mesure : antipasti, lasagnes, pizzas. Sur réservation.", price: null },
+                ],
+                desserts: [
+                    { name: "Tiramisu Maison", emoji: "☕", desc: "Le classique italien : mascarpone, café espresso, biscuits savoiardi, cacao.", price: 5.50 },
+                    { name: "Panna Cotta", emoji: "🍮", desc: "Panna cotta crémeuse, coulis de fruits rouges frais. Légère et gourmande.", price: 5.00 },
+                    { name: "Cannoli Siciliens", emoji: "🍦", desc: "Cannoli croustillants farcis à la ricotta sucrée et zestes de citron.", price: 5.50 },
+                    { name: "Gelato", emoji: "🍨", desc: "2 boules de glace artisanale au choix : vanille, pistache, fraise, chocolat.", price: 4.50 },
+                ],
+            };
+
+            let cart = [];
+
+            function loadMenuItems(category) {
+                const grid = document.getElementById('menuGrid');
+                const items = menuData[category];
+                if (!items) { grid.innerHTML = ''; return; }
+
+                grid.innerHTML = items.map(item => {
+                    if (item.sizes) {
+                        const sizeKeys = Object.keys(item.sizes);
+                        const sizeBtns = sizeKeys.map((k, i) => `
+                            <button class="size-btn ${i===0?'active':''}" data-size="${k}" data-price="${item.sizes[k].price}"
+                                onclick="selectSize(this)">
+                                <span class="size-name">${item.sizes[k].label}</span>
+                                <span class="size-price">${item.sizes[k].price.toFixed(2)}€</span>
+                            </button>
+                        `).join('');
+                        return `
+                            <div class="menu-item">
+                                <div class="menu-item-image">${item.emoji}</div>
+                                <div class="menu-item-content">
+                                    <h3>${item.name}</h3>
+                                    <p>${item.desc}</p>
+                                    <div class="pizza-sizes">${sizeBtns}</div>
+                                    <div class="menu-item-footer">
+                                        <span class="price" id="price-${item.name.replace(/\s/g,'_')}">${item.sizes[sizeKeys[0]].price.toFixed(2)}€</span>
+                                        <button class="add-to-cart-btn" onclick="addPizzaToCart('${item.name}', this)">Ajouter</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        const priceDisplay = item.price !== null ? `<span class="price">${item.price.toFixed(2)}€</span>` : `<span class="price" style="font-size:1rem;color:var(--muted)">Sur devis</span>`;
+                        const addBtn = item.price !== null
+                            ? `<button class="add-to-cart-btn" onclick="addToCart('${item.name}', ${item.price})">Ajouter</button>`
+                            : `<a href="#contact" class="add-to-cart-btn" style="text-decoration:none">Demander</a>`;
+                        return `
+                            <div class="menu-item">
+                                <div class="menu-item-image">${item.emoji}</div>
+                                <div class="menu-item-content">
+                                    <h3>${item.name}</h3>
+                                    <p>${item.desc}</p>
+                                    <div class="menu-item-footer">
+                                        ${priceDisplay}
+                                        ${addBtn}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }).join('');
+            }
+
+            function selectSize(btn) {
+                const container = btn.closest('.pizza-sizes');
+                container.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const priceSpan = btn.closest('.menu-item-content').querySelector('.price');
+                if (priceSpan) priceSpan.textContent = parseFloat(btn.dataset.price).toFixed(2) + '€';
+            }
+
+            function addToCart(name, price) {
+                const existing = cart.find(i => i.name === name && !i.size);
+                if (existing) { existing.quantity++; }
+                else { cart.push({ name, displayName: name, price: Number(price), quantity: 1, size: null }); }
+                updateCart();
+                showCartNotification();
+            }
+
+            function addPizzaToCart(name, button) {
+                const menuItem = button.closest('.menu-item');
+                const activeSize = menuItem.querySelector('.size-btn.active');
+                if (!activeSize) { alert("Veuillez sélectionner une taille."); return; }
+                const size = activeSize.dataset.size;
+                const price = parseFloat(activeSize.dataset.price);
+                const sizeLabel = activeSize.querySelector('.size-name').textContent;
+                const displayName = `${name} – ${sizeLabel}`;
+                const existing = cart.find(i => i.name === name && i.size === size);
+                if (existing) { existing.quantity++; }
+                else { cart.push({ name, displayName, price, quantity: 1, size }); }
+                updateCart();
+                showCartNotification();
+            }
+
+            function showCartNotification() {
+                const btn = document.getElementById('cartToggle');
+                btn.style.transform = 'scale(1.2)';
+                setTimeout(() => btn.style.transform = 'scale(1)', 200);
+            }
+
+            function updateQuantity(idx, delta) {
+                cart[idx].quantity += delta;
+                if (cart[idx].quantity <= 0) cart.splice(idx, 1);
+                updateCart();
+            }
+
+            function removeFromCart(idx) { cart.splice(idx, 1); updateCart(); }
+
+            function updateCart() {
+                const itemsEl = document.getElementById('cartItems');
+                const countEl = document.getElementById('cartCount');
+                const totalEl = document.getElementById('cartTotal');
+                const checkoutBtn = document.getElementById('checkoutBtn');
+
+                if (cart.length === 0) {
+                    itemsEl.innerHTML = '<p class="cart-empty">Votre panier est vide</p>';
+                    countEl.textContent = '';
+                    totalEl.textContent = '0.00€';
+                    checkoutBtn.disabled = true;
+                    checkoutBtn.textContent = 'Commander Maintenant';
+                    return;
+                }
+
+                let total = 0, count = 0, html = '';
+                cart.forEach((item, idx) => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal; count += item.quantity;
+                    html += `
+                        <div class="cart-item">
+                            <div class="cart-item-header">
+                                <div class="cart-item-name">${item.displayName}</div>
+                                <button class="cart-item-remove" onclick="removeFromCart(${idx})">✕</button>
+                            </div>
+                            <div class="cart-item-footer">
+                                <div class="quantity-controls">
+                                    <button class="qty-btn" onclick="updateQuantity(${idx}, -1)">−</button>
+                                    <span class="qty-display">${item.quantity}</span>
+                                    <button class="qty-btn" onclick="updateQuantity(${idx}, 1)">+</button>
+                                </div>
+                                <div class="cart-item-price">${itemTotal.toFixed(2)}€</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                itemsEl.innerHTML = html;
+                countEl.textContent = count;
+                totalEl.textContent = total.toFixed(2) + '€';
+                checkoutBtn.disabled = false;
+                checkoutBtn.textContent = 'Commander Maintenant';
+            }
+
+            function toggleCart() { document.getElementById('cartSidebar').classList.toggle('open'); }
+
+            async function checkout() {
+                if (cart.length === 0) { alert("Votre panier est vide"); return; }
+                try {
+                    const response = await fetch("/api/create-checkout-session", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ cart })
+                    });
+                    const data = await response.json();
+                    if (!response.ok || data.error || !data.url) {
+                        alert(data.error || "Erreur lors de la création de la session de paiement");
+                        return;
+                    }
+                    window.location.href = data.url;
+                } catch (err) {
+                    alert("Erreur réseau : " + err.message);
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                loadMenuItems('pizzas');
+
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        loadMenuItems(btn.dataset.category);
+                    });
+                });
+
+                document.getElementById('cartToggle').addEventListener('click', toggleCart);
+                document.getElementById('cartClose').addEventListener('click', toggleCart);
+                document.getElementById('checkoutBtn').addEventListener('click', checkout);
+
+                // Smooth scroll
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', e => {
+                        e.preventDefault();
+                        const target = document.querySelector(anchor.getAttribute('href'));
+                        if (target) target.scrollIntoView({ behavior: 'smooth' });
+                    });
+                });
+
+                // Fade-in
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+                }, { threshold: 0.1 });
+                document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+                // Contact form
+                document.querySelector('.contact-form-inner')?.addEventListener('submit', e => {
+                    e.preventDefault();
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
+                    let body = `Nom: ${name}%0D%0AEmail: ${email}%0D%0A`;
+                    if (phone) body += `Téléphone: ${phone}%0D%0A`;
+                    body += `%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`;
+                    window.location.href = `mailto:contact@lacapanna.fr?subject=${encodeURIComponent(subject)}&body=${body}`;
+                });
+            });
+        </script>
+    </body>
+</html>
