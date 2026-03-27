@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Délice Daguerre - Paris 14ème | Restaurant Asiatique</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #0F1923;
+            --deep-navy: #162231;
+            --gold: #C9A84C;
+            --gold-light: #E8C97A;
+            --red: #C0392B;
+            --rice: #FAF5EC;
+            --parchment: #F2EAD8;
+            --mist: #8A9BAA;
+            --white: #FDFCFA;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--rice);
+            color: var(--ink);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250, 245, 236, 0.96);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            padding: 1.2rem 5%;
+            box-shadow: 0 1px 0 rgba(201, 168, 76, 0.25);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--ink);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .logo-accent {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--ink);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .cta-button {
+            background: var(--ink);
+            color: var(--gold);
+            padding: 0.75rem 1.8rem;
+            border-radius: 3px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            border: 1px solid var(--ink);
+        }
+
+        .cta-button:hover {
+            background: var(--gold);
+            color: var(--ink);
+            border-color: var(--gold);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 8rem 5% 5rem;
+            background: var(--rice);
+            overflow: hidden;
+        }
+
+        .hero-bg-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 75% 30%, rgba(201, 168, 76, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 20% 70%, rgba(15, 25, 35, 0.04) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        /* Decorative vertical Chinese-style line */
+        .hero-deco-line {
+            position: absolute;
+            right: 8%;
+            top: 10%;
+            bottom: 10%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+            opacity: 0.4;
+        }
+
+        .hero-deco-line::before {
+            content: '✦';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--gold);
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .hero-content {
+            max-width: 1300px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            animation: fadeUp 0.8s ease-out both;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            color: var(--ink);
+            margin-bottom: 1.2rem;
+            animation: fadeUp 0.8s ease-out 0.15s both;
+        }
+
+        .hero-text h1 em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .hero-text .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--mist);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            animation: fadeUp 0.8s ease-out 0.3s both;
+        }
+
+        .hero-text p {
+            font-size: 1.05rem;
+            color: #4a5568;
+            margin-bottom: 2.5rem;
+            max-width: 520px;
+            line-height: 1.8;
+            animation: fadeUp 0.8s ease-out 0.45s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.2rem;
+            animation: fadeUp 0.8s ease-out 0.6s both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background: var(--ink);
+            color: var(--gold);
+            border: 2px solid var(--ink);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold);
+            color: var(--ink);
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(201, 168, 76, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--ink);
+            border: 2px solid var(--ink);
+        }
+
+        .btn-secondary:hover {
+            background: var(--ink);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: fadeUp 1s ease-out 0.2s both;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-plate {
+            width: 100%;
+            max-width: 440px;
+            aspect-ratio: 1;
+            background: linear-gradient(145deg, var(--deep-navy) 0%, #1a2f45 60%, var(--ink) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7rem;
+            box-shadow: 
+                0 30px 80px rgba(15, 25, 35, 0.25),
+                0 0 0 1px rgba(201, 168, 76, 0.3),
+                inset 0 1px 0 rgba(201, 168, 76, 0.1);
+            position: relative;
+            animation: floatPlate 6s ease-in-out infinite;
+        }
+
+        @keyframes floatPlate {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-16px); }
+        }
+
+        .hero-plate::before {
+            content: '';
+            position: absolute;
+            inset: -16px;
+            border-radius: 50%;
+            border: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        .hero-plate::after {
+            content: '';
+            position: absolute;
+            inset: -32px;
+            border-radius: 50%;
+            border: 1px dashed rgba(201, 168, 76, 0.08);
+        }
+
+        /* ── STATS BAR ── */
+        .stats-bar {
+            background: var(--ink);
+            padding: 2.5rem 5%;
+        }
+
+        .stats-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            border-right: 1px solid rgba(201, 168, 76, 0.2);
+        }
+
+        .stat-item:last-child { border-right: none; }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--mist);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 0.3rem;
+        }
+
+        /* ── FEATURES ── */
+        .features {
+            padding: 7rem 5%;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4.5rem;
+        }
+
+        .section-eyebrow {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--mist);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2.5rem 2rem;
+            border-radius: 2px;
+            background: var(--rice);
+            transition: all 0.35s;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(201, 168, 76, 0.12);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--gold);
+            transition: height 0.35s;
+        }
+
+        .feature-card:hover::before { height: 100%; }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            border-color: rgba(201, 168, 76, 0.3);
+        }
+
+        .feature-icon { font-size: 2.8rem; margin-bottom: 1.2rem; }
+
+        .feature-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--ink);
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-card p {
+            color: #5a6a7a;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ── MENU ── */
+        .menu-preview {
+            padding: 7rem 5%;
+            background: var(--rice);
+        }
+
+        .menu-categories {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: transparent;
+            border: 1.5px solid rgba(15, 25, 35, 0.3);
+            color: var(--ink);
+            padding: 0.75rem 1.8rem;
+            border-radius: 2px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: 'DM Sans', sans-serif;
+            letter-spacing: 0.3px;
+        }
+
+        .category-btn:hover {
+            background: var(--ink);
+            color: white;
+            border-color: var(--ink);
+        }
+
+        .category-btn.active {
+            background: var(--ink);
+            border-color: var(--ink);
+            color: var(--gold);
+        }
+
+        .menu-items-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 400px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .menu-item {
+            background: var(--white);
+            border-radius: 2px;
+            overflow: hidden;
+            border: 1px solid rgba(201, 168, 76, 0.1);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border-color: rgba(201, 168, 76, 0.4);
+        }
+
+        .menu-item-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, var(--deep-navy) 0%, #1a3a55 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+        }
+
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .menu-item-image.has-image { background: #000; }
+
+        .menu-item-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-item-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item-content p {
+            color: #6a7a8a;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.65;
+            flex: 1;
+        }
+
+        .menu-item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .add-to-cart-btn {
+            background: var(--ink);
+            color: var(--gold);
+            border: none;
+            padding: 0.65rem 1.4rem;
+            border-radius: 2px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--gold);
+            color: var(--ink);
+        }
+
+        /* ── CART ── */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 420px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: -4px 0 30px rgba(0,0,0,0.15);
+            z-index: 2000;
+            transition: right 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid rgba(201, 168, 76, 0.2);
+        }
+
+        .cart-sidebar.open { right: 0; }
+
+        .cart-header {
+            padding: 2rem;
+            background: var(--ink);
+            color: var(--gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        .cart-close {
+            background: transparent;
+            border: none;
+            color: var(--gold);
+            font-size: 1.8rem;
+            cursor: pointer;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .cart-close:hover { background: rgba(201, 168, 76, 0.15); }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .cart-empty { text-align: center; color: var(--mist); padding: 3rem 1rem; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; }
+
+        .cart-item {
+            background: var(--rice);
+            padding: 1rem;
+            border-radius: 2px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(201, 168, 76, 0.1);
+        }
+
+        .cart-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-name { font-weight: 700; color: var(--ink); font-size: 1rem; }
+
+        .cart-item-remove {
+            background: transparent;
+            border: none;
+            color: var(--mist);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 0;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-item-remove:hover { color: var(--red); }
+
+        .cart-item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quantity-controls { display: flex; align-items: center; gap: 0.8rem; }
+
+        .qty-btn {
+            background: var(--ink);
+            color: var(--gold);
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.25s;
+        }
+
+        .qty-btn:hover { background: var(--gold); color: var(--ink); }
+
+        .qty-display { font-weight: 700; font-size: 1rem; min-width: 28px; text-align: center; }
+
+        .cart-item-price { font-weight: 700; font-size: 1.1rem; color: var(--gold); font-family: 'Playfair Display', serif; }
+
+        .cart-footer {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--ink);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .cart-total span:last-child { color: var(--gold); }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--ink);
+            color: var(--gold);
+            border: none;
+            padding: 1.1rem;
+            border-radius: 2px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: 'DM Sans', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .checkout-btn:hover { background: var(--gold); color: var(--ink); }
+        .checkout-btn:disabled { background: #ccc; cursor: not-allowed; color: white; }
+
+        .cart-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background: var(--ink);
+            color: var(--gold);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.6rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(15, 25, 35, 0.35);
+            z-index: 1500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-toggle:hover { background: var(--gold); color: var(--ink); transform: scale(1.05); }
+
+        .cart-count {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: var(--red);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .cart-count:empty { display: none; }
+
+        /* ── LOCATION ── */
+        .location {
+            padding: 7rem 5%;
+            background: var(--deep-navy);
+            color: white;
+        }
+
+        .location .section-eyebrow { color: var(--gold); }
+        .location .section-title { color: white; }
+        .location .section-subtitle { color: var(--mist); }
+
+        .location-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .location-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-icon { font-size: 1.8rem; color: var(--gold); flex-shrink: 0; }
+
+        .info-text h4 {
+            color: var(--gold-light);
+            margin-bottom: 0.3rem;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .info-text p { color: #9ab0c0; line-height: 1.6; }
+
+        .info-text a { color: var(--gold); text-decoration: none; }
+        .info-text a:hover { color: var(--gold-light); }
+
+        .hours-grid { display: grid; gap: 0.6rem; margin-top: 2rem; }
+
+        .hour-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.9rem 1.2rem;
+            background: rgba(255,255,255,0.04);
+            border-radius: 2px;
+            border: 1px solid rgba(201, 168, 76, 0.1);
+            font-size: 0.95rem;
+        }
+
+        .hour-row span:last-child { color: var(--gold); font-weight: 600; }
+
+        .map-container {
+            width: 100%;
+            height: 450px;
+            border-radius: 2px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            border: 1px solid rgba(201, 168, 76, 0.2);
+        }
+
+        .map-container iframe { width: 100%; height: 100%; border: none; }
+
+        /* ── CONTACT ── */
+        .contact {
+            padding: 7rem 5%;
+            background: var(--parchment);
+        }
+
+        .contact-container { max-width: 720px; margin: 0 auto; }
+
+        .contact-form {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 2px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            border: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        .form-group { margin-bottom: 1.8rem; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--ink);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1.1rem;
+            border: 1.5px solid rgba(15, 25, 35, 0.15);
+            border-radius: 2px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            background: var(--rice);
+            color: var(--ink);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: var(--white);
+        }
+
+        .form-group textarea { resize: vertical; min-height: 140px; }
+
+        .submit-btn {
+            background: var(--ink);
+            color: var(--gold);
+            border: none;
+            padding: 1.1rem 3rem;
+            border-radius: 2px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            font-family: 'DM Sans', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover { background: var(--gold); color: var(--ink); transform: translateY(-2px); }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--ink);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            margin-bottom: 1.2rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #7a9ab0;
+            text-decoration: none;
+            line-height: 2.2;
+            font-size: 0.95rem;
+        }
+
+        .footer-section a:hover { color: var(--gold); }
+
+        .footer-brand-desc {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #8aa0b5;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            transform: translateY(-4px);
+        }
+
+        .social-icon svg { width: 20px; height: 20px; fill: var(--gold); }
+        .social-icon:hover svg { fill: var(--ink); }
+
+        .copyright {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            color: #4a6070;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* ── FADE IN ── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s, transform 0.7s;
+        }
+
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 968px) {
+            .nav-links { display: none; }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text p { max-width: 100%; }
+
+            .hero-buttons { justify-content: center; flex-wrap: wrap; }
+
+            .hero-visual { order: -1; }
+
+            .hero-plate { max-width: 300px; height: 300px; font-size: 5rem; }
+
+            .stats-container { grid-template-columns: 1fr; gap: 1.5rem; }
+            .stat-item { border-right: none; border-bottom: 1px solid rgba(201, 168, 76, 0.15); padding-bottom: 1.5rem; }
+            .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+            .location-content { grid-template-columns: 1fr; gap: 3rem; }
+
+            .cart-sidebar { width: 100%; right: -100%; }
+
+            .menu-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            .hero-text h1 { font-size: 2.5rem; }
+            .contact-form { padding: 2rem 1.5rem; }
+            .cart-toggle { width: 56px; height: 56px; font-size: 1.4rem; bottom: 20px; right: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                Délice <span class="logo-accent">Daguerre</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#location">Localisation</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="tel:+33142180556" class="cta-button">Réserver</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-bg-pattern"></div>
+        <div class="hero-deco-line"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-eyebrow">Restaurant Asiatique · Paris 14ème</div>
+                <h1>Un voyage <em>culinaire</em> au cœur du 14ème</h1>
+                <div class="subtitle">Saveurs d'Asie, âme parisienne</div>
+                <p>Venez découvrir une cuisine asiatique soignée, préparée avec des ingrédients frais et de qualité. Sur place ou à emporter, chaque plat est une invitation au voyage.</p>
+                <div class="hero-buttons">
+                    <a href="tel:+33142180556" class="btn-primary">Commander par téléphone</a>
+                    <a href="#menu" class="btn-secondary">Voir le Menu</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-plate">🍜</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">4 ★</div>
+                <div class="stat-label">Note Google</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">7j/7</div>
+                <div class="stat-label">Ouvert tous les jours</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">€10–20</div>
+                <div class="stat-label">Prix par personne</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <section class="features fade-in">
+        <div class="section-header">
+            <span class="section-eyebrow">Nos engagements</span>
+            <h2 class="section-title">Pourquoi nous choisir</h2>
+            <p class="section-subtitle">L'authenticité et la fraîcheur avant tout</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🥢</div>
+                <h3>Cuisine Authentique</h3>
+                <p>Des recettes traditionnelles revisitées avec soin, pour vous offrir une expérience gustative fidèle aux saveurs d'Asie.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌿</div>
+                <h3>Ingrédients Frais</h3>
+                <p>Nous sélectionnons quotidiennement les meilleurs produits pour garantir la fraîcheur et la qualité de chaque plat.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🥡</div>
+                <h3>Vente à Emporter</h3>
+                <p>Nos plats sont disponibles à emporter — idéal pour un déjeuner rapide ou un dîner en famille à la maison.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📍</div>
+                <h3>Rue Daguerre</h3>
+                <p>Situés dans la charmante rue piétonne Daguerre, au cœur du 14ème arrondissement, entre Montparnasse et Denfert.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🕐</div>
+                <h3>Tous les Jours</h3>
+                <p>Ouverts 7 jours sur 7 de 11h à 22h30, pour vous accueillir que ce soit pour le déjeuner ou le dîner.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Prix Abordables</h3>
+                <p>Un repas complet entre 10 et 20€ par personne — la qualité au juste prix, sans compromis sur le goût.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu-preview" id="menu">
+        <div class="section-header">
+            <span class="section-eyebrow">Notre carte</span>
+            <h2 class="section-title">Le Menu</h2>
+            <p class="section-subtitle">Commander par téléphone pour retrait sur place</p>
+        </div>
+
+        <div class="menu-categories">
+            <button class="category-btn active" data-category="soupes">🍜 Soupes & Bouillons</button>
+            <button class="category-btn" data-category="plats">🍱 Plats</button>
+            <button class="category-btn" data-category="riz">🍚 Riz & Nouilles</button>
+            <button class="category-btn" data-category="entrees">🥟 Entrées</button>
+            <button class="category-btn" data-category="boissons">🍵 Boissons</button>
+        </div>
+
+        <div class="menu-items-container" id="menuItemsContainer"></div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>🛒 Mon Panier</h3>
+            <button class="cart-close" id="cartClose">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="cart-empty">Votre panier est vide</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total :</span>
+                <span id="cartTotal">0.00€</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn" disabled>Commander par téléphone</button>
+        </div>
+    </div>
+
+    <!-- Cart Toggle -->
+    <button class="cart-toggle" id="cartToggle">
+        🛒 <span class="cart-count" id="cartCount"></span>
+    </button>
+
+    <!-- Location -->
+    <section class="location fade-in" id="location">
+        <div class="section-header">
+            <span class="section-eyebrow">Nous trouver</span>
+            <h2 class="section-title">Venez nous rendre visite</h2>
+            <p class="section-subtitle">Dans la rue commerçante et piétonne Daguerre</p>
+        </div>
+        <div class="location-content">
+            <div class="location-info">
+                <h3>Informations Pratiques</h3>
+
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div class="info-text">
+                        <h4>Adresse</h4>
+                        <p>42 rue Daguerre<br>75014 Paris, France</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">📞</div>
+                    <div class="info-text">
+                        <h4>Téléphone</h4>
+                        <p><a href="tel:+33142180556">01 42 18 05 56</a></p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">🚇</div>
+                    <div class="info-text">
+                        <h4>Accès</h4>
+                        <p>Métro : Denfert-Rochereau (Ligne 4 & 6)<br>RER B : Denfert-Rochereau</p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Horaires d'Ouverture</h3>
+                <div class="hours-grid">
+                    <div class="hour-row">
+                        <span>Lundi – Dimanche</span>
+                        <span>11h00 – 22h30</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.9!2d2.3261!3d48.8334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e670f8b34e8b1f%3A0x1234!2s42%20Rue%20Daguerre%2C%2075014%20Paris!5e0!3m2!1sfr!2sfr!4v1234567890"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact fade-in" id="contact">
+        <div class="section-header">
+            <span class="section-eyebrow">Écrivez-nous</span>
+            <h2 class="section-title">Contactez-nous</h2>
+            <p class="section-subtitle">Une question, une réservation de groupe ? On vous répond rapidement.</p>
+        </div>
+        <div class="contact-container">
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Votre Nom *</label>
+                    <input type="text" id="name" name="name" placeholder="Jean Dupont" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Votre Email *</label>
+                    <input type="email" id="email" name="email" placeholder="jean@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Votre Téléphone</label>
+                    <input type="tel" id="phone" name="phone" placeholder="06 00 00 00 00">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Objet *</label>
+                    <input type="text" id="subject" name="subject" placeholder="Réservation de groupe, renseignement..." required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Votre Message *</label>
+                    <textarea id="message" name="message" placeholder="Votre message ici..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Envoyer le Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Délice Daguerre</h3>
+                <p class="footer-brand-desc">Un restaurant asiatique chaleureux au cœur du 14ème arrondissement, sur la célèbre rue piétonne Daguerre.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon" title="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" title="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <p><a href="#menu">Menu</a></p>
+                <p><a href="#location">Localisation</a></p>
+                <p><a href="#contact">Contact</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <p>🥡 Vente à emporter</p>
+                <p>🍽️ Sur place</p>
+                <p>👥 Groupes acceptés</p>
+                <p>🕐 Ouvert 7j/7</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📍 42 rue Daguerre, 75014 Paris</p>
+                <p>📞 <a href="tel:+33142180556">01 42 18 05 56</a></p>
+                <p>🕐 11h00 – 22h30</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2026 Délice Daguerre · Tous droits réservés · Design par <strong style="color: var(--gold);">Viral Horizon</strong></p>
+        </div>
+    </footer>
+
+    <script>
+        const menuData = {
+            soupes: [
+                { name: "Soupe Pho Bœuf", desc: "Bouillon de bœuf parfumé, nouilles de riz, tranches de bœuf, herbes fraîches et citron vert", price: 12.50, icon: "🍜" },
+                { name: "Soupe Pho Poulet", desc: "Bouillon de volaille, nouilles de riz, poulet effiloché, coriandre et gingembre", price: 11.50, icon: "🍜" },
+                { name: "Soupe Wonton", desc: "Bouillon clair, raviolis au porc et crevettes, pak choï et sésame", price: 10.50, icon: "🥣" },
+                { name: "Soupe Miso Saumon", desc: "Miso traditionnel, dés de saumon frais, tofu soyeux, algues wakamé", price: 10.00, icon: "🍵" },
+                { name: "Tom Yam Crevettes", desc: "Bouillon thaï pimenté, crevettes tigrées, champignons shiitake, citronnelle", price: 13.50, icon: "🍲" },
+            ],
+            plats: [
+                { name: "Canard Laqué", desc: "Demi-canard laqué façon pékinoise, sauce hoisin, crêpes mandarin et oignons verts", price: 17.50, icon: "🦆" },
+                { name: "Poulet Sauté aux Noix de Cajou", desc: "Poulet sauté à wok, noix de cajou grillées, poivrons et sauce douce-épicée", price: 13.50, icon: "🍗" },
+                { name: "Bœuf aux Brocolis", desc: "Fines tranches de bœuf sautées, brocolis, sauce huître et gingembre frais", price: 14.00, icon: "🥩" },
+                { name: "Crevettes à l'Ail", desc: "Crevettes tigrées sautées à l'ail et au beurre, piment doux, ciboulette", price: 15.50, icon: "🦐" },
+                { name: "Tofu Mapo", desc: "Tofu soyeux en sauce sichuan épicée, porc haché, poivre du Sichuan", price: 12.00, icon: "🌶️" },
+                { name: "Poulet Kung Pao", desc: "Poulet sauté, arachides, piments séchés, sauce sucrée-épicée traditionnelle", price: 13.00, icon: "🍗" },
+            ],
+            riz: [
+                { name: "Riz Cantonais", desc: "Riz sauté aux œufs, jambon, petits pois, ciboule et sauce soja", price: 9.50, icon: "🍚" },
+                { name: "Riz Poulet Teriyaki", desc: "Riz blanc vapeur, poulet teriyaki maison, sésame et julienne de concombre", price: 12.50, icon: "🍚" },
+                { name: "Nouilles Sautées Bœuf", desc: "Nouilles udon sautées, bœuf effiloché, shiitake, sauce XO", price: 13.00, icon: "🍝" },
+                { name: "Nouilles Végétariennes", desc: "Nouilles de blé sautées, légumes de saison, tofu, sauce sésame-gingembre", price: 11.00, icon: "🌿" },
+                { name: "Riz au Lait de Coco Crevettes", desc: "Riz thaï au lait de coco, crevettes sautées, curry vert et basilic thaï", price: 14.50, icon: "🥥" },
+            ],
+            entrees: [
+                { name: "Raviolis Vapeur (6 pcs)", desc: "Dim sum cuits à la vapeur, farce porc et crevettes, sauce soja gingembre", price: 7.50, icon: "🥟" },
+                { name: "Nems au Poulet (3 pcs)", desc: "Rouleaux croustillants au poulet, vermicelles et légumes, sauce nuoc-mâm", price: 6.50, icon: "🌯" },
+                { name: "Rouleaux de Printemps (2 pcs)", desc: "Rouleaux frais à la crevette, menthe, vermicelles, sauce cacahuète", price: 6.00, icon: "🥗" },
+                { name: "Gyozas Porc (5 pcs)", desc: "Raviolis japonais poêlés, farce porc et chou chinois, sauce ponzu", price: 8.00, icon: "🥟" },
+                { name: "Bao Char Siu", desc: "Brioche vapeur fourrée au porc laqué, oignons verts et graines de sésame", price: 5.50, icon: "🫓" },
+                { name: "Salade de Papaye Verte", desc: "Papaye râpée, tomates cerises, arachides, piment, sauce thaï aigre-douce", price: 8.50, icon: "🥗" },
+            ],
+            boissons: [
+                { name: "Thé Jasmin", desc: "Thé vert aux fleurs de jasmin, chaud ou froid", price: 2.50, icon: "🍵" },
+                { name: "Thé Oolong", desc: "Thé semi-oxydé traditionnel, notes florales et boisées", price: 3.00, icon: "🍵" },
+                { name: "Bubble Tea Mangue", desc: "Thé vert, purée de mangue, billes de tapioca, lait de coco", price: 5.50, icon: "🧋" },
+                { name: "Bubble Tea Fraise", desc: "Thé noir, coulis de fraise, billes de tapioca, lait végétal", price: 5.50, icon: "🧋" },
+                { name: "Eau Minérale 50cl", desc: "Évian ou Perrier", price: 2.00, icon: "💧" },
+                { name: "Soda 33cl", desc: "Coca-Cola, Sprite ou Orangina", price: 2.50, icon: "🥤" },
+                { name: "Bière Asahi 33cl", desc: "Bière japonaise légère et rafraîchissante", price: 4.50, icon: "🍺" },
+            ],
+        };
+
+        let cart = [];
+
+        function loadMenuItems(category) {
+            const container = document.getElementById('menuItemsContainer');
+            const items = menuData[category] || [];
+
+            if (items.length === 0) {
+                container.innerHTML = '<p style="text-align:center;color:#999;">Aucun article dans cette catégorie</p>';
+                return;
+            }
+
+            let html = '<div class="menu-grid">';
+            items.forEach(item => {
+                html += `
+                    <div class="menu-item">
+                        <div class="menu-item-image">${item.icon}</div>
+                        <div class="menu-item-content">
+                            <h3>${item.name}</h3>
+                            <p>${item.desc}</p>
+                            <div class="menu-item-footer">
+                                <span class="price">${item.price.toFixed(2)}€</span>
+                                <button class="add-to-cart-btn" onclick="addToCart('${item.name.replace(/'/g,"\\'")}', ${item.price})">
+                                    + Ajouter
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function addToCart(name, price) {
+            const existing = cart.find(i => i.name === name);
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({ name, price: Number(price), quantity: 1 });
+            }
+            updateCart();
+            showCartNotification();
+        }
+
+        function updateQuantity(idx, delta) {
+            cart[idx].quantity += delta;
+            if (cart[idx].quantity <= 0) cart.splice(idx, 1);
+            updateCart();
+        }
+
+        function removeFromCart(idx) {
+            cart.splice(idx, 1);
+            updateCart();
+        }
+
+        function showCartNotification() {
+            const btn = document.getElementById('cartToggle');
+            btn.style.transform = 'scale(1.2)';
+            setTimeout(() => btn.style.transform = 'scale(1)', 200);
+        }
+
+        function updateCart() {
+            const itemsEl = document.getElementById('cartItems');
+            const countEl = document.getElementById('cartCount');
+            const totalEl = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            if (cart.length === 0) {
+                itemsEl.innerHTML = '<p class="cart-empty">Votre panier est vide</p>';
+                countEl.textContent = '';
+                totalEl.textContent = '0.00€';
+                checkoutBtn.disabled = true;
+                return;
+            }
+
+            let total = 0, count = 0, html = '';
+            cart.forEach((item, idx) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                count += item.quantity;
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-header">
+                            <div class="cart-item-name">${item.name}</div>
+                            <button class="cart-item-remove" onclick="removeFromCart(${idx})">✕</button>
+                        </div>
+                        <div class="cart-item-footer">
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="updateQuantity(${idx}, -1)">−</button>
+                                <span class="qty-display">${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateQuantity(${idx}, 1)">+</button>
+                            </div>
+                            <div class="cart-item-price">${itemTotal.toFixed(2)}€</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            itemsEl.innerHTML = html;
+            countEl.textContent = count;
+            totalEl.textContent = total.toFixed(2) + '€';
+            checkoutBtn.disabled = false;
+        }
+
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('open');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMenuItems('soupes');
+
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    loadMenuItems(btn.dataset.category);
+                });
+            });
+
+            document.getElementById('cartToggle').addEventListener('click', toggleCart);
+            document.getElementById('cartClose').addEventListener('click', toggleCart);
+
+            document.getElementById('checkoutBtn').addEventListener('click', () => {
+                if (cart.length === 0) return;
+                const items = cart.map(i => `${i.quantity}x ${i.name}`).join(', ');
+                const total = cart.reduce((s, i) => s + i.price * i.quantity, 0).toFixed(2);
+                window.location.href = `tel:+33142180556`;
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', e => {
+                    e.preventDefault();
+                    document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            const fadeEls = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+            }, { threshold: 0.1 });
+            fadeEls.forEach(el => observer.observe(el));
+
+            document.querySelector('.contact-form')?.addEventListener('submit', e => {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                let body = `Nom: ${name}%0D%0AEmail: ${email}%0D%0A`;
+                if (phone) body += `Téléphone: ${phone}%0D%0A`;
+                body += `%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`;
+                window.location.href = `mailto:contact@delicedaguerre.fr?subject=${encodeURIComponent(subject)}&body=${body}`;
+            });
+        });
+    </script>
+</body>
+</html>
