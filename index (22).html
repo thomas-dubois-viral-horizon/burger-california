@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cocotte - Brasserie Gastronomique Paris 14ème</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --cocotte-terracotta: #C4622D;
+                --cocotte-gold: #D4A852;
+                --cocotte-dark: #1C1C1C;
+                --cocotte-cream: #FAF6F0;
+                --cocotte-warm: #F2EBE0;
+                --cocotte-green: #3A5A40;
+                --cocotte-rust: #8B3A1E;
+                --cocotte-muted: #6B5B4E;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'DM Sans', sans-serif;
+                background: var(--cocotte-cream);
+                color: var(--cocotte-dark);
+                overflow-x: hidden;
+                line-height: 1.6;
+            }
+
+            /* Navigation */
+            nav {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                background: rgba(250, 246, 240, 0.96);
+                backdrop-filter: blur(12px);
+                z-index: 1000;
+                padding: 1.3rem 5%;
+                box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+                border-bottom: 1px solid rgba(196, 98, 45, 0.12);
+            }
+
+            .nav-container {
+                max-width: 1400px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .logo {
+                font-family: 'Playfair Display', serif;
+                font-size: 2rem;
+                color: var(--cocotte-terracotta);
+                text-decoration: none;
+                letter-spacing: 3px;
+                font-weight: 900;
+                position: relative;
+            }
+
+            .logo span {
+                display: block;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 0.6rem;
+                letter-spacing: 4px;
+                color: var(--cocotte-muted);
+                font-weight: 500;
+                text-transform: uppercase;
+                margin-top: -4px;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 2.5rem;
+                list-style: none;
+            }
+
+            .nav-links a {
+                color: var(--cocotte-dark);
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 0.95rem;
+                letter-spacing: 0.5px;
+                transition: color 0.3s;
+                position: relative;
+            }
+
+            .nav-links a::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 0;
+                height: 1.5px;
+                background: var(--cocotte-terracotta);
+                transition: width 0.3s;
+            }
+
+            .nav-links a:hover { color: var(--cocotte-terracotta); }
+            .nav-links a:hover::after { width: 100%; }
+
+            .cta-button {
+                background: var(--cocotte-terracotta);
+                color: white;
+                padding: 0.75rem 1.8rem;
+                border-radius: 4px;
+                text-decoration: none;
+                font-weight: 700;
+                font-size: 0.9rem;
+                letter-spacing: 0.5px;
+                transition: all 0.3s;
+                box-shadow: 0 4px 15px rgba(196, 98, 45, 0.25);
+            }
+
+            .cta-button:hover {
+                background: var(--cocotte-rust);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(139, 58, 30, 0.35);
+            }
+
+            /* Hero Section */
+            .hero {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                padding: 8rem 5% 4rem;
+                background: linear-gradient(135deg, var(--cocotte-cream) 0%, var(--cocotte-warm) 100%);
+                overflow: hidden;
+            }
+
+            .hero::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -20%;
+                width: 80%;
+                height: 150%;
+                background: radial-gradient(circle, rgba(196, 98, 45, 0.08) 0%, transparent 70%);
+                animation: float 20s ease-in-out infinite;
+            }
+
+            .hero::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, var(--cocotte-gold), transparent);
+            }
+
+            @keyframes float {
+                0%, 100% { transform: translateY(0) rotate(0deg); }
+                50% { transform: translateY(-30px) rotate(3deg); }
+            }
+
+            .hero-content {
+                max-width: 1400px;
+                display: grid;
+                grid-template-columns: 1.2fr 1fr;
+                gap: 5rem;
+                align-items: center;
+                z-index: 1;
+            }
+
+            .hero-eyebrow {
+                font-family: 'DM Sans', sans-serif;
+                font-size: 0.8rem;
+                letter-spacing: 5px;
+                text-transform: uppercase;
+                color: var(--cocotte-terracotta);
+                font-weight: 700;
+                margin-bottom: 1.2rem;
+                animation: slideInLeft 1s ease-out;
+            }
+
+            .hero-text h1 {
+                font-family: 'Playfair Display', serif;
+                font-size: clamp(3rem, 7vw, 6rem);
+                line-height: 1.05;
+                color: var(--cocotte-dark);
+                margin-bottom: 1.2rem;
+                font-weight: 900;
+                animation: slideInLeft 1s ease-out 0.1s both;
+            }
+
+            .hero-text h1 em {
+                color: var(--cocotte-terracotta);
+                font-style: italic;
+            }
+
+            @keyframes slideInLeft {
+                from { opacity: 0; transform: translateX(-40px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+
+            .hero-text .subtitle {
+                font-family: 'Cormorant Garamond', serif;
+                font-size: clamp(1.2rem, 2vw, 1.6rem);
+                color: var(--cocotte-muted);
+                font-weight: 600;
+                margin-bottom: 1.5rem;
+                animation: slideInLeft 1s ease-out 0.2s both;
+                font-style: italic;
+            }
+
+            .hero-text p {
+                font-size: 1.05rem;
+                color: var(--cocotte-muted);
+                margin-bottom: 2.5rem;
+                max-width: 520px;
+                animation: slideInLeft 1s ease-out 0.4s both;
+                line-height: 1.8;
+            }
+
+            .hero-buttons {
+                display: flex;
+                gap: 1.5rem;
+                animation: slideInLeft 1s ease-out 0.6s both;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 1.1rem 2.4rem;
+                border-radius: 4px;
+                font-weight: 700;
+                text-decoration: none;
+                transition: all 0.3s;
+                display: inline-block;
+                font-size: 0.95rem;
+                letter-spacing: 0.5px;
+            }
+
+            .btn-primary {
+                background: var(--cocotte-terracotta);
+                color: white;
+                box-shadow: 0 8px 25px rgba(196, 98, 45, 0.28);
+            }
+
+            .btn-primary:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 12px 35px rgba(196, 98, 45, 0.38);
+                background: var(--cocotte-rust);
+            }
+
+            .btn-secondary {
+                border: 1.5px solid var(--cocotte-dark);
+                color: var(--cocotte-dark);
+                background: transparent;
+            }
+
+            .btn-secondary:hover {
+                background: var(--cocotte-dark);
+                color: white;
+            }
+
+            .hero-image {
+                position: relative;
+                animation: slideInRight 1s ease-out;
+            }
+
+            @keyframes slideInRight {
+                from { opacity: 0; transform: translateX(40px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+
+            .cocotte-visual {
+                width: 100%;
+                max-width: 480px;
+                height: 480px;
+                background: linear-gradient(135deg, var(--cocotte-terracotta) 0%, var(--cocotte-rust) 100%);
+                border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 9rem;
+                box-shadow: 0 30px 70px rgba(196, 98, 45, 0.25);
+                position: relative;
+                overflow: hidden;
+                margin-left: auto;
+            }
+
+            .cocotte-visual::before {
+                content: '';
+                position: absolute;
+                top: -30%;
+                left: -30%;
+                width: 80%;
+                height: 80%;
+                background: rgba(255,255,255,0.08);
+                border-radius: 50%;
+            }
+
+            .cocotte-visual .visual-inner {
+                animation: bounce 3s ease-in-out infinite;
+                z-index: 1;
+            }
+
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0) rotate(-5deg); }
+                50% { transform: translateY(-18px) rotate(5deg); }
+            }
+
+            .hero-badges {
+                display: flex;
+                gap: 1.5rem;
+                margin-top: 2.5rem;
+                flex-wrap: wrap;
+                animation: slideInLeft 1s ease-out 0.8s both;
+            }
+
+            .badge {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: 0.85rem;
+                color: var(--cocotte-muted);
+                font-weight: 600;
+            }
+
+            .badge-dot {
+                width: 6px;
+                height: 6px;
+                background: var(--cocotte-terracotta);
+                border-radius: 50%;
+            }
+
+            /* Features Section */
+            .features {
+                padding: 6rem 5%;
+                background: white;
+            }
+
+            .section-title {
+                font-family: 'Playfair Display', serif;
+                font-size: clamp(2rem, 4vw, 3.2rem);
+                text-align: center;
+                color: var(--cocotte-dark);
+                margin-bottom: 0.5rem;
+                font-weight: 900;
+            }
+
+            .section-title em {
+                color: var(--cocotte-terracotta);
+                font-style: italic;
+            }
+
+            .section-divider {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .section-divider::before,
+            .section-divider::after {
+                content: '';
+                width: 60px;
+                height: 1px;
+                background: var(--cocotte-gold);
+            }
+
+            .section-divider span {
+                color: var(--cocotte-gold);
+                font-size: 1.2rem;
+            }
+
+            .section-subtitle {
+                text-align: center;
+                color: var(--cocotte-muted);
+                margin-bottom: 4rem;
+                font-size: 1rem;
+                font-family: 'Cormorant Garamond', serif;
+                font-style: italic;
+                font-size: 1.2rem;
+            }
+
+            .features-grid {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 2.5rem;
+            }
+
+            .feature-card {
+                text-align: center;
+                padding: 2.5rem 2rem;
+                border-radius: 8px;
+                background: var(--cocotte-cream);
+                transition: all 0.3s;
+                position: relative;
+                overflow: hidden;
+                border: 1px solid rgba(196, 98, 45, 0.08);
+            }
+
+            .feature-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 3px;
+                background: linear-gradient(90deg, var(--cocotte-terracotta), var(--cocotte-gold));
+                transform: scaleX(0);
+                transition: transform 0.3s;
+            }
+
+            .feature-card:hover::before { transform: scaleX(1); }
+
+            .feature-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            }
+
+            .feature-icon {
+                font-size: 3rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .feature-card h3 {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.3rem;
+                color: var(--cocotte-dark);
+                margin-bottom: 0.8rem;
+                font-weight: 700;
+            }
+
+            .feature-card p {
+                color: var(--cocotte-muted);
+                line-height: 1.7;
+                font-size: 0.95rem;
+            }
+
+            /* Menu Section */
+            .menu-preview {
+                padding: 6rem 5%;
+                background: var(--cocotte-cream);
+            }
+
+            .menu-categories {
+                max-width: 1200px;
+                margin: 0 auto 3rem;
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .category-btn {
+                background: white;
+                border: 1.5px solid #DDD;
+                color: var(--cocotte-muted);
+                padding: 0.85rem 1.8rem;
+                border-radius: 4px;
+                font-weight: 600;
+                font-size: 0.9rem;
+                cursor: pointer;
+                transition: all 0.3s;
+                font-family: 'DM Sans', sans-serif;
+                letter-spacing: 0.3px;
+            }
+
+            .category-btn:hover {
+                border-color: var(--cocotte-terracotta);
+                color: var(--cocotte-terracotta);
+            }
+
+            .category-btn.active {
+                background: var(--cocotte-terracotta);
+                border-color: var(--cocotte-terracotta);
+                color: white;
+                box-shadow: 0 4px 15px rgba(196, 98, 45, 0.25);
+            }
+
+            .menu-items-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                min-height: 400px;
+            }
+
+            .menu-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                gap: 2rem;
+            }
+
+            .menu-item {
+                background: white;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+                transition: all 0.3s;
+                display: flex;
+                flex-direction: column;
+                border: 1px solid rgba(196, 98, 45, 0.06);
+            }
+
+            .menu-item:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            }
+
+            .menu-item-image {
+                width: 100%;
+                height: 180px;
+                background: linear-gradient(135deg, var(--cocotte-terracotta), var(--cocotte-rust));
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 4rem;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .menu-item-content {
+                padding: 1.5rem;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .menu-item-content h3 {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.25rem;
+                color: var(--cocotte-dark);
+                margin-bottom: 0.4rem;
+                font-weight: 700;
+            }
+
+            .menu-item-content p {
+                color: var(--cocotte-muted);
+                margin-bottom: 1rem;
+                font-size: 0.9rem;
+                line-height: 1.6;
+                flex: 1;
+                font-style: italic;
+                font-family: 'Cormorant Garamond', serif;
+                font-size: 1rem;
+            }
+
+            .menu-item-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: auto;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .price {
+                font-size: 1.6rem;
+                font-weight: 700;
+                color: var(--cocotte-terracotta);
+                font-family: 'Playfair Display', serif;
+            }
+
+            .add-to-cart-btn {
+                background: var(--cocotte-terracotta);
+                color: white;
+                border: none;
+                padding: 0.7rem 1.5rem;
+                border-radius: 4px;
+                font-weight: 700;
+                cursor: pointer;
+                transition: all 0.3s;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+
+            .add-to-cart-btn:hover {
+                background: var(--cocotte-rust);
+                transform: scale(1.03);
+            }
+
+            /* Cart Sidebar */
+            .cart-sidebar {
+                position: fixed;
+                right: -400px;
+                top: 0;
+                width: 400px;
+                height: 100vh;
+                background: white;
+                box-shadow: -5px 0 30px rgba(0,0,0,0.15);
+                z-index: 2000;
+                transition: right 0.3s ease;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .cart-sidebar.open { right: 0; }
+
+            .cart-header {
+                padding: 2rem;
+                background: var(--cocotte-terracotta);
+                color: white;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .cart-header h3 {
+                margin: 0;
+                font-family: 'Playfair Display', serif;
+                font-size: 1.4rem;
+            }
+
+            .cart-close {
+                background: transparent;
+                border: none;
+                color: white;
+                font-size: 1.8rem;
+                cursor: pointer;
+                width: 38px;
+                height: 38px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                transition: background 0.3s;
+            }
+
+            .cart-close:hover { background: rgba(255,255,255,0.2); }
+
+            .cart-items {
+                flex: 1;
+                overflow-y: auto;
+                padding: 1.5rem;
+            }
+
+            .cart-empty {
+                text-align: center;
+                color: #bbb;
+                padding: 3rem 1rem;
+                font-style: italic;
+                font-family: 'Cormorant Garamond', serif;
+                font-size: 1.1rem;
+            }
+
+            .cart-item {
+                background: var(--cocotte-cream);
+                padding: 1rem;
+                border-radius: 6px;
+                margin-bottom: 1rem;
+            }
+
+            .cart-item-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin-bottom: 0.5rem;
+            }
+
+            .cart-item-name {
+                font-weight: 700;
+                color: var(--cocotte-dark);
+                font-size: 0.95rem;
+            }
+
+            .cart-item-remove {
+                background: transparent;
+                border: none;
+                color: #bbb;
+                cursor: pointer;
+                font-size: 1.1rem;
+            }
+
+            .cart-item-remove:hover { color: var(--cocotte-terracotta); }
+
+            .cart-item-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .quantity-controls {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+            }
+
+            .qty-btn {
+                background: var(--cocotte-terracotta);
+                color: white;
+                border: none;
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: background 0.3s;
+            }
+
+            .qty-btn:hover { background: var(--cocotte-rust); }
+
+            .qty-display {
+                font-weight: 700;
+                font-size: 1rem;
+                min-width: 28px;
+                text-align: center;
+            }
+
+            .cart-item-price {
+                font-weight: 700;
+                font-size: 1.1rem;
+                color: var(--cocotte-terracotta);
+                font-family: 'Playfair Display', serif;
+            }
+
+            .cart-footer {
+                padding: 1.5rem 2rem;
+                border-top: 1px solid #eee;
+            }
+
+            .cart-total {
+                display: flex;
+                justify-content: space-between;
+                font-size: 1.4rem;
+                font-weight: 700;
+                margin-bottom: 1.5rem;
+                color: var(--cocotte-dark);
+                font-family: 'Playfair Display', serif;
+            }
+
+            .cart-total span:last-child { color: var(--cocotte-terracotta); }
+
+            .checkout-btn {
+                width: 100%;
+                background: var(--cocotte-terracotta);
+                color: white;
+                border: none;
+                padding: 1.1rem;
+                border-radius: 4px;
+                font-weight: 700;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: all 0.3s;
+                font-family: 'DM Sans', sans-serif;
+            }
+
+            .checkout-btn:hover:not(:disabled) {
+                background: var(--cocotte-rust);
+                transform: translateY(-2px);
+            }
+
+            .checkout-btn:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+
+            .cart-toggle {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                width: 65px;
+                height: 65px;
+                background: var(--cocotte-terracotta);
+                color: white;
+                border: none;
+                border-radius: 50%;
+                font-size: 1.8rem;
+                cursor: pointer;
+                box-shadow: 0 8px 25px rgba(196, 98, 45, 0.4);
+                z-index: 1500;
+                transition: all 0.3s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .cart-toggle:hover {
+                transform: scale(1.08);
+                background: var(--cocotte-rust);
+            }
+
+            .cart-count {
+                position: absolute;
+                top: -4px;
+                right: -4px;
+                background: var(--cocotte-gold);
+                color: var(--cocotte-dark);
+                width: 26px;
+                height: 26px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.85rem;
+                font-weight: 700;
+            }
+
+            .cart-count:empty { display: none; }
+
+            /* Location Section */
+            .location {
+                padding: 6rem 5%;
+                background: var(--cocotte-dark);
+                color: white;
+            }
+
+            .location .section-title { color: white; }
+            .location .section-title em { color: var(--cocotte-gold); }
+
+            .location-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 5rem;
+                align-items: center;
+            }
+
+            .location-info h3 {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.8rem;
+                color: var(--cocotte-gold);
+                margin-bottom: 1.5rem;
+            }
+
+            .info-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .info-icon {
+                font-size: 1.8rem;
+                color: var(--cocotte-terracotta);
+            }
+
+            .info-text h4 {
+                color: var(--cocotte-gold);
+                margin-bottom: 0.3rem;
+                font-size: 0.85rem;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }
+
+            .info-text p {
+                color: #ccc;
+                line-height: 1.6;
+            }
+
+            .info-text a {
+                color: var(--cocotte-gold);
+            }
+
+            .hours-grid {
+                display: grid;
+                gap: 0.8rem;
+                margin-top: 1.5rem;
+            }
+
+            .hour-row {
+                display: flex;
+                justify-content: space-between;
+                padding: 0.9rem 1rem;
+                background: rgba(255,255,255,0.04);
+                border-radius: 6px;
+                border-left: 3px solid var(--cocotte-terracotta);
+            }
+
+            .hour-row span:last-child { color: var(--cocotte-gold); font-weight: 600; }
+
+            .map-container {
+                width: 100%;
+                height: 450px;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            }
+
+            .map-container iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            /* Contact Section */
+            .contact {
+                padding: 6rem 5%;
+                background: var(--cocotte-warm);
+            }
+
+            .contact-container {
+                max-width: 750px;
+                margin: 0 auto;
+            }
+
+            .contact-form {
+                background: white;
+                padding: 3rem;
+                border-radius: 8px;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.07);
+            }
+
+            .form-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+            }
+
+            .form-group {
+                margin-bottom: 1.8rem;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: var(--cocotte-dark);
+                font-weight: 600;
+                font-size: 0.85rem;
+                letter-spacing: 0.5px;
+                text-transform: uppercase;
+            }
+
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                width: 100%;
+                padding: 0.9rem 1rem;
+                border: 1.5px solid #E0D8D0;
+                border-radius: 4px;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 0.95rem;
+                transition: border-color 0.3s;
+                background: var(--cocotte-cream);
+                color: var(--cocotte-dark);
+            }
+
+            .form-group input:focus,
+            .form-group textarea:focus,
+            .form-group select:focus {
+                outline: none;
+                border-color: var(--cocotte-terracotta);
+                background: white;
+            }
+
+            .form-group textarea {
+                resize: vertical;
+                min-height: 140px;
+            }
+
+            .submit-btn {
+                background: var(--cocotte-terracotta);
+                color: white;
+                border: none;
+                padding: 1.1rem 3rem;
+                border-radius: 4px;
+                font-weight: 700;
+                font-size: 1rem;
+                cursor: pointer;
+                width: 100%;
+                transition: all 0.3s;
+                box-shadow: 0 6px 20px rgba(196, 98, 45, 0.25);
+                letter-spacing: 0.5px;
+            }
+
+            .submit-btn:hover {
+                background: var(--cocotte-rust);
+                transform: translateY(-2px);
+            }
+
+            /* Footer */
+            footer {
+                background: #111;
+                color: white;
+                padding: 4rem 5% 2rem;
+            }
+
+            .footer-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 3rem;
+                margin-bottom: 3rem;
+            }
+
+            .footer-section h3 {
+                font-family: 'Playfair Display', serif;
+                color: var(--cocotte-gold);
+                margin-bottom: 1.2rem;
+                font-size: 1.3rem;
+            }
+
+            .footer-section p,
+            .footer-section a {
+                color: #999;
+                text-decoration: none;
+                line-height: 2.2;
+                font-size: 0.95rem;
+            }
+
+            .footer-section a:hover { color: var(--cocotte-gold); }
+
+            .social-links {
+                display: flex;
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+
+            .social-icon {
+                width: 42px;
+                height: 42px;
+                background: rgba(255,255,255,0.07);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.4rem;
+                transition: all 0.3s;
+                text-decoration: none;
+            }
+
+            .social-icon svg { width: 22px; height: 22px; fill: white; }
+
+            .social-icon:hover {
+                background: var(--cocotte-terracotta);
+                transform: translateY(-4px);
+            }
+
+            .footer-logo {
+                font-family: 'Playfair Display', serif;
+                font-size: 2.5rem;
+                color: var(--cocotte-gold);
+                font-weight: 900;
+                letter-spacing: 3px;
+                margin-bottom: 0.5rem;
+            }
+
+            .copyright {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding-top: 2rem;
+                border-top: 1px solid rgba(255,255,255,0.08);
+                color: #555;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 0.85rem;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            /* Mobile */
+            @media (max-width: 968px) {
+                .nav-links { display: none; }
+
+                .hero-content {
+                    grid-template-columns: 1fr;
+                    text-align: center;
+                }
+
+                .hero-text p { max-width: 100%; }
+
+                .hero-buttons {
+                    justify-content: center;
+                    flex-wrap: wrap;
+                }
+
+                .hero-badges { justify-content: center; }
+
+                .hero-image { order: -1; }
+
+                .cocotte-visual {
+                    max-width: 300px;
+                    height: 300px;
+                    margin: 0 auto;
+                }
+
+                .location-content { grid-template-columns: 1fr; }
+
+                .cart-sidebar {
+                    width: 100%;
+                    right: -100%;
+                }
+
+                .menu-grid { grid-template-columns: 1fr; }
+
+                .form-row { grid-template-columns: 1fr; }
+            }
+
+            @media (max-width: 640px) {
+                .hero-text h1 { font-size: 3rem; }
+
+                .contact-form { padding: 2rem 1.5rem; }
+
+                .cart-toggle {
+                    width: 58px;
+                    height: 58px;
+                    font-size: 1.5rem;
+                    bottom: 20px;
+                    right: 20px;
+                }
+            }
+
+            .fade-in {
+                opacity: 0;
+                transform: translateY(25px);
+                transition: opacity 0.7s, transform 0.7s;
+            }
+
+            .fade-in.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* Happy Hour Banner */
+            .happy-hour-banner {
+                background: linear-gradient(135deg, var(--cocotte-terracotta), var(--cocotte-rust));
+                color: white;
+                text-align: center;
+                padding: 0.9rem;
+                font-size: 0.9rem;
+                font-weight: 600;
+                letter-spacing: 1px;
+                position: relative;
+                z-index: 999;
+                margin-top: 0;
+            }
+
+            .happy-hour-banner span {
+                color: var(--cocotte-gold);
+                font-family: 'Playfair Display', serif;
+                font-style: italic;
+            }
+        </style>
+    </head>
+    <body>
+
+        <!-- Happy Hour Banner -->
+        <div class="happy-hour-banner">
+            🍹 <span>Happy Hour</span> tous les soirs dès 17h jusqu'à la fermeture — Cocktails & Boissons à prix réduits
+        </div>
+
+        <!-- Navigation -->
+        <nav>
+            <div class="nav-container">
+                <a href="#" class="logo">
+                    Cocotte
+                    <span>Brasserie Gastronomique · Paris 14ème</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#menu">La Carte</a></li>
+                    <li><a href="#location">Nous Trouver</a></li>
+                    <li><a href="#contact">Réserver</a></li>
+                </ul>
+                <a href="tel:0143950653" class="cta-button">Réserver une table</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-eyebrow">— Paris 14ème · Avenue du Maine</div>
+                    <h1>Chez nous, <em>chez vous</em></h1>
+                    <div class="subtitle">Brasserie gastronomique · Cuisine maison · Terrasse</div>
+                    <p>Au cœur du 14ème arrondissement, Cocotte vous propose une cuisine faite maison aux touches d'exotisme, servie en continu de l'aube jusqu'au bout de la nuit. Brunch dominical, terrasse toute l'année, et un espace de réception pour vos événements.</p>
+                    <div class="hero-buttons">
+                        <a href="tel:0143950653" class="btn-primary">Appeler pour réserver</a>
+                        <a href="#menu" class="btn-secondary">Découvrir la carte</a>
+                    </div>
+                    <div class="hero-badges">
+                        <div class="badge"><div class="badge-dot"></div> Service continu 7j/7</div>
+                        <div class="badge"><div class="badge-dot"></div> Brunch Dimanche</div>
+                        <div class="badge"><div class="badge-dot"></div> Terrasse été/hiver</div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="cocotte-visual">
+                        <div class="visual-inner">🫕</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features fade-in">
+            <h2 class="section-title">L'<em>Art</em> du Bien Recevoir</h2>
+            <div class="section-divider"><span>✦</span></div>
+            <p class="section-subtitle">De l'aube au bout de la nuit, Cocotte est votre adresse</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🍳</div>
+                    <h3>Cuisine Maison</h3>
+                    <p>Chaque plat est préparé avec soin dans notre cuisine, avec des produits frais et des touches d'exotisme qui font toute la différence.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">☀️</div>
+                    <h3>Terrasse Toute l'Année</h3>
+                    <p>Profitez de notre grande terrasse chauffée été comme hiver, dans une ambiance chaleureuse et conviviale.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🥂</div>
+                    <h3>Happy Hour</h3>
+                    <p>Chaque soir dès 17h jusqu'à la fermeture, profitez de nos cocktails et boissons à tarifs Happy Hour.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🥞</div>
+                    <h3>Brunch Dominical</h3>
+                    <p>Chaque dimanche de 11h à 15h, venez vous retrouver autour de notre brunch gourmand, fait maison.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎉</div>
+                    <h3>Espace Réception</h3>
+                    <p>Mariages, anniversaires, baptêmes ou événements professionnels — notre salle de réception est disponible sur réservation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">♿</div>
+                    <h3>Accès Facilité & Wi-Fi</h3>
+                    <p>Établissement accessible PMR, Wi-Fi gratuit et accueil adapté aux familles, groupes et animaux de compagnie.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section class="menu-preview fade-in" id="menu">
+            <h2 class="section-title">Notre <em>Carte</em></h2>
+            <div class="section-divider"><span>✦</span></div>
+            <p class="section-subtitle">Service continu · Midi, soir et tard dans la nuit</p>
+
+            <div class="menu-categories">
+                <button class="category-btn active" data-category="entrees">🥗 Entrées</button>
+                <button class="category-btn" data-category="plats">🍽️ Plats</button>
+                <button class="category-btn" data-category="brunch">🥞 Brunch</button>
+                <button class="category-btn" data-category="desserts">🍮 Desserts</button>
+                <button class="category-btn" data-category="boissons">🍷 Boissons</button>
+            </div>
+
+            <div class="menu-items-container" id="menuItemsContainer"></div>
+        </section>
+
+        <!-- Shopping Cart -->
+        <div class="cart-sidebar" id="cartSidebar">
+            <div class="cart-header">
+                <h3>🛒 Mon Panier</h3>
+                <button class="cart-close" id="cartClose">✕</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="cart-empty">Votre panier est vide</p>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total :</span>
+                    <span id="cartTotal">0.00€</span>
+                </div>
+                <button class="checkout-btn" id="checkoutBtn" disabled>Valider la commande</button>
+            </div>
+        </div>
+
+        <button class="cart-toggle" id="cartToggle" style="position:relative;">
+            🛒 <span class="cart-count" id="cartCount" style="position:absolute;top:-4px;right:-4px;display:none;"></span>
+        </button>
+
+        <!-- Location Section -->
+        <section class="location fade-in" id="location">
+            <h2 class="section-title">Venez Nous <em>Rendre Visite</em></h2>
+            <div class="section-divider" style="margin-bottom:1rem;"><span>✦</span></div>
+            <p class="section-subtitle" style="color:#999;">Au cœur du 14ème arrondissement de Paris</p>
+            <div class="location-content">
+                <div class="location-info">
+                    <h3>Informations Pratiques</h3>
+
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-text">
+                            <h4>Adresse</h4>
+                            <p>165 Avenue du Maine<br>75014 Paris, France</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-text">
+                            <h4>Téléphone</h4>
+                            <p><a href="tel:0143950653">01 43 95 06 53</a></p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">🌐</div>
+                        <div class="info-text">
+                            <h4>Site Web</h4>
+                            <p><a href="https://cafecocotte-paris.com" target="_blank">cafecocotte-paris.com</a></p>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 2rem;">Horaires d'Ouverture</h3>
+                    <div class="hours-grid">
+                        <div class="hour-row">
+                            <span>Lundi – Jeudi</span>
+                            <span>7h30 – 1h00</span>
+                        </div>
+                        <div class="hour-row">
+                            <span>Vendredi – Samedi</span>
+                            <span>7h30 – 2h00</span>
+                        </div>
+                        <div class="hour-row">
+                            <span>Dimanche</span>
+                            <span>7h30 – 1h00</span>
+                        </div>
+                        <div class="hour-row" style="border-left-color: var(--cocotte-gold);">
+                            <span>🥞 Brunch Dimanche</span>
+                            <span>11h00 – 15h00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.88!2d2.3224757!3d48.8329502!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6717514fe66c1%3A0x709c786fc947b273!2sCocotte!5e0!3m2!1sfr!2sfr!4v1680000000000"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact / Reservation Section -->
+        <section class="contact fade-in" id="contact">
+            <h2 class="section-title">Réserver <em>une Table</em></h2>
+            <div class="section-divider"><span>✦</span></div>
+            <p class="section-subtitle">Une question, un événement, une réservation ? Écrivez-nous !</p>
+            <div class="contact-container">
+                <form class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Votre Nom *</label>
+                            <input type="text" id="name" name="name" required placeholder="Jean Dupont">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Votre Email *</label>
+                            <input type="email" id="email" name="email" required placeholder="jean@exemple.fr">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel" id="phone" name="phone" placeholder="06 00 00 00 00">
+                        </div>
+                        <div class="form-group">
+                            <label for="guests">Nombre de couverts</label>
+                            <select id="guests" name="guests">
+                                <option>1–2 personnes</option>
+                                <option>3–4 personnes</option>
+                                <option>5–8 personnes</option>
+                                <option>9+ personnes</option>
+                                <option>Événement privé</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Objet *</label>
+                        <input type="text" id="subject" name="subject" required placeholder="Réservation, événement, question...">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre Message *</label>
+                        <textarea id="message" name="message" required placeholder="Précisez la date, l'heure souhaitée et toute demande particulière..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Envoyer ma demande</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">Cocotte</div>
+                    <p>Brasserie gastronomique au cœur du 14ème arrondissement de Paris.<br>Cuisine maison avec des touches d'exotisme, de l'aube à l'aurore.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/cocotteparis14/" target="_blank" class="social-icon" title="Facebook">
+                            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/cafecocotteparis/" target="_blank" class="social-icon" title="Instagram">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://www.tripadvisor.fr/Restaurant_Review-g187147-d17209870-Reviews-Cocotte-Paris_Ile_de_France.html" target="_blank" class="social-icon" title="TripAdvisor">
+                            <svg viewBox="0 0 24 24"><path d="M12.006 4.295c-2.67 0-5.338.784-7.645 2.353H0l1.963 2.135a5.997 5.997 0 0 0-1.055 3.412 5.919 5.919 0 0 0 5.912 5.912c1.539 0 2.94-.59 3.993-1.549l1.193 1.292 1.193-1.292a5.9 5.9 0 0 0 3.993 1.549 5.919 5.919 0 0 0 5.912-5.912 6.001 6.001 0 0 0-1.055-3.412L24 6.648h-4.362c-2.307-1.569-4.975-2.353-7.632-2.353zM6.82 9.982a3.213 3.213 0 1 1 0 6.426 3.213 3.213 0 0 1 0-6.426zm10.36 0a3.213 3.213 0 1 1 0 6.426 3.213 3.213 0 0 1 0-6.426zm-10.36 1.564a1.649 1.649 0 1 0 0 3.298 1.649 1.649 0 0 0 0-3.298zm10.36 0a1.649 1.649 0 1 0 0 3.298 1.649 1.649 0 0 0 0-3.298z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Navigation</h3>
+                    <p><a href="#menu">La Carte</a></p>
+                    <p><a href="#location">Nous Trouver</a></p>
+                    <p><a href="#contact">Réserver</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <p>☀️ Terrasse toute l'année</p>
+                    <p>🥞 Brunch le Dimanche</p>
+                    <p>🎉 Espace de réception</p>
+                    <p>🐾 Animaux acceptés</p>
+                    <p>♿ Accès PMR</p>
+                    <p>📶 Wi-Fi gratuit</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>📍 165 Av. du Maine, 75014 Paris</p>
+                    <p>📞 <a href="tel:0143950653">01 43 95 06 53</a></p>
+                    <p>🕐 7h30 – 1h00 (2h le week-end)</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2026 Café Cocotte Paris. Tous droits réservés.</p>
+                <p>Design par <strong style="color: var(--cocotte-gold);">Viral Horizon</strong></p>
+            </div>
+        </footer>
+
+        <script>
+            // Menu Data — inspiré de la carte Cocotte
+            const menuData = {
+                entrees: [
+                    { name: "Huîtres de la Mer", desc: "6 huîtres fraîches, mignonette et pain de seigle beurré", price: 14.50, icon: "🦪" },
+                    { name: "Tataki de Bœuf Thaï", desc: "Fine tranche de bœuf snacké, sauce soja-gingembre, herbes fraîches", price: 13.50, icon: "🥩" },
+                    { name: "Gambas Croustillantes", desc: "Gambas panées, sauce aigre-douce maison, citron vert", price: 15.00, icon: "🍤" },
+                    { name: "Tartare de Bar aux Agrumes", desc: "Bar frais mariné, agrumes, huile d'olive vierge", price: 14.00, icon: "🐟" },
+                    { name: "Salade Italienne", desc: "Roquette, parmesan, tomates cerises, olives, pesto maison", price: 11.00, icon: "🥗" },
+                    { name: "Velouté du Moment", desc: "Selon la saison, légumes frais de notre maraîcher", price: 9.00, icon: "🍲" },
+                ],
+                plats: [
+                    { name: "Magret de Canard", desc: "Magret rôti, jus de fruits rouges, gratin dauphinois maison", price: 26.00, icon: "🦆" },
+                    { name: "Saumon Croustillant", desc: "Pavé de saumon croustillant, risotto citronné, épinards à l'ail", price: 24.00, icon: "🐟" },
+                    { name: "Côte de Bœuf (pour 2)", desc: "Côte de Normandie, sauce au poivre, frites maison — à partager !", price: 79.00, icon: "🥩" },
+                    { name: "Ribs de Porc", desc: "Travers de porc confit, sauce BBQ maison, frites maison", price: 22.00, icon: "🍖" },
+                    { name: "Suprême de Volaille", desc: "Suprême fermier rôti, orecchiette à la crème de basilic", price: 21.00, icon: "🍗" },
+                    { name: "Bo Bun Végétarien", desc: "Vermicelles de riz, légumes croquants, tofu, herbes fraîches, sauce nuoc-mam veggie", price: 18.00, icon: "🌿" },
+                ],
+                brunch: [
+                    { name: "Formule Brunch Complet", desc: "Jus de fruit, café ou thé, viennoiserie, œufs à votre façon, charcuterie, fromages, pain grillé", price: 24.00, icon: "🥞" },
+                    { name: "Crêpe Miel Citron", desc: "Crêpe fine maison, miel de fleurs, citron frais — la signature Cocotte", price: 8.00, icon: "🍋" },
+                    { name: "Pancakes aux Myrtilles", desc: "3 pancakes moelleux, myrtilles fraîches, sirop d'érable", price: 10.00, icon: "🫐" },
+                    { name: "Eggs Benedict", desc: "Muffin grillé, jambon, œuf poché, sauce hollandaise maison", price: 14.00, icon: "🥚" },
+                    { name: "Avocado Toast", desc: "Pain de campagne, avocat écrasé, œufs brouillés, graines de sésame, piment d'Espelette", price: 13.00, icon: "🥑" },
+                    { name: "Pain Perdu", desc: "Pain brioché doré, caramel beurre salé, glace vanille maison", price: 10.00, icon: "🍞" },
+                ],
+                desserts: [
+                    { name: "Mousse au Chocolat", desc: "Mousse au chocolat noir 70%, tuile croustillante", price: 8.00, icon: "🍫" },
+                    { name: "Tarte Tatin Feuilletée", desc: "Tarte tatin maison aux pommes caramélisées, crème fraîche", price: 8.50, icon: "🥧" },
+                    { name: "Tarte au Citron", desc: "Citron de Menton, meringue italienne légère", price: 8.00, icon: "🍋" },
+                    { name: "Ananas Rôti au Miel", desc: "Ananas Victoria rôti, miel, vanille de Madagascar, sorbet coco", price: 9.00, icon: "🍍" },
+                    { name: "Glaces & Sorbets Maison", desc: "Demandez nos parfums du moment — 2 ou 3 boules", price: 6.50, icon: "🍨" },
+                ],
+                boissons: [
+                    { name: "Café Expresso", desc: "Café de spécialité, torréfaction artisanale", price: 2.50, icon: "☕" },
+                    { name: "Café Crème / Latte", desc: "Expresso allongé, mousse de lait veloutée", price: 4.00, icon: "☕" },
+                    { name: "Thé & Infusions", desc: "Sélection de thés grands crus, tisanes maison", price: 4.00, icon: "🍵" },
+                    { name: "Jus de Fruits Frais", desc: "Orange, pomme, carotte-gingembre — pressés à la commande", price: 5.50, icon: "🍊" },
+                    { name: "Cocktail Maison", desc: "Demandez notre carte cocktails — Happy Hour dès 17h", price: 9.00, icon: "🍹" },
+                    { name: "Verre de Vin", desc: "Sélection vins de France — rouge, blanc, rosé", price: 7.00, icon: "🍷" },
+                    { name: "Bière Pression", desc: "Bière artisanale locale — demi ou pinte", price: 5.50, icon: "🍺" },
+                    { name: "Eau Minérale", desc: "Sparkling ou plate, 75cl", price: 4.50, icon: "💧" },
+                ]
+            };
+
+            let cart = [];
+
+            function loadMenuItems(category) {
+                const container = document.getElementById('menuItemsContainer');
+                const items = menuData[category] || [];
+
+                if (items.length === 0) {
+                    container.innerHTML = '<p style="text-align:center;color:#bbb;padding:3rem;font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:1.2rem;">Carte bientôt disponible</p>';
+                    return;
+                }
+
+                let html = '<div class="menu-grid">';
+                items.forEach(item => {
+                    html += `
+                        <div class="menu-item">
+                            <div class="menu-item-image">${item.icon}</div>
+                            <div class="menu-item-content">
+                                <h3>${item.name}</h3>
+                                <p>${item.desc}</p>
+                                <div class="menu-item-footer">
+                                    <span class="price">${item.price.toFixed(2)}€</span>
+                                    <button class="add-to-cart-btn" onclick="addToCart('${item.name.replace(/'/g, "\\'")}', ${item.price})">Ajouter</button>
+                                </div>
+                            </div>
+                        </div>`;
+                });
+                html += '</div>';
+                container.innerHTML = html;
+            }
+
+            function addToCart(name, price) {
+                const existing = cart.find(i => i.name === name);
+                if (existing) {
+                    existing.quantity++;
+                } else {
+                    cart.push({ name, price: Number(price), quantity: 1 });
+                }
+                updateCart();
+                const btn = document.getElementById('cartToggle');
+                btn.style.transform = 'scale(1.2)';
+                setTimeout(() => btn.style.transform = 'scale(1)', 200);
+            }
+
+            function updateQuantity(idx, delta) {
+                cart[idx].quantity += delta;
+                if (cart[idx].quantity <= 0) cart.splice(idx, 1);
+                updateCart();
+            }
+
+            function removeFromCart(idx) {
+                cart.splice(idx, 1);
+                updateCart();
+            }
+
+            function updateCart() {
+                const itemsEl = document.getElementById('cartItems');
+                const countEl = document.getElementById('cartCount');
+                const totalEl = document.getElementById('cartTotal');
+                const checkoutBtn = document.getElementById('checkoutBtn');
+
+                if (cart.length === 0) {
+                    itemsEl.innerHTML = '<p class="cart-empty">Votre panier est vide</p>';
+                    countEl.style.display = 'none';
+                    totalEl.textContent = '0.00€';
+                    checkoutBtn.disabled = true;
+                    return;
+                }
+
+                let total = 0, count = 0, html = '';
+                cart.forEach((item, idx) => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    count += item.quantity;
+                    html += `
+                        <div class="cart-item">
+                            <div class="cart-item-header">
+                                <div class="cart-item-name">${item.name}</div>
+                                <button class="cart-item-remove" onclick="removeFromCart(${idx})">✕</button>
+                            </div>
+                            <div class="cart-item-footer">
+                                <div class="quantity-controls">
+                                    <button class="qty-btn" onclick="updateQuantity(${idx}, -1)">−</button>
+                                    <span class="qty-display">${item.quantity}</span>
+                                    <button class="qty-btn" onclick="updateQuantity(${idx}, 1)">+</button>
+                                </div>
+                                <div class="cart-item-price">${itemTotal.toFixed(2)}€</div>
+                            </div>
+                        </div>`;
+                });
+
+                itemsEl.innerHTML = html;
+                countEl.textContent = count;
+                countEl.style.display = 'flex';
+                totalEl.textContent = total.toFixed(2) + '€';
+                checkoutBtn.disabled = false;
+            }
+
+            function toggleCart() {
+                document.getElementById('cartSidebar').classList.toggle('open');
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                loadMenuItems('entrees');
+
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        loadMenuItems(btn.dataset.category);
+                    });
+                });
+
+                document.getElementById('cartToggle').addEventListener('click', toggleCart);
+                document.getElementById('cartClose').addEventListener('click', toggleCart);
+
+                document.getElementById('checkoutBtn').addEventListener('click', () => {
+                    if (cart.length === 0) return;
+                    const items = cart.map(i => `${i.quantity}x ${i.name}`).join(', ');
+                    const total = cart.reduce((s, i) => s + i.price * i.quantity, 0).toFixed(2);
+                    window.location.href = `mailto:contact@cafecocotte-paris.com?subject=Commande en ligne&body=Bonjour,%0D%0A%0D%0AMa commande :%0D%0A${encodeURIComponent(items)}%0D%0A%0D%0ATotal : ${total}€`;
+                });
+
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', e => {
+                        e.preventDefault();
+                        const target = document.querySelector(anchor.getAttribute('href'));
+                        if (target) target.scrollIntoView({ behavior: 'smooth' });
+                    });
+                });
+
+                const fadeEls = document.querySelectorAll('.fade-in');
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) entry.target.classList.add('visible');
+                    });
+                }, { threshold: 0.1 });
+                fadeEls.forEach(el => observer.observe(el));
+
+                document.querySelector('.contact-form')?.addEventListener('submit', e => {
+                    e.preventDefault();
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const guests = document.getElementById('guests').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
+                    let body = `Nom: ${name}%0D%0AEmail: ${email}%0D%0A`;
+                    if (phone) body += `Téléphone: ${phone}%0D%0A`;
+                    body += `Couverts: ${guests}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`;
+                    window.location.href = `mailto:contact@cafecocotte-paris.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+                });
+            });
+        </script>
+    </body>
+</html>
