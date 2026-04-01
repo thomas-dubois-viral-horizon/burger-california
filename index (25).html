@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ginza - Paris | Sushis & Cuisine Japonaise Authentique</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Righteous&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --california-gold: #FDB813;
+                --sunset-orange: #FF6B35;
+                --deep-red: #C8102E; /* Rouge Japon traditionnel */
+                --ocean-blue: #1E3A8A;
+                --cream: #FFF8E7;
+                --charcoal: #1a1a1a;
+                --warm-gray: #2d2d2d;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'DM Sans', sans-serif;
+                background: var(--cream);
+                color: var(--charcoal);
+                overflow-x: hidden;
+                line-height: 1.6;
+            }
+
+            /* Navigation */
+            nav {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                background: rgba(255, 248, 231, 0.95);
+                backdrop-filter: blur(10px);
+                z-index: 1000;
+                padding: 1.5rem 5%;
+                box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            }
+
+            .nav-container {
+                max-width: 1400px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .logo {
+                font-family: 'Righteous', cursive;
+                font-size: 2.4rem;
+                color: var(--deep-red);
+                text-decoration: none;
+                letter-spacing: 3px;
+                position: relative;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 2.5rem;
+                list-style: none;
+            }
+
+            .nav-links a {
+                color: var(--charcoal);
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.3s;
+                position: relative;
+            }
+
+            .nav-links a::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--sunset-orange);
+                transition: width 0.3s;
+            }
+
+            .nav-links a:hover::after {
+                width: 100%;
+            }
+
+            .cta-button {
+                background: var(--deep-red);
+                color: white;
+                padding: 0.8rem 2rem;
+                border-radius: 50px;
+                text-decoration: none;
+                font-weight: 700;
+                transition: all 0.3s;
+                box-shadow: 0 4px 15px rgba(200, 16, 46, 0.3);
+            }
+
+            .cta-button:hover {
+                background: var(--sunset-orange);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+            }
+
+            /* Hero Section */
+            .hero {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                padding: 8rem 5% 4rem;
+                background: linear-gradient(135deg, var(--cream) 0%, #FFE5B4 100%);
+                overflow: hidden;
+            }
+
+            .hero::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -20%;
+                width: 80%;
+                height: 150%;
+                background: radial-gradient(circle, rgba(253, 184, 19, 0.15) 0%, transparent 70%);
+                animation: float 20s ease-in-out infinite;
+            }
+
+            @keyframes float {
+                0%, 100% { transform: translateY(0) rotate(0deg); }
+                50% { transform: translateY(-30px) rotate(5deg); }
+            }
+
+            .hero-content {
+                max-width: 1400px;
+                display: grid;
+                grid-template-columns: 1.2fr 1fr;
+                gap: 4rem;
+                align-items: center;
+                z-index: 1;
+            }
+
+            .hero-text h1 {
+                font-family: 'Bebas Neue', cursive;
+                font-size: clamp(3rem, 8vw, 7rem);
+                line-height: 0.95;
+                color: var(--deep-red);
+                margin-bottom: 1rem;
+                letter-spacing: 2px;
+                animation: slideInLeft 1s ease-out;
+            }
+
+            @keyframes slideInLeft {
+                from { opacity: 0; transform: translateX(-50px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+
+            .hero-text .subtitle {
+                font-size: clamp(1.2rem, 2vw, 1.8rem);
+                color: var(--sunset-orange);
+                font-weight: 700;
+                margin-bottom: 1.5rem;
+                animation: slideInLeft 1s ease-out 0.2s both;
+            }
+
+            .hero-text p {
+                font-size: 1.1rem;
+                color: var(--warm-gray);
+                margin-bottom: 2.5rem;
+                max-width: 550px;
+                animation: slideInLeft 1s ease-out 0.4s both;
+            }
+
+            .hero-buttons {
+                display: flex;
+                gap: 1.5rem;
+                animation: slideInLeft 1s ease-out 0.6s both;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 1.2rem 2.5rem;
+                border-radius: 50px;
+                font-weight: 700;
+                text-decoration: none;
+                transition: all 0.3s;
+                display: inline-block;
+            }
+
+            .btn-primary {
+                background: var(--deep-red);
+                color: white;
+                box-shadow: 0 8px 25px rgba(200, 16, 46, 0.3);
+            }
+
+            .btn-primary:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 12px 35px rgba(200, 16, 46, 0.4);
+            }
+
+            .btn-secondary {
+                border: 2px solid var(--charcoal);
+                color: var(--charcoal);
+                background: transparent;
+            }
+
+            .btn-secondary:hover {
+                background: var(--charcoal);
+                color: white;
+            }
+
+            .hero-image {
+                position: relative;
+                animation: slideInRight 1s ease-out;
+            }
+
+            @keyframes slideInRight {
+                from { opacity: 0; transform: translateX(50px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+
+            .burger-visual {
+                width: 100%;
+                max-width: 500px;
+                height: 500px;
+                background: linear-gradient(135deg, var(--sunset-orange) 0%, var(--deep-red) 100%);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Righteous', cursive;
+                font-size: 4rem;
+                color: white;
+                box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .burger-visual img{
+                width: 75%;
+                height: 50%;
+                animation: bounce 2s ease-in-out infinite;
+                z-index: 100;
+                border-radius: 20px;
+            }
+
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-20px); }
+            }
+
+            /* Features Section */
+            .features {
+                padding: 6rem 5%;
+                background: white;
+            }
+
+            .section-title {
+                font-family: 'Bebas Neue', cursive;
+                font-size: clamp(2.5rem, 5vw, 4rem);
+                text-align: center;
+                color: var(--deep-red);
+                margin-bottom: 1rem;
+                letter-spacing: 2px;
+            }
+
+            .section-subtitle {
+                text-align: center;
+                color: var(--warm-gray);
+                margin-bottom: 4rem;
+                font-size: 1.1rem;
+            }
+
+            .features-grid {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 3rem;
+            }
+
+            .feature-card {
+                text-align: center;
+                padding: 2.5rem 2rem;
+                border-radius: 20px;
+                background: var(--cream);
+                transition: all 0.3s;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .feature-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background: linear-gradient(90deg, var(--california-gold), var(--sunset-orange));
+                transform: scaleX(0);
+                transition: transform 0.3s;
+            }
+
+            .feature-card:hover::before {
+                transform: scaleX(1);
+            }
+
+            .feature-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            }
+
+            .feature-icon {
+                font-size: 3.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.5rem;
+                color: var(--deep-red);
+                margin-bottom: 1rem;
+                font-weight: 700;
+            }
+
+            .feature-card p {
+                color: var(--warm-gray);
+                line-height: 1.7;
+            }
+
+            /* Menu Preview */
+            .menu-preview {
+                padding: 6rem 5%;
+                background: linear-gradient(180deg, var(--cream) 0%, white 100%);
+            }
+
+            /* Menu Categories */
+            .menu-categories {
+                max-width: 1200px;
+                margin: 0 auto 3rem;
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .category-btn {
+                background: white;
+                border: 2px solid var(--charcoal);
+                color: var(--charcoal);
+                padding: 1rem 2rem;
+                border-radius: 50px;
+                font-weight: 700;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: all 0.3s;
+                font-family: 'DM Sans', sans-serif;
+            }
+
+            .category-btn:hover {
+                background: var(--charcoal);
+                color: white;
+                transform: translateY(-2px);
+            }
+
+            .category-btn.active {
+                background: var(--deep-red);
+                border-color: var(--deep-red);
+                color: white;
+                box-shadow: 0 4px 15px rgba(200, 16, 46, 0.3);
+            }
+
+            /* Menu Items Container */
+            .menu-items-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                min-height: 400px;
+            }
+
+            .menu-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                gap: 2rem;
+            }
+
+            .menu-item {
+                background: white;
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+                transition: all 0.3s;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .menu-item:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 15px 50px rgba(0,0,0,0.12);
+            }
+
+            .menu-item-image {
+                width: 100%;
+                height: 200px;
+                background: linear-gradient(135deg, var(--sunset-orange), var(--deep-red));
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 4rem;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .menu-item-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            .menu-item-image.has-image {
+                background: #000;
+            }
+
+            .menu-item-content {
+                padding: 1.5rem;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .menu-item-content h3 {
+                font-size: 1.5rem;
+                color: var(--deep-red);
+                margin-bottom: 0.5rem;
+                font-weight: 700;
+            }
+
+            .menu-item-content p {
+                color: var(--warm-gray);
+                margin-bottom: 1rem;
+                font-size: 0.95rem;
+                line-height: 1.6;
+                flex: 1;
+            }
+
+            .menu-item-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: auto;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .price {
+                font-size: 1.8rem;
+                font-weight: 700;
+                color: var(--california-gold);
+            }
+
+            .add-to-cart-btn {
+                background: var(--deep-red);
+                color: white;
+                border: none;
+                padding: 0.8rem 1.8rem;
+                border-radius: 50px;
+                font-weight: 700;
+                cursor: pointer;
+                transition: all 0.3s;
+                font-family: 'DM Sans', sans-serif;
+                white-space: nowrap;
+            }
+
+            .add-to-cart-btn:hover {
+                background: var(--sunset-orange);
+                transform: scale(1.05);
+            }
+
+            /* Pizza Sizes (réutilisé pour combos) */
+            .pizza-sizes {
+                display: flex;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .size-btn {
+                flex: 1;
+                background: var(--cream);
+                border: 2px solid transparent;
+                padding: 0.6rem;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: all 0.3s;
+                font-family: 'DM Sans', sans-serif;
+                font-weight: 600;
+            }
+
+            .size-btn:hover {
+                border-color: var(--sunset-orange);
+            }
+
+            .size-btn.active {
+                background: var(--sunset-orange);
+                color: white;
+                border-color: var(--sunset-orange);
+            }
+
+            .size-btn .size-name {
+                display: block;
+                font-size: 0.85rem;
+            }
+
+            .size-btn .size-price {
+                display: block;
+                font-size: 1.1rem;
+                font-weight: 700;
+            }
+
+            /* Shopping Cart Sidebar */
+            .cart-sidebar {
+                position: fixed;
+                right: -400px;
+                top: 0;
+                width: 400px;
+                height: 100vh;
+                background: white;
+                box-shadow: -5px 0 30px rgba(0,0,0,0.2);
+                z-index: 2000;
+                transition: right 0.3s ease;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .cart-sidebar.open {
+                right: 0;
+            }
+
+            .cart-header {
+                padding: 2rem;
+                background: var(--deep-red);
+                color: white;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .cart-header h3 {
+                margin: 0;
+                font-size: 1.5rem;
+            }
+
+            .cart-close {
+                background: transparent;
+                border: none;
+                color: white;
+                font-size: 2rem;
+                cursor: pointer;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                transition: background 0.3s;
+            }
+
+            .cart-close:hover {
+                background: rgba(255,255,255,0.2);
+            }
+
+            .cart-items {
+                flex: 1;
+                overflow-y: auto;
+                padding: 1.5rem;
+            }
+
+            .cart-empty {
+                text-align: center;
+                color: #999;
+                padding: 3rem 1rem;
+            }
+
+            .cart-item {
+                background: var(--cream);
+                padding: 1rem;
+                border-radius: 15px;
+                margin-bottom: 1rem;
+            }
+
+            .cart-item-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin-bottom: 0.5rem;
+            }
+
+            .cart-item-name {
+                font-weight: 700;
+                color: var(--deep-red);
+                font-size: 1.1rem;
+            }
+
+            .cart-item-remove {
+                background: transparent;
+                border: none;
+                color: #999;
+                cursor: pointer;
+                font-size: 1.2rem;
+                padding: 0;
+                width: 24px;
+                height: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .cart-item-remove:hover {
+                color: var(--deep-red);
+            }
+
+            .cart-item-details {
+                color: var(--warm-gray);
+                font-size: 0.9rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .cart-item-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .quantity-controls {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+            }
+
+            .qty-btn {
+                background: var(--deep-red);
+                color: white;
+                border: none;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 1.1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: background 0.3s;
+            }
+
+            .qty-btn:hover {
+                background: var(--sunset-orange);
+            }
+
+            .qty-display {
+                font-weight: 700;
+                font-size: 1.1rem;
+                min-width: 30px;
+                text-align: center;
+            }
+
+            .cart-item-price {
+                font-weight: 700;
+                font-size: 1.2rem;
+                color: var(--california-gold);
+            }
+
+            .cart-footer {
+                padding: 1.5rem 2rem;
+                border-top: 2px solid var(--cream);
+            }
+
+            .cart-total {
+                display: flex;
+                justify-content: space-between;
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-bottom: 1.5rem;
+                color: var(--charcoal);
+            }
+
+            .cart-total span:last-child {
+                color: var(--deep-red);
+            }
+
+            .checkout-btn {
+                width: 100%;
+                background: var(--deep-red);
+                color: white;
+                border: none;
+                padding: 1.2rem;
+                border-radius: 50px;
+                font-weight: 700;
+                font-size: 1.1rem;
+                cursor: pointer;
+                transition: all 0.3s;
+                font-family: 'DM Sans', sans-serif;
+            }
+
+            .checkout-btn:hover {
+                background: var(--sunset-orange);
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+            }
+
+            .checkout-btn:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+                transform: none;
+            }
+
+            /* Cart Toggle Button */
+            .cart-toggle {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                width: 70px;
+                height: 70px;
+                background: var(--deep-red);
+                color: white;
+                border: none;
+                border-radius: 50%;
+                font-size: 1.8rem;
+                cursor: pointer;
+                box-shadow: 0 8px 25px rgba(200, 16, 46, 0.4);
+                z-index: 1500;
+                transition: all 0.3s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .cart-toggle:hover {
+                background: var(--sunset-orange);
+                transform: scale(1.1);
+            }
+
+            .cart-count {
+                position: absolute;
+                top: -5px;
+                right: -5px;
+                background: var(--california-gold);
+                color: var(--charcoal);
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.9rem;
+                font-weight: 700;
+            }
+
+            .cart-count:empty {
+                display: none;
+            }
+
+            /* Location Section */
+            .location {
+                padding: 6rem 5%;
+                background: var(--charcoal);
+                color: white;
+            }
+
+            .location .section-title {
+                color: white;
+            }
+
+            .location-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem;
+                align-items: center;
+            }
+
+            .location-info h3 {
+                font-size: 2rem;
+                color: var(--california-gold);
+                margin-bottom: 1.5rem;
+            }
+
+            .info-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .info-icon {
+                font-size: 2rem;
+                color: var(--sunset-orange);
+            }
+
+            .info-text h4 {
+                color: var(--california-gold);
+                margin-bottom: 0.5rem;
+            }
+
+            .info-text p {
+                color: #ccc;
+            }
+
+            .hours-grid {
+                display: grid;
+                gap: 1rem;
+                margin-top: 2rem;
+            }
+
+            .hour-row {
+                display: flex;
+                justify-content: space-between;
+                padding: 1rem;
+                background: rgba(255,255,255,0.05);
+                border-radius: 10px;
+            }
+
+            .map-container {
+                width: 100%;
+                height: 450px;
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            }
+
+            .map-container iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            /* Contact Section */
+            .contact {
+                padding: 6rem 5%;
+                background: var(--cream);
+            }
+
+            .contact-container {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .contact-form {
+                background: white;
+                padding: 3rem;
+                border-radius: 20px;
+                box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+            }
+
+            .form-group {
+                margin-bottom: 2rem;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: var(--charcoal);
+                font-weight: 600;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                width: 100%;
+                padding: 1rem;
+                border: 2px solid #e0e0e0;
+                border-radius: 10px;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 1rem;
+                transition: border-color 0.3s;
+            }
+
+            .form-group input:focus,
+            .form-group textarea:focus {
+                outline: none;
+                border-color: var(--sunset-orange);
+            }
+
+            .form-group textarea {
+                resize: vertical;
+                min-height: 150px;
+            }
+
+            .submit-btn {
+                background: var(--deep-red);
+                color: white;
+                border: none;
+                padding: 1.2rem 3rem;
+                border-radius: 50px;
+                font-weight: 700;
+                font-size: 1.1rem;
+                cursor: pointer;
+                width: 100%;
+                transition: all 0.3s;
+                box-shadow: 0 8px 25px rgba(200, 16, 46, 0.3);
+            }
+
+            .submit-btn:hover {
+                background: var(--sunset-orange);
+                transform: translateY(-2px);
+                box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+            }
+
+            /* Footer */
+            footer {
+                background: var(--charcoal);
+                color: white;
+                padding: 3rem 5%;
+                text-align: center;
+            }
+
+            .footer-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 3rem;
+                margin-bottom: 2rem;
+            }
+
+            .footer-section h3 {
+                color: var(--california-gold);
+                margin-bottom: 1rem;
+                font-size: 1.5rem;
+            }
+
+            .footer-section p,
+            .footer-section a {
+                color: #ccc;
+                text-decoration: none;
+                line-height: 2;
+            }
+
+            .footer-section a:hover {
+                color: var(--sunset-orange);
+            }
+
+            .social-links {
+                display: flex;
+                gap: 1.5rem;
+                justify-content: center;
+                margin-top: 1rem;
+            }
+
+            .social-icon {
+                width: 45px;
+                height: 45px;
+                background: rgba(255,255,255,0.1);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                transition: all 0.3s;
+            }
+
+            .social-icon svg {
+                width: 24px;
+                height: 24px;
+                fill: white;
+            }
+
+            .social-icon:hover {
+                background: var(--sunset-orange);
+                transform: translateY(-5px);
+            }
+
+            .copyright {
+                padding-top: 2rem;
+                border-top: 1px solid rgba(255,255,255,0.1);
+                color: #888;
+            }
+
+            /* Mobile Responsiveness */
+            @media (max-width: 968px) {
+                .nav-links {
+                    display: none;
+                }
+
+                .hero-content {
+                    grid-template-columns: 1fr;
+                    text-align: center;
+                }
+
+                .hero-text p {
+                    max-width: 100%;
+                }
+
+                .hero-buttons {
+                    justify-content: center;
+                    flex-wrap: wrap;
+                }
+
+                .hero-image {
+                    order: -1;
+                }
+
+                .burger-visual {
+                    max-width: 350px;
+                    height: 350px;
+                    margin: 0 auto;
+                }
+
+                .location-content {
+                    grid-template-columns: 1fr;
+                }
+
+                .footer-content {
+                    text-align: left;
+                }
+
+                .cart-sidebar {
+                    width: 100%;
+                    right: -100%;
+                }
+
+                .menu-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .menu-item-footer {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+
+                .menu-item-footer > div {
+                    justify-content: center;
+                }
+            }
+
+            @media (max-width: 640px) {
+                .hero-text h1 {
+                    font-size: 3rem;
+                }
+
+                .burger-visual {
+                    max-width: 280px;
+                    height: 280px;
+                }
+
+                .burger-visual::after {
+                    font-size: 5rem;
+                }
+
+                .contact-form {
+                    padding: 2rem 1.5rem;
+                }
+
+                .cart-toggle {
+                    width: 60px;
+                    height: 60px;
+                    font-size: 1.5rem;
+                    bottom: 20px;
+                    right: 20px;
+                }
+            }
+
+            .fade-in {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.6s, transform 0.6s;
+            }
+
+            .fade-in.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav>
+            <div class="nav-container">
+                <a href="#" class="logo">
+                    GINZA
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#location">Localisation</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="tel:0143204354" class="cta-button">Commander</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>LE GOÛT DU JAPON À PARIS</h1>
+                    <div class="subtitle">Sushis Authentiques • Cuisine Japonaise Traditionnelle</div>
+                    <p>Découvrez nos sushis, sashimis et plats japonais préparés avec des ingrédients ultra-frais dans une ambiance familiale. L’esprit de Ginza rencontre le savoir-faire parisien dans chaque bouchée.</p>
+                    <div class="hero-buttons">
+                        <a href="tel:0143204354" class="btn-primary">Commander Maintenant</a>
+                        <a href="#menu" class="btn-secondary">Voir le Menu</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="burger-visual">
+                        <img src="https://picsum.photos/id/292/500/500" alt="Ginza Sushi - Sushis frais">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features fade-in">
+            <h2 class="section-title">POURQUOI NOUS CHOISIR</h2>
+            <p class="section-subtitle">L’excellence japonaise dans chaque détail</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🐟</div>
+                    <h3>Poisson Ultra-Frais</h3>
+                    <p>Poissons et fruits de mer livrés quotidiennement pour une fraîcheur incomparable et un goût authentique.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌿</div>
+                    <h3>Ingrédients Traditionnels</h3>
+                    <p>Riz japonais premium, nori, sauces maison et légumes frais préparés chaque jour dans notre cuisine.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Livraison Rapide</h3>
+                    <p>Commandez en ligne et recevez vos sushis frais à domicile ou optez pour le click & collect.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👪</div>
+                    <h3>Ambiance Familiale</h3>
+                    <p>Restaurant familial depuis 2003 où le chef prépare vos sushis devant vous avec passion.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Wi-Fi Gratuit</h3>
+                    <p>Restez connecté pendant votre repas avec notre Wi-Fi haut débit disponible gratuitement.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">♿</div>
+                    <h3>Accessible PMR</h3>
+                    <p>Notre établissement est entièrement accessible aux personnes à mobilité réduite.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section class="menu-preview" id="menu">
+            <h2 class="section-title">NOTRE MENU</h2>
+            <p class="section-subtitle">Commandez en ligne pour retrait sur place ou livraison à domicile (minimum 20 € pour la livraison).</p>
+            
+            <!-- Menu Categories -->
+            <div class="menu-categories">
+                <button class="category-btn active" data-category="sushis">🍣 Sushis</button>
+                <button class="category-btn" data-category="makis">🍣 Makis</button>
+                <button class="category-btn" data-category="sashimis">🐟 Sashimis</button>
+                <button class="category-btn" data-category="plats">🍜 Plats Chauds</button>
+                <button class="category-btn" data-category="desserts">🍰 Desserts</button>
+                <button class="category-btn" data-category="boissons">🥤 Boissons</button>
+            </div>
+
+            <!-- Menu Items Container -->
+            <div class="menu-items-container" id="menuItemsContainer">
+                <!-- Items will be dynamically loaded here -->
+            </div>
+        </section>
+
+        <!-- Shopping Cart -->
+        <div class="cart-sidebar" id="cartSidebar">
+            <div class="cart-header">
+                <h3>🛒 Mon Panier</h3>
+                <button class="cart-close" id="cartClose">✕</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="cart-empty">Votre panier est vide</p>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cartTotal">0.00€</span>
+                </div>
+                <button class="checkout-btn" id="checkoutBtn" disabled>Commander Maintenant</button>
+            </div>
+        </div>
+
+        <!-- Cart Toggle Button -->
+        <button class="cart-toggle" id="cartToggle">
+            🛒 <span class="cart-count" id="cartCount"></span>
+        </button>
+
+        <!-- Location Section -->
+        <section class="location fade-in" id="location">
+            <h2 class="section-title">VENEZ NOUS RENDRE VISITE</h2>
+            <p class="section-subtitle" style="color: #ccc;">Au cœur de Montparnasse – 14ème arrondissement</p>
+            <div class="location-content">
+                <div class="location-info">
+                    <h3>Informations Pratiques</h3>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-text">
+                            <h4>Adresse</h4>
+                            <p>50 rue Daguerre<br>75014 Paris, France</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-text">
+                            <h4>Téléphone</h4>
+                            <p><a href="tel:0143204354" style="color: var(--california-gold);">01 43 20 43 54</a></p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">✉️</div>
+                        <div class="info-text">
+                            <h4>Email</h4>
+                            <p><a href="mailto:contact@ginza-paris.fr" style="color: var(--california-gold);">contact@ginza-paris.fr</a></p>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 2rem;">Horaires d'Ouverture</h3>
+                    <div class="hours-grid">
+                        <div class="hour-row">
+                            <span>Lundi - Samedi</span>
+                            <span style="color: var(--california-gold);">12:00 - 14:30 &amp; 19:00 - 23:00</span>
+                        </div>
+                        <div class="hour-row">
+                            <span>Dimanche</span>
+                            <span style="color: var(--sunset-orange);">19:00 - 23:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.8!2d2.323!3d48.8336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671f0a0a0a0a0%3A0x0!2zNTAgcnVlIERhZ3VlcnJlLCA3NTAxNCBQYXJpcw!5e0!3m2!1sfr!2sfr!4v1710000000000" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact fade-in" id="contact">
+            <h2 class="section-title">CONTACTEZ-NOUS</h2>
+            <p class="section-subtitle">Une question ? Une réservation ? On vous répond rapidement !</p>
+            <div class="contact-container">
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Votre Nom *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Votre Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Votre Téléphone</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Objet *</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre Message *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Envoyer le Message</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Ginza</h3>
+                    <p>Le goût authentique du Japon au cœur de Paris depuis 2003. Sushis frais et cuisine familiale.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/ginzadaguerre/" target="_blank" class="social-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <p><a href="#menu">Menu</a></p>
+                    <p><a href="#location">Localisation</a></p>
+                    <p><a href="#contact">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <p>🚚 Livraison à domicile</p>
+                    <p>🏃 Click & Collect</p>
+                    <p>🍣 Sushis à emporter</p>
+                    <p>♿ Accessible PMR</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Paiements Acceptés</h3>
+                    <p>💳 Cartes bancaires</p>
+                    <p>💵 Espèces</p>
+                    <p>📱 Paiement sans contact</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2026 Ginza. Tous droits réservés. | Design par Viral Horizon</p>
+            </div>
+        </footer>
+
+        <script>
+            // Menu Data - Ginza Japanese Restaurant
+            const menuData = {
+                sushis: [
+                    { name: "California Roll", desc: "Avocat, crabe, concombre, mayonnaise japonaise", price: 8.50, icon: "🍣" },
+                    { name: "Spicy Tuna Roll", desc: "Thon épicé, avocat, sésame, sauce spicy", price: 9.50, icon: "🍣" },
+                    { name: "Salmon Avocado Roll", desc: "Saumon frais, avocat, riz japonais", price: 9.00, icon: "🍣" },
+                    { name: "Eel Roll", desc: "Anguille grillée, concombre, sauce unagi", price: 10.50, icon: "🍣" },
+                    { name: "Rainbow Roll", desc: "Saumon, thon, avocat, crevettes", price: 12.90, icon: "🌈" },
+                    { name: "Dragon Roll", desc: "Anguille, avocat, tobiko, sauce unagi", price: 13.50, icon: "🐉" },
+                    { name: "Tuna Nigiri (2pcs)", desc: "Thon rouge frais sur riz", price: 7.50, icon: "🍣" },
+                    { name: "Salmon Nigiri (2pcs)", desc: "Saumon frais sur riz", price: 7.00, icon: "🐟" }
+                ],
+                makis: [
+                    { name: "Maki Saumon", desc: "Saumon frais, riz, algue nori (6 pièces)", price: 6.50, icon: "🍣" },
+                    { name: "Maki Thon", desc: "Thon rouge, riz, algue nori (6 pièces)", price: 6.90, icon: "🍣" },
+                    { name: "Maki Avocat", desc: "Avocat frais, riz, algue nori (6 pièces)", price: 5.90, icon: "🥑" },
+                    { name: "Maki Concombre", desc: "Concombre, riz, algue nori (6 pièces)", price: 5.50, icon: "🥒" },
+                    { name: "Maki California", desc: "Crabe, avocat, concombre (6 pièces)", price: 7.90, icon: "🍣" },
+                    { name: "Maki Spicy", desc: "Thon épicé, riz, algue nori (6 pièces)", price: 7.50, icon: "🌶️" }
+                ],
+                sashimis: [
+                    { name: "Sashimi Saumon", desc: "8 pièces de saumon frais", price: 12.90, icon: "🐟" },
+                    { name: "Sashimi Thon", desc: "8 pièces de thon rouge", price: 14.50, icon: "🐟" },
+                    { name: "Sashimi Mix", desc: "Saumon, thon, crevette (10 pièces)", price: 16.90, icon: "🐟" },
+                    { name: "Sashimi Saint-Jacques", desc: "6 pièces de noix de Saint-Jacques", price: 15.50, icon: "🐚" },
+                    { name: "Sashimi Eel", desc: "Anguille grillée (6 pièces)", price: 13.90, icon: "🐟" }
+                ],
+                plats: [
+                    { name: "Ramen Miso", desc: "Nouilles, porc chashu, miso, œuf, nori", price: 14.90, icon: "🍜" },
+                    { name: "Cha-Han Fruits de Mer", desc: "Riz sauté aux fruits de mer et légumes", price: 13.50, icon: "🍚" },
+                    { name: "Gyoza (6 pièces)", desc: "Raviolis japonais porc & légumes grillés", price: 7.90, icon: "🥟" },
+                    { name: "Tonkatsu", desc: "Côte de porc panée, riz, salade", price: 15.90, icon: "🍖" },
+                    { name: "Teriyaki Saumon", desc: "Saumon grillé sauce teriyaki, riz", price: 16.50, icon: "🐟" },
+                    { name: "Tempura Crevettes", desc: "Crevettes et légumes frits légers", price: 12.90, icon: "🦐" }
+                ],
+                desserts: [
+                    { name: "Mochi Glacé", desc: "3 mochis glacés (thé vert, mangue, fraise)", price: 6.50, icon: "🍡" },
+                    { name: "Matcha Cheesecake", desc: "Cheesecake au thé matcha", price: 7.00, icon: "🍰" },
+                    { name: "Dorayaki", desc: "Pancakes japonais fourrés à la pâte de haricot rouge", price: 5.50, icon: "🥞" },
+                    { name: "Glace au Thé Vert", desc: "Glace artisanale matcha", price: 4.50, icon: "🍦" }
+                ],
+                boissons: [
+                    { name: "Coca-Cola 33cl", desc: "Coca, Coca Zéro ou Light", price: 3.50, icon: "🥤" },
+                    { name: "Jus de Mangue", desc: "Jus frais 25cl", price: 4.00, icon: "🥭" },
+                    { name: "Thé Vert Chaud", desc: "Thé vert japonais", price: 3.00, icon: "🍵" },
+                    { name: "Saké Junmai", desc: "Saké japonais 15cl", price: 8.00, icon: "🍶" },
+                    { name: "Eau Minérale 50cl", desc: "Plate ou pétillante", price: 2.50, icon: "💧" }
+                ]
+            };
+
+            let cart = [];
+
+            function loadMenuItems(category) {
+                const container = document.getElementById('menuItemsContainer');
+                const items = menuData[category] || [];
+
+                if (items.length === 0) {
+                    container.innerHTML = '<p style="text-align: center; color: #999;">Aucun article dans cette catégorie</p>';
+                    return;
+                }
+
+                let html = '<div class="menu-grid">';
+
+                items.forEach((item) => {
+                    let imageHtml = `<div class="menu-item-image">${item.icon || '🍣'}</div>`;
+
+                    html += `
+                        <div class="menu-item">
+                            ${imageHtml}
+                            <div class="menu-item-content">
+                                <h3>${item.name}</h3>
+                                <p>${item.desc}</p>
+                                <div class="menu-item-footer">
+                                    <span class="price">${item.price.toFixed(2)}€</span>
+                                    <div style="display: flex; gap: 1rem;">
+                                        <button class="add-to-cart-btn" onclick="addToCart('${item.name.replace(/'/g, "\\'")}', ${item.price}, false)">À Emporter</button>
+                                        <button class="add-to-cart-btn" style="background: var(--sunset-orange);" onclick="addToCart('${item.name.replace(/'/g, "\\'")}', ${item.price}, true)">Livraison</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += '</div>';
+                container.innerHTML = html;
+            }
+
+            function addToCart(name, price, isDelivery = false) {
+                const suffix = isDelivery ? " - Livraison" : " - À Emporter";
+                const displayName = name + suffix;
+                const existing = cart.find(i => i.name === name && i.delivery === isDelivery);
+                if (existing) {
+                    existing.quantity++;
+                } else {
+                    cart.push({ name, displayName, price: Number(price), quantity: 1, size: null, delivery: isDelivery });
+                }
+                updateCart();
+                showCartNotification();
+            }
+
+            function updateQuantity(idx, delta) {
+                cart[idx].quantity += delta;
+                if (cart[idx].quantity <= 0) {
+                    cart.splice(idx, 1);
+                }
+                updateCart();
+            }
+
+            function removeFromCart(idx) {
+                cart.splice(idx, 1);
+                updateCart();
+            }
+
+            function showCartNotification() {
+                const btn = document.getElementById('cartToggle');
+                btn.style.transform = 'scale(1.2)';
+                setTimeout(() => btn.style.transform = 'scale(1)', 200);
+            }
+
+            function updateCart() {
+                const itemsEl = document.getElementById('cartItems');
+                const countEl = document.getElementById('cartCount');
+                const totalEl = document.getElementById('cartTotal');
+                const checkoutBtn = document.getElementById('checkoutBtn');
+
+                if (cart.length === 0) {
+                    itemsEl.innerHTML = '<p class="cart-empty">Votre panier est vide</p>';
+                    countEl.textContent = '';
+                    totalEl.textContent = '0.00€';
+                    checkoutBtn.disabled = true;
+                    checkoutBtn.textContent = 'Commander Maintenant';
+                    return;
+                }
+
+                let total = 0;
+                let count = 0;
+                let html = '';
+
+                cart.forEach((item, idx) => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    count += item.quantity;
+
+                    html += `
+                        <div class="cart-item">
+                            <div class="cart-item-header">
+                                <div class="cart-item-name">${item.displayName}</div>
+                                <button class="cart-item-remove" onclick="removeFromCart(${idx})">✕</button>
+                            </div>
+                            <div class="cart-item-footer">
+                                <div class="quantity-controls">
+                                    <button class="qty-btn" onclick="updateQuantity(${idx}, -1)">−</button>
+                                    <span class="qty-display">${item.quantity}</span>
+                                    <button class="qty-btn" onclick="updateQuantity(${idx}, 1)">+</button>
+                                </div>
+                                <div class="cart-item-price">${itemTotal.toFixed(2)}€</div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                itemsEl.innerHTML = html;
+                countEl.textContent = count;
+                totalEl.textContent = total.toFixed(2) + '€';
+
+                const hasDelivery = cart.some(i => i.delivery);
+                if (hasDelivery && total < 20) {
+                    checkoutBtn.disabled = true;
+                    checkoutBtn.textContent = 'Minimum 20€ pour livraison';
+                } else {
+                    checkoutBtn.disabled = false;
+                    checkoutBtn.textContent = 'Commander Maintenant';
+                }
+            }
+
+            function toggleCart() {
+                document.getElementById('cartSidebar').classList.toggle('open');
+            }
+
+            async function checkout() {
+                if (cart.length === 0) {
+                    alert("Votre panier est vide");
+                    return;
+                }
+
+                const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                const hasDelivery = cart.some(i => i.delivery);
+
+                if (hasDelivery && total < 20) {
+                    alert("Le minimum pour une commande en livraison est de 20 €.");
+                    return;
+                }
+
+                try {
+                    const response = await fetch("/api/create-checkout-session", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ cart })
+                    });
+
+                    const data = await response.json();
+
+                    if (!response.ok || data.error || !data.url) {
+                        alert(data.error || "Erreur lors de la création de la session de paiement");
+                        return;
+                    }
+
+                    window.location.href = data.url;
+                } catch (err) {
+                    alert("Erreur réseau : " + err.message);
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                loadMenuItems('sushis');
+
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        loadMenuItems(btn.dataset.category);
+                    });
+                });
+
+                document.getElementById('cartToggle').addEventListener('click', toggleCart);
+                document.getElementById('cartClose').addEventListener('click', toggleCart);
+                document.getElementById('checkoutBtn').addEventListener('click', checkout);
+
+                // Smooth scroll
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', e => {
+                        e.preventDefault();
+                        document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                    });
+                });
+
+                // Fade-in animations
+                const fadeEls = document.querySelectorAll('.fade-in');
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                fadeEls.forEach(el => observer.observe(el));
+
+                // Contact form
+                document.querySelector('.contact-form')?.addEventListener('submit', e => {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
+                    
+                    let body = `Nom: ${name}%0D%0A`;
+                    body += `Email: ${email}%0D%0A`;
+                    if (phone) body += `Téléphone: ${phone}%0D%0A`;
+                    body += `%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`;
+                    
+                    window.location.href = `mailto:contact@ginza-paris.fr?subject=${encodeURIComponent(subject)}&body=${body}`;
+                });
+            });
+        </script>
+    </body>
+</html>
