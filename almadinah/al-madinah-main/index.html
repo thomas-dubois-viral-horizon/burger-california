@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Al Madinah Wholesale — Premium Food Distribution</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark: #1a4d2e;
+      --green-mid: #2d7a47;
+      --green-light: #4caf70;
+      --gold: #f0c832;
+      --gold-dark: #c9a800;
+      --cream: #faf7f0;
+      --white: #ffffff;
+      --text-dark: #111111;
+      --text-mid: #4a5568;
+      --text-light: #8a9aaa;
+      --border: #e8e3d8;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+
+    /* ========== TOP BAR ========== */
+    .top-bar {
+      background: var(--green-dark);
+      padding: 10px 6%;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.78rem; color: rgba(255,255,255,0.7);
+    }
+    .top-bar-left { display: flex; align-items: center; gap: 6px; }
+    .top-bar-left span { color: var(--gold); font-weight: 700; }
+    .top-bar-right a { color: rgba(255,255,255,0.75); text-decoration: none; margin-left: 20px; transition: color 0.2s; }
+    .top-bar-right a:hover { color: var(--gold); }
+
+    /* ========== NAV ========== */
+    nav {
+      background: var(--white);
+      padding: 0 6%; height: 80px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 200;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 54px; width: auto; object-fit: contain; display: block; }
+
+    .nav-center { display: flex; gap: 34px; align-items: center; }
+    .nav-center a {
+      color: var(--text-dark); text-decoration: none;
+      font-size: 0.88rem; font-weight: 600; letter-spacing: 0.01em;
+      transition: color 0.2s; position: relative;
+    }
+    .nav-center a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 2px; background: var(--green-mid);
+      transform: scaleX(0); transition: transform 0.2s; transform-origin: left;
+    }
+    .nav-center a:hover { color: var(--green-dark); }
+    .nav-center a:hover::after { transform: scaleX(1); }
+
+    .nav-right { display: flex; gap: 10px; align-items: center; }
+    .btn-login {
+      border: 1.5px solid var(--border); color: var(--text-dark);
+      background: transparent; padding: 9px 20px; border-radius: 8px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-login:hover { border-color: var(--green-mid); color: var(--green-mid); }
+    .btn-nav-cta {
+      background: var(--green-dark); color: var(--white);
+      padding: 10px 22px; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: all 0.2s;
+    }
+    .btn-nav-cta:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+    /* ========== HERO — DESKTOP SPLIT BANNER ========== */
+    .hero { display: grid; grid-template-columns: 3fr 2fr; min-height: 78vh; }
+
+    .hero-main {
+      background: var(--green-dark);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 64px 6% 64px;
+    }
+    .hero-main::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M0 0h80v80H0V0zm20 20v40h40V20H20zm20 35a15 15 0 1 1 0-30 15 15 0 0 1 0 30z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-main-gradient {
+      position: absolute; inset: 0;
+      background: linear-gradient(150deg, #0f2e1a 0%, #1a4d2e 40%, #2d7a47 100%);
+    }
+    .hero-main-glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(240,200,50,0.07) 0%, transparent 60%);
+    }
+    .hero-main::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 60%);
+    }
+    .hero-main-content {
+      position: relative; z-index: 2;
+      animation: fadeUp 0.9s ease both;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold); color: var(--green-dark);
+      padding: 7px 16px; border-radius: 100px;
+      font-size: 0.72rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 24px;
+    }
+    .hero-main h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 4.5vw, 5.2rem);
+      font-weight: 900; color: var(--white);
+      line-height: 1.0; margin-bottom: 22px;
+    }
+    .hero-main h1 em { font-style: italic; color: var(--gold); }
+    .hero-main p {
+      font-size: 1rem; color: rgba(255,255,255,0.68);
+      line-height: 1.75; max-width: 440px; margin-bottom: 38px;
+    }
+    .hero-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gold); color: var(--green-dark);
+      padding: 15px 30px; border-radius: 8px;
+      font-weight: 800; font-size: 0.9rem; text-decoration: none;
+      transition: all 0.25s; letter-spacing: 0.02em;
+    }
+    .hero-btn:hover { background: #ffe066; transform: translateX(4px); }
+
+    /* SECONDARY PANEL */
+    .hero-secondary { display: flex; flex-direction: column; }
+    .hero-sec-top {
+      flex: 1; position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 36px 40px; border-bottom: 4px solid var(--white);
+    }
+    .hero-sec-top-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #243d17 0%, #3a6228 100%);
+    }
+    .hero-sec-top::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 70%);
+    }
+    .hero-sec-top-content { position: relative; z-index: 2; }
+    .sub-eyebrow {
+      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: block;
+    }
+    .hero-sec-top h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem; font-weight: 900; color: var(--white);
+      line-height: 1.1; margin-bottom: 18px;
+    }
+    .hero-sec-top h2 em { font-style: normal; color: var(--gold); }
+
+    .hero-sec-bottom {
+      flex: 1; background: var(--gold);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 40px; position: relative; overflow: hidden;
+    }
+    .hero-sec-bottom::before {
+      content: ''; position: absolute; right: -50px; bottom: -50px;
+      width: 220px; height: 220px; border-radius: 50%;
+      background: rgba(0,0,0,0.07);
+    }
+    .hero-sec-bottom::after {
+      content: ''; position: absolute; left: -30px; top: -30px;
+      width: 120px; height: 120px; border-radius: 50%;
+      background: rgba(0,0,0,0.04);
+    }
+    .hero-sec-bottom-content { position: relative; z-index: 2; }
+    .hero-sec-bottom h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.65rem; font-weight: 900; color: var(--green-dark);
+      line-height: 1.15; margin-bottom: 10px;
+    }
+    .hero-sec-bottom p {
+      font-size: 0.85rem; color: rgba(26,77,46,0.72);
+      line-height: 1.65; margin-bottom: 22px;
+    }
+
+    /* BUTTONS */
+    .btn-dark {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green-dark); color: var(--white);
+      padding: 12px 22px; border-radius: 8px;
+      font-weight: 700; font-size: 0.83rem; text-decoration: none;
+      transition: all 0.2s; width: fit-content;
+    }
+    .btn-dark:hover { background: var(--green-mid); transform: translateX(3px); }
+    .btn-white {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.15); color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      padding: 12px 22px; border-radius: 8px;
+      font-weight: 700; font-size: 0.83rem; text-decoration: none;
+      transition: all 0.2s; width: fit-content; backdrop-filter: blur(4px);
+    }
+    .btn-white:hover { background: rgba(255,255,255,0.25); transform: translateX(3px); }
+
+    /* Arrow SVG */
+    .arrow-icon { display: inline-block; transition: transform 0.2s; }
+    a:hover .arrow-icon { transform: translateX(4px); }
+
+    /* ========== MOBILE HERO CAROUSEL ========== */
+    .hero-carousel {
+      display: none; /* hidden on desktop */
+      position: relative;
+      overflow: hidden;
+      height: 70vh;
+      min-height: 420px;
+    }
+
+    .hero-carousel-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+      will-change: transform;
+    }
+
+    .hero-slide {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 44px 6% 52px;
+    }
+
+    /* Slide 1 — Main hero (green) */
+    .hero-slide-main {
+      background: var(--green-dark);
+    }
+    .hero-slide-main::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M0 0h80v80H0V0zm20 20v40h40V20H20zm20 35a15 15 0 1 1 0-30 15 15 0 0 1 0 30z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-slide-main .slide-gradient {
+      position: absolute; inset: 0;
+      background: linear-gradient(150deg, #0f2e1a 0%, #1a4d2e 40%, #2d7a47 100%);
+    }
+    .hero-slide-main .slide-glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 20%, rgba(240,200,50,0.08) 0%, transparent 60%);
+    }
+    .hero-slide-main .slide-fade {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+    }
+
+    /* Slide 2 — Coca Cola (dark green) */
+    .hero-slide-coca .slide-gradient {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #243d17 0%, #3a6228 100%);
+    }
+    .hero-slide-coca .slide-fade {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.08) 70%);
+    }
+
+    /* Slide 3 — Delivery Policy (gold) */
+    .hero-slide-delivery {
+      background: var(--gold);
+    }
+    .hero-slide-delivery::before {
+      content: ''; position: absolute; right: -50px; bottom: -50px;
+      width: 220px; height: 220px; border-radius: 50%;
+      background: rgba(0,0,0,0.07); z-index: 1;
+    }
+    .hero-slide-delivery::after {
+      content: ''; position: absolute; left: -30px; top: -30px;
+      width: 140px; height: 140px; border-radius: 50%;
+      background: rgba(0,0,0,0.04); z-index: 1;
+    }
+
+    .slide-content { position: relative; z-index: 2; }
+
+    .slide-content .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold); color: var(--green-dark);
+      padding: 6px 14px; border-radius: 100px;
+      font-size: 0.68rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 18px;
+    }
+
+    .slide-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 8vw, 3.2rem);
+      font-weight: 900; color: var(--white);
+      line-height: 1.0; margin-bottom: 16px;
+    }
+    .slide-content h1 em { font-style: italic; color: var(--gold); }
+
+    .slide-content p {
+      font-size: 0.88rem; color: rgba(255,255,255,0.68);
+      line-height: 1.7; margin-bottom: 28px;
+    }
+
+    .slide-content .sub-eyebrow {
+      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: block;
+    }
+    .slide-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 7vw, 2.6rem);
+      font-weight: 900; color: var(--white);
+      line-height: 1.1; margin-bottom: 16px;
+    }
+    .slide-content h2 em { font-style: normal; color: var(--gold); }
+
+    /* Delivery slide text overrides */
+    .hero-slide-delivery .slide-content .sub-eyebrow {
+      color: rgba(26,77,46,0.65);
+    }
+    .hero-slide-delivery .slide-content h2 {
+      color: var(--green-dark);
+    }
+    .hero-slide-delivery .slide-content p {
+      color: rgba(26,77,46,0.72);
+    }
+
+    /* Progress dots */
+    .carousel-dots {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .carousel-dot {
+      width: 6px; height: 6px;
+      border-radius: 100px;
+      background: rgba(255,255,255,0.35);
+      transition: all 0.35s ease;
+      cursor: pointer;
+    }
+    .carousel-dot.active {
+      width: 22px;
+      background: var(--white);
+    }
+    /* On gold slide, invert dots */
+    .hero-carousel[data-slide="2"] .carousel-dot {
+      background: rgba(26,77,46,0.25);
+    }
+    .hero-carousel[data-slide="2"] .carousel-dot.active {
+      background: var(--green-dark);
+    }
+
+    /* Progress bar at top */
+    .carousel-progress {
+      position: absolute;
+      top: 0; left: 0;
+      height: 3px;
+      background: var(--gold);
+      width: 0%;
+      z-index: 10;
+      transition: width linear;
+    }
+    .hero-carousel[data-slide="2"] .carousel-progress {
+      background: var(--green-dark);
+    }
+
+    /* ========== MARQUEE ========== */
+    .marquee-section {
+      background: var(--gold); padding: 15px 0; overflow: hidden;
+      border-top: 3px solid rgba(0,0,0,0.08);
+      border-bottom: 3px solid rgba(0,0,0,0.08);
+    }
+    .marquee-track {
+      display: flex; animation: marquee 30s linear infinite; width: max-content;
+    }
+    .marquee-section:hover .marquee-track { animation-play-state: paused; }
+    .marquee-item {
+      display: flex; align-items: center; gap: 18px;
+      padding: 0 36px; font-size: 0.8rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--green-dark); white-space: nowrap;
+    }
+    .marquee-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(26,77,46,0.35); flex-shrink: 0; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ========== SECTIONS ========== */
+    .section { padding: 80px 6%; }
+    .section-alt { background: var(--cream); }
+    .section-dark { background: var(--green-dark); }
+    .section-eyebrow {
+      font-size: 0.7rem; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--green-mid);
+      margin-bottom: 10px; display: flex; align-items: center; gap: 10px;
+    }
+    .section-eyebrow::before { content: ''; display: inline-block; width: 26px; height: 2px; background: var(--gold); }
+    .section-dark .section-eyebrow { color: var(--gold); }
+    .section-dark .section-eyebrow::before { background: rgba(255,255,255,0.25); }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 900; color: var(--green-dark); line-height: 1.1; margin-bottom: 14px;
+    }
+    .section-title em { font-style: normal; color: var(--green-mid); }
+    .section-dark .section-title { color: var(--white); }
+    .section-dark .section-title em { color: var(--gold); }
+    .section-sub { font-size: 0.95rem; color: var(--text-mid); line-height: 1.75; max-width: 500px; margin-bottom: 50px; }
+    .section-dark .section-sub { color: rgba(255,255,255,0.55); }
+    .section-header-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; gap: 20px; flex-wrap: wrap; }
+
+    /* ========== CATEGORIES ========== */
+    .categories-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .categories-row:last-child { margin-bottom: 0; }
+
+    .cat-card {
+      border-radius: 18px; overflow: hidden;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-end;
+      text-decoration: none; position: relative;
+      padding: 24px 16px 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer; min-height: 160px;
+      border: 2px solid transparent;
+      flex-shrink: 0;
+    }
+    .cat-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.2); border-color: var(--gold); }
+    .cat-bg { position: absolute; inset: 0; }
+    .cat-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.1) 60%);
+    }
+    .cat-emoji { font-size: 2.4rem; position: relative; z-index: 2; margin-bottom: 10px; transition: transform 0.3s; }
+    .cat-card:hover .cat-emoji { transform: scale(1.15) translateY(-5px); }
+    .cat-name { font-size: 0.78rem; font-weight: 700; color: var(--white); text-align: center; position: relative; z-index: 2; letter-spacing: 0.03em; line-height: 1.3; }
+
+    .cat-large { flex: 2; min-height: 200px; }
+    .cat-large .cat-emoji { font-size: 3.2rem; }
+    .cat-large .cat-name { font-size: 0.9rem; }
+    .cat-small { flex: 1; }
+
+    /* ========== HOW IT WORKS ========== */
+    .steps-row {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px;
+      counter-reset: steps;
+    }
+    .step-item { counter-increment: steps; position: relative; }
+    .step-item:not(:last-child)::after {
+      content: ''; position: absolute;
+      top: 28px; left: calc(100% - 10px);
+      width: calc(100% - 14px); height: 1px;
+      background: var(--border); z-index: 0;
+    }
+    .step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.8rem; font-weight: 900;
+      color: rgba(26,77,46,0.07); line-height: 1;
+      margin-bottom: -8px; display: block;
+    }
+    .step-icon-wrap {
+      width: 56px; height: 56px; background: var(--green-dark);
+      border-radius: 16px; display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 18px; position: relative; z-index: 1;
+    }
+    .step-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--green-dark); margin-bottom: 9px; }
+    .step-text { font-size: 0.84rem; color: var(--text-mid); line-height: 1.65; }
+
+    /* ========== NEW CLIENT BAND ========== */
+    .new-client-band {
+      background: var(--cream); padding: 88px 6%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 88px; align-items: center;
+    }
+    .new-client-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem; font-weight: 900; color: var(--green-dark);
+      line-height: 1.1; margin-bottom: 18px;
+    }
+    .new-client-text h2 em { font-style: normal; color: var(--gold-dark); }
+    .new-client-text p { font-size: 0.93rem; color: var(--text-mid); line-height: 1.8; margin-bottom: 28px; }
+    .check-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+    .check-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; color: var(--text-dark); line-height: 1.5; }
+    .check-list li::before {
+      content: '✓'; width: 22px; height: 22px;
+      background: var(--green-dark); color: var(--white);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 800; flex-shrink: 0; margin-top: 1px;
+    }
+    .new-client-visual {
+      background: var(--green-dark); border-radius: 24px; padding: 50px 44px;
+      position: relative; overflow: hidden;
+    }
+    .new-client-visual::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 260px; height: 260px; border-radius: 50%; background: rgba(240,200,50,0.06);
+    }
+    .new-client-visual::after {
+      content: ''; position: absolute; bottom: -40px; left: -40px;
+      width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,0.03);
+    }
+    .new-client-visual-inner { position: relative; z-index: 2; }
+    .new-client-visual h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); font-weight: 700; margin-bottom: 8px; }
+    .new-client-visual p { color: rgba(255,255,255,0.55); font-size: 0.86rem; margin-bottom: 28px; line-height: 1.65; }
+    .mini-form { display: flex; flex-direction: column; gap: 10px; }
+    .mini-input {
+      padding: 13px 16px;
+      background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.14);
+      border-radius: 10px; color: var(--white);
+      font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+      outline: none; transition: border 0.2s;
+    }
+    .mini-input::placeholder { color: rgba(255,255,255,0.3); }
+    .mini-input:focus { border-color: var(--gold); }
+    .mini-submit {
+      background: var(--gold); color: var(--green-dark); border: none;
+      padding: 14px; border-radius: 10px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 800;
+      cursor: pointer; transition: all 0.2s; margin-top: 4px;
+    }
+    .mini-submit:hover { background: #ffe066; transform: translateY(-2px); }
+    .mini-note { text-align: center; font-size: 0.73rem; color: rgba(255,255,255,0.35); margin-top: 4px; }
+    .mini-note a { color: rgba(255,255,255,0.55); text-decoration: none; }
+
+    /* ========== FOOTER ========== */
+    footer { background: #0d1f12; color: rgba(255,255,255,0.5); }
+    .footer-top {
+      padding: 70px 6% 50px;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-logo { height: 50px; width: auto; display: block; margin-bottom: 18px; }
+    .footer-brand p { font-size: 0.83rem; line-height: 1.8; max-width: 270px; margin-bottom: 22px; }
+    .footer-social { display: flex; gap: 8px; }
+    .social-btn {
+      width: 34px; height: 34px; background: rgba(255,255,255,0.07);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; text-decoration: none; color: rgba(255,255,255,0.6);
+      transition: all 0.2s;
+    }
+    .social-btn:hover { background: var(--gold); color: var(--green-dark); }
+    .footer-col h4 { color: var(--white); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; margin-bottom: 20px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom {
+      padding: 20px 6%; display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.76rem; flex-wrap: wrap; gap: 10px;
+    }
+
+    /* ========== LANG TOGGLE ========== */
+    .lang-toggle {
+      display: flex; align-items: center;
+      background: rgba(0,0,0,0.06); border-radius: 100px;
+      padding: 3px; gap: 2px; margin-left: 6px;
+    }
+    .lang-btn {
+      padding: 5px 13px; border-radius: 100px; border: none;
+      font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s; letter-spacing: 0.04em;
+      background: transparent; color: var(--text-mid);
+    }
+    .lang-btn.active {
+      background: var(--green-dark); color: var(--white);
+      box-shadow: 0 2px 8px rgba(26,77,46,0.25);
+    }
+    .lang-btn:hover:not(.active) { color: var(--green-dark); }
+
+    /* ========== ANIMATIONS ========== */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1100px) {
+      .steps-row { grid-template-columns: repeat(2, 1fr); }
+      .step-item:nth-child(2)::after, .step-item:nth-child(4)::after { display: none; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      /* Hide desktop hero, show carousel */
+      .hero { display: none; }
+      .hero-carousel { display: block; }
+
+      /* Categories: horizontal scroll per row */
+      .categories-row {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 4px;
+        margin-left: -6%;
+        margin-right: -6%;
+        padding-left: 6%;
+        padding-right: 6%;
+      }
+      .categories-row::-webkit-scrollbar { display: none; }
+      .cat-card { scroll-snap-align: start; }
+      .cat-large { min-width: 54vw; min-height: 160px; }
+      .cat-large .cat-emoji { font-size: 2.4rem; }
+      .cat-large .cat-name { font-size: 0.78rem; }
+      .cat-small { min-width: 38vw; min-height: 160px; }
+
+      .new-client-band { grid-template-columns: 1fr; gap: 44px; }
+      .steps-row { grid-template-columns: 1fr; }
+      .step-item::after { display: none; }
+      .nav-center, .top-bar { display: none; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-bar-left">📦 <span data-i18n="topbar_tag">Comptes professionnels uniquement</span> — <span data-i18n="topbar_sub">Inscrivez-vous pour accéder aux tarifs grossiste</span></div>
+    <div class="top-bar-right">
+      <a href="login.html" data-i18n="nav_login">Espace Client</a>
+      <a href="catalog.html" data-i18n="topbar_catalog">Voir le Catalogue</a>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="https://i.postimg.cc/PfQQkYvs/logo.png" alt="Al Madinah Wholesale">
+    </a>
+    <div class="nav-center">
+      <a href="catalog.html" data-i18n="nav_products">Nos Produits</a>
+      <a href="#how-it-works" data-i18n="nav_how">Comment ça marche</a>
+      <a href="#categories" data-i18n="nav_categories">Catégories</a>
+      <a href="#new-client" data-i18n="nav_account">Ouvrir un Compte</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
+      </div>
+      <a href="login.html" class="btn-login" data-i18n="nav_login">Espace Client</a>
+      <a href="catalog.html" class="btn-nav-cta" data-i18n="nav_cta">Demander les Tarifs →</a>
+    </div>
+  </nav>
+
+  <!-- ===== DESKTOP HERO ===== -->
+  <section class="hero">
+    <div class="hero-main">
+      <div class="hero-main-gradient"></div>
+      <div class="hero-main-glow"></div>
+      <div class="hero-main-content">
+        <div class="hero-tag">⭐ <span data-i18n="hero_tag">Fournisseur Grossiste Premium</span></div>
+        <h1 data-i18n="hero_h1">Produits Alimentaires<br>de Qualité aux<br>Prix <em>Grossiste</em>.</h1>
+        <p data-i18n="hero_p">Al Madinah fournit des produits alimentaires et d'épicerie premium aux revendeurs, restaurants et distributeurs à travers l'Europe. Tarifs compétitifs, chaînes d'approvisionnement fiables.</p>
+        <a href="catalog.html" class="hero-btn">
+          <span data-i18n="hero_cta">Parcourir notre Catalogue</span>
+          <span class="arrow-icon">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-secondary">
+      <div class="hero-sec-top">
+        <div class="hero-sec-top-bg"></div>
+        <div class="hero-sec-top-content">
+          <span class="sub-eyebrow" data-i18n="hero_new_arrivals">Nouveautés</span>
+          <h2 data-i18n="hero_new_product">Coca Cola Vanille !</h2>
+          <a href="catalog.html?cat=Coca+Cola+%26+Vanille" class="btn-white">
+            <span data-i18n="hero_discover">Découvrir</span> <span class="arrow-icon">→</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero-sec-bottom">
+        <div class="hero-sec-bottom-content">
+          <span class="sub-eyebrow" style="color:rgba(26,77,46,0.6);" data-i18n="hero_new_client_tag">Livraison</span>
+          <h2 data-i18n="hero_open_account">Lisez notre <br>Politique de Livraison</h2>
+          <p data-i18n="hero_open_account_p">Cliquez-ici pour lire notre Politique Intégral à Jour de Livraison.</p>
+          <a href="policy.html" class="btn-dark">
+            <span data-i18n="hero_get_started">Commencer</span> <span class="arrow-icon">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MOBILE HERO CAROUSEL ===== -->
+  <div class="hero-carousel" id="heroCarousel" data-slide="0">
+    <div class="carousel-progress" id="carouselProgress"></div>
+    <div class="hero-carousel-track" id="carouselTrack">
+
+      <!-- Slide 1: Main Hero -->
+      <div class="hero-slide hero-slide-main">
+        <div class="slide-gradient"></div>
+        <div class="slide-glow"></div>
+        <div class="slide-fade"></div>
+        <div class="slide-content">
+          <div class="hero-tag">⭐ <span data-i18n="hero_tag">Fournisseur Grossiste Premium</span></div>
+          <h1 data-i18n="hero_h1">Produits Alimentaires<br>de Qualité aux<br>Prix <em>Grossiste</em>.</h1>
+          <p data-i18n="hero_p">Al Madinah fournit des produits alimentaires premium aux revendeurs, restaurants et distributeurs à travers l'Europe.</p>
+          <a href="catalog.html" class="hero-btn">
+            <span data-i18n="hero_cta">Parcourir notre Catalogue</span>
+            <span class="arrow-icon">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Slide 2: Coca Cola Vanille -->
+      <div class="hero-slide hero-slide-coca">
+        <div class="slide-gradient"></div>
+        <div class="slide-fade"></div>
+        <div class="slide-content">
+          <span class="sub-eyebrow" data-i18n="hero_new_arrivals">Nouveautés</span>
+          <h2 data-i18n="hero_new_product">Coca Cola Vanille !</h2>
+          <a href="catalog.html?cat=Coca+Cola+%26+Vanille" class="btn-white">
+            <span data-i18n="hero_discover">Découvrir</span> <span class="arrow-icon">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Slide 3: Delivery Policy -->
+      <div class="hero-slide hero-slide-delivery">
+        <div class="slide-content">
+          <span class="sub-eyebrow" data-i18n="hero_new_client_tag">Livraison</span>
+          <h2 data-i18n="hero_open_account">Lisez notre<br>Politique de Livraison</h2>
+          <p data-i18n="hero_open_account_p">Cliquez-ici pour lire notre Politique Intégrale à Jour de Livraison.</p>
+          <a href="policy.html" class="btn-dark">
+            <span data-i18n="hero_get_started">Commencer</span> <span class="arrow-icon">→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Dots -->
+    <div class="carousel-dots" id="carouselDots">
+      <div class="carousel-dot active" onclick="goToSlide(0)"></div>
+      <div class="carousel-dot" onclick="goToSlide(1)"></div>
+      <div class="carousel-dot" onclick="goToSlide(2)"></div>
+    </div>
+  </div>
+
+  <!-- ===== MARQUEE ===== -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <div class="marquee-item"><span>Coca Cola</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Kola</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Fanta</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Monster</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Monstar</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Canada Dry</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>7 Up</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Fanta</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Hawaï</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Fuze Tea</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Minute Maid</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Ice Tea</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Perrier</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Mirinda</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Pepsi</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Caraïbos</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Maaza</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Pulco</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Red Bull</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Caprisun</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Coca Cola</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Kola</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Fanta</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Monster</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Monstar</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Canada Dry</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>7 Up</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Fanta</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Hawaï</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Fuze Tea</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Minute Maid</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Ice Tea</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Perrier</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Mirinda</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Pepsi</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Caraïbos</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Maaza</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Pulco</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Red Bull</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Caprisun</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Coca Cola</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Kola</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Fanta</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Monster</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Monstar</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Canada Dry</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>7 Up</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Fanta</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Hawaï</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Fuze Tea</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Minute Maid</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Ice Tea</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Perrier</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Mirinda</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Pepsi</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Caraïbos</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Maaza</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Pulco</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Red Bull</span><div class="marquee-dot"></div></div>
+      <div class="marquee-item"><span>Caprisun</span><div class="marquee-dot"></div></div>
+    </div>
+  </div>
+
+  <!-- ===== CATEGORIES ===== -->
+  <section class="section" id="categories">
+    <div class="section-header-row">
+      <div>
+        <div class="section-eyebrow" data-i18n="cat_eyebrow">Notre Gamme</div>
+        <h2 class="section-title" style="margin-bottom:0;"><span data-i18n="cat_title_pre">Nos</span> <em data-i18n="cat_title_em">Catégories</em></h2>
+      </div>
+      <a href="catalog.html" class="btn-dark" data-i18n="cat_view_all">Voir tous les Produits →</a>
+    </div>
+
+    <!-- Row 1 -->
+    <div class="categories-row">
+      <a href="catalog.html?cat=Boissons+33cl" class="cat-card cat-large">
+        <div class="cat-bg" style="background: linear-gradient(150deg,#ffffff, #ffffff);"></div>
+        <div class="cat-overlay"></div>
+        <span class="cat-emoji"><img src="https://i.postimg.cc/NjL7pVWj/Gemini-Generated-Image-b2sci1b2sci1b2sc-removebg-preview.png" width="240px" height="168px"></span>
+        <span class="cat-name">Boissons</span>
+      </a>
+      <a href="catalog.html?cat=Boissons+33cl&search=Fanta+Orange" class="cat-card cat-small">
+        <div class="cat-bg" style="background: linear-gradient(150deg,#EC6509,#F9A54C);"></div>
+        <div class="cat-overlay"></div>
+        <span class="cat-emoji"><img src="https://i.postimg.cc/htXSB8jL/fanta-orange.png" width="50px" height="150px"></span>
+        <span class="cat-name">Fanta Orange</span>
+      </a>
+      <a href="catalog.html?cat=Boissons+33cl&search=Monster" class="cat-card cat-small">
+        <div class="cat-bg" style="background: linear-gradient(150deg,#ffffff,#f0f0f0);"></div>
+        <div class="cat-overlay"></div>
+        <span class="cat-emoji"><img src="https://i.postimg.cc/MZs2pcg7/monster.png" width="50px" height="150px"></span>
+        <span class="cat-name">Monster</span>
+      </a>
+      <a href="catalog.html?cat=Boissons+33cl&search=7+Up" class="cat-card cat-small">
+        <div class="cat-bg" style="background: linear-gradient(150deg,#2e4810,#487020);"></div>
+        <div class="cat-overlay"></div>
+        <span class="cat-emoji"><img src="https://i.postimg.cc/HL0FDjQt/7-Up.png" width="50px" height="150px"></span>
+        <span class="cat-name">7 Up</span>
+      </a>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="categories-row">
+      <a href="catalog.html?cat=Offre+Gamme+Emballage" class="cat-card cat-large">
+        <div class="cat-bg" style="background: linear-gradient(150deg,#ffffff,#ffffff);"></div>
+        <div class="cat-overlay"></div>
+        <span class="cat-emoji"><img src="https://i.postimg.cc/SjFVwG83/download-(5).png" width="230px" height="156px"></span>
+        <span class="cat-name">Emballages</span>
+      </a>
+      <a href="catalog.html?cat=Offre+Gamme+Emballage&search=Sac+Kraft+R4" class="cat-card cat-small">
+        <div class="cat-bg" style="background: linear-gradient(150deg, #A78E56,#A78E56);"></div>
+        <div class="cat-overlay"></div>
+        <span class="cat-emoji"><img src="https://i.postimg.cc/4dLLscn4/sac-kraft-r4.png" width="85px" height="150px"></span>
+        <span class="cat-name">Sac Kraft R4</span>
+      </a>
+      <a href="catalog.html?cat=Offre+Gamme+Emballage&search=Film+Alimentaire" class="cat-card cat-small">
+        <div class="cat-bg" style="background: linear-gradient(150deg,#782E6D,#782E6D);"></div>
+        <div class="cat-overlay"></div>
+        <span class="cat-emoji"><img src="https://i.postimg.cc/xTHwysX2/film-alimentaire.png" width="129px" height="84px"></span>
+        <span class="cat-name">Film Alimentaire</span>
+      </a>
+      <a href="catalog.html?cat=Offre+Gamme+Emballage&search=Aluminium+Rouleaux" class="cat-card cat-small">
+        <div class="cat-bg" style="background: linear-gradient(150deg,#5E7076,#5E7076);"></div>
+        <div class="cat-overlay"></div>
+        <span class="cat-emoji"><img src="https://i.postimg.cc/PqFVkZCT/aluminium-rouleaux.png" width="135px" height="71px"></span>
+        <span class="cat-name">Aluminium Rouleaux</span>
+      </a>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="categories-row">
+      <a href="catalog.html?cat=Hygiène+%26+Entretien" class="cat-card cat-large">
+        <div class="cat-bg" style="background: linear-gradient(150deg,#ffffff,#ffffff);"></div>
+        <div class="cat-overlay"></div>
+        <span class="cat-emoji"><img src="https://i.postimg.cc/KjXFKBYB/Hygiene-Entretien-removebg-preview.png" width="294px" height="204px"></span>
+        <span class="cat-name">Hygiène & Entretien</span>
+      </a>
+      <a href="catalog.html?cat=Hygiène+%26+Entretien&search=Abrasif+Vert+sur+Eponge" class="cat-card cat-small">
+        <div class="cat-bg" style="background: linear-gradient(150deg,#E7E772,#E7E772);"></div>
+        <div class="cat-overlay"></div>
+        <span class="cat-emoji"><img src="https://i.postimg.cc/BbNDZSSn/image-removebg-preview-(51).png" width="150px" height="150px"></span>
+        <span class="cat-name">Abrasif Vert sur Eponge</span>
+      </a>
+      <a href="catalog.html?cat=Hygiène+%26+Entretien&search=Eau+de+Javel+2.6%" class="cat-card cat-small">
+        <div class="cat-bg" style="background: linear-gradient(150deg,#76C0D1,#76C0D1);"></div>
+        <div class="cat-overlay"></div>
+        <span class="cat-emoji"><img src="https://i.postimg.cc/RCwHVTs3/image-removebg-preview-(52).png" width="132px" height="171px"></span>
+        <span class="cat-name">Eau de Javel 2.6%</span>
+      </a>
+      <a href="catalog.html?cat=Hygiène+%26+Entretien&search=Spray+Desinfectant+pour+Surfaces+sans+Rincage" class="cat-card cat-small">
+        <div class="cat-bg" style="background: linear-gradient(150deg,#4B6CEE,#4B6CEE);"></div>
+        <div class="cat-overlay"></div>
+        <span class="cat-emoji"><img src="https://i.postimg.cc/Y24w1ncT/image-removebg-preview-(53).png" width="120px" height="150px"></span>
+        <span class="cat-name">Spray Desinfectant pour Surfaces sans Rincage</span>
+      </a>
+    </div>
+
+    <!-- Row 4 -->
+    <div class="categories-row">
+      <a href="catalog.html?cat=Epices" class="cat-card cat-large">
+        <div class="cat-bg" style="background: linear-gradient(150deg,#ffffff,#ffffff);"></div>
+        <div class="cat-overlay"></div>
+        <span class="cat-emoji"><img src="https://i.postimg.cc/tgDSsxXs/Epices-(1).png" width="300px" height="177px"></span>
+        <span class="cat-name">Epices</span>
+      </a>
+      <a href="catalog.html?cat=Epices&search=Epicial+Epices+Riz+Saveur+Thai" class="cat-card cat-small">
+        <div class="cat-bg" style="background: linear-gradient(150deg,#D07C0C,#D07C0C);"></div>
+        <div class="cat-overlay"></div>
+        <span class="cat-emoji"><img src="https://i.postimg.cc/gj5kmjwB/Screenshot-2026-03-27-113428-(1).png" width="120px" height="168px"></span>
+        <span class="cat-name">Epicial Epices Riz Saveur Thai</span>
+      </a>
+      <a href="catalog.html?cat=Epices&search=Lait+d'Ici+Rouge" class="cat-card cat-small">
+        <div class="cat-bg" style="background: linear-gradient(150deg,#D4CCD6,#D4CCD6);"></div>
+        <div class="cat-overlay"></div>
+        <span class="cat-emoji"><img src="https://i.postimg.cc/qqpZqxKb/Lait-dici-UHT-entier-brique-1L.png" width="109px" height="147px"></span>
+        <span class="cat-name">Lait d'Ici Rouge</span>
+      </a>
+      <a href="catalog.html?cat=Epices&search=Epicial+Curry+Madras" class="cat-card cat-small">
+        <div class="cat-bg" style="background: linear-gradient(150deg,#EC900F,#EC900F);"></div>
+        <div class="cat-overlay"></div>
+        <span class="cat-emoji"><img src="https://i.postimg.cc/qqHjYXwj/Screenshot-2026-03-27-113043-(1).png" width="105px" height="150px"></span>
+        <span class="cat-name">Epicial Curry Madras</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="section section-alt" id="how-it-works">
+    <div class="section-eyebrow" data-i18n="hiw_eyebrow">Processus Simple</div>
+    <h2 class="section-title" style="margin-bottom:12px;" data-i18n="hiw_title">Comment ça <em>Marche</em></h2>
+    <p class="section-sub" data-i18n="hiw_sub">De la première visite au compte approuvé — nous simplifions chaque étape.</p>
+    <div class="steps-row">
+      <div class="step-item">
+        <span class="step-num">01</span>
+        <div class="step-icon-wrap">🔍</div>
+        <div class="step-title" data-i18n="step1_title">Parcourir le Catalogue</div>
+        <p class="step-text" data-i18n="step1_text">Explorez notre gamme complète. Consultez les descriptions, unités et commandes minimales — aucun tarif visible avant approbation.</p>
+      </div>
+      <div class="step-item">
+        <span class="step-num">02</span>
+        <div class="step-icon-wrap">📋</div>
+        <div class="step-title" data-i18n="step2_title">Soumettre vos Coordonnées</div>
+        <p class="step-text" data-i18n="step2_text">Cliquez sur "Demander le Tarif" sur n'importe quel produit pour renseigner les informations de votre entreprise. Moins de 2 minutes.</p>
+      </div>
+      <div class="step-item">
+        <span class="step-num">03</span>
+        <div class="step-icon-wrap">🤝</div>
+        <div class="step-title" data-i18n="step3_title">Nous Examinons votre Compte</div>
+        <p class="step-text" data-i18n="step3_text">Notre équipe examine votre profil et vous contacte sous 24 heures pour confirmer votre compte.</p>
+      </div>
+      <div class="step-item">
+        <span class="step-num">04</span>
+        <div class="step-icon-wrap">🔓</div>
+        <div class="step-title" data-i18n="step4_title">Commencez à Commander</div>
+        <p class="step-text" data-i18n="step4_text">Connectez-vous avec vos identifiants pour accéder au catalogue complet avec les tarifs, à tout moment.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NEW CLIENT CTA ===== -->
+  <section class="new-client-band" id="new-client">
+    <div class="new-client-text">
+      <div class="section-eyebrow" data-i18n="nc_eyebrow">Ouvrir un Compte</div>
+      <h2 data-i18n="nc_h2">Prêt à Démarrer<br>en tant que<br><em>Nouveau Client ?</em></h2>
+      <p data-i18n="nc_p">Ouvrir un compte grossiste chez Al Madinah prend moins de 5 minutes. Parcourez le catalogue, soumettez les informations de votre entreprise, et nous nous occupons du reste.</p>
+      <ul class="check-list">
+        <li data-i18n="nc_check1">Pas de dépense minimale pour ouvrir un compte</li>
+        <li data-i18n="nc_check2">Un chargé de compte dédié vous est assigné</li>
+        <li data-i18n="nc_check3">Approbation rapide — généralement sous 24 heures</li>
+      </ul>
+      <a href="catalog.html" class="btn-dark" style="font-size:0.93rem; padding:14px 28px;" data-i18n="nc_cta">Parcourir & Demander les Tarifs →</a>
+    </div>
+
+    <div class="new-client-visual">
+      <div class="new-client-visual-inner">
+        <h3 data-i18n="nc_already_h3">Déjà Client ?</h3>
+        <p data-i18n="nc_already_p">Connectez-vous pour parcourir le catalogue complet avec les tarifs et passer vos commandes.</p>
+        <div class="mini-form">
+          <input class="mini-input" type="email" data-i18n-placeholder="nc_email_placeholder" placeholder="Adresse e-mail" id="quickEmail">
+          <input class="mini-input" type="password" data-i18n-placeholder="nc_pw_placeholder" placeholder="Mot de passe" id="quickPassword">
+          <button class="mini-submit" onclick="quickLogin()" data-i18n="nc_signin">Se Connecter à Mon Compte →</button>
+          <p class="mini-note"><span data-i18n="nc_new_client_q">Nouveau client ?</span> <a href="catalog.html" data-i18n="nc_request_access">Demander l'accès via le catalogue</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://i.postimg.cc/PfQQkYvs/logo.png" alt="Al Madinah Wholesale" class="footer-logo">
+        <p data-i18n="footer_brand_p">Distribution alimentaire grossiste premium. Nous fournissons revendeurs, restaurants et distributeurs à travers l'Europe avec des produits de qualité à des prix compétitifs.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">𝕏</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_col1_h">Catalogue</h4>
+        <ul>
+          <li><a href="catalog.html" data-i18n="footer_all_products">Tous les Produits</a></li>
+          <li><a href="catalog.html?cat=Coca+%26+Cola">Coca Cola</a></li>
+          <li><a href="catalog.html?cat=Fanta">Fanta</a></li>
+          <li><a href="catalog.html?cat=Monster">Monster</a></li>
+          <li><a href="catalog.html?cat=7+%26+Up">7 Up</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_col2_h">Compte</h4>
+        <ul>
+          <li><a href="login.html" data-i18n="footer_client_login">Espace Client</a></li>
+          <li><a href="catalog.html" data-i18n="footer_request_access">Demander l'Accès</a></li>
+          <li><a href="dashboard.html" data-i18n="footer_dashboard">Mon Tableau de Bord</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_col3_h">Entreprise</h4>
+        <ul>
+          <li><a href="#how-it-works" data-i18n="nav_how">Comment ça marche</a></li>
+          <li><a href="#new-client" data-i18n="footer_open_account">Ouvrir un Compte</a></li>
+          <li><a href="#categories" data-i18n="footer_our_products">Nos Produits</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer_copyright">© 2024 Al Madinah Wholesale. Tous droits réservés.</span>
+      <span data-i18n="footer_tagline">Distribution alimentaire en gros</span>
+    </div>
+  </footer>
+
+  <script>
+    // ── i18n Translations ─────────────────────────────────────────────────────
+    const translations = {
+      en: {
+        topbar_tag: 'Professional accounts only',
+        topbar_sub: 'Register to access wholesale pricing',
+        topbar_catalog: 'View Catalog',
+        nav_products: 'Our Products',
+        nav_how: 'How It Works',
+        nav_categories: 'Categories',
+        nav_account: 'Open Account',
+        nav_login: 'Client Login',
+        nav_cta: 'Request Pricing →',
+        hero_tag: 'Premium Wholesale Supplier',
+        hero_h1: 'Quality Food<br>Products at<br><em>Wholesale</em><br>Prices.',
+        hero_p: 'Al Madinah supplies premium grocery and food products to retailers, restaurants, and distributors across Europe. Competitive pricing, reliable supply chains.',
+        hero_cta: 'Browse Our Catalog',
+        hero_new_arrivals: 'New Arrivals',
+        hero_new_product: 'Coca Cola Vanille!',
+        hero_discover: 'Discover',
+        hero_new_client_tag: 'Delivery',
+        hero_open_account: 'Read Our <br>Delivery Policy',
+        hero_open_account_p: 'Click here to read our full Updated Delivery Policy.',
+        hero_get_started: 'Get Started',
+        cat_eyebrow: 'Product Range',
+        cat_title_pre: 'Our',
+        cat_title_em: 'Categories',
+        cat_view_all: 'View All Products →',
+        hiw_eyebrow: 'Simple Process',
+        hiw_title: 'How It <em>Works</em>',
+        hiw_sub: 'From first visit to approved account — we make it straightforward.',
+        step1_title: 'Browse the Catalog',
+        step1_text: "Explore our full product range. See descriptions, units, and minimum orders — no pricing visible until you're approved.",
+        step2_title: 'Submit Your Details',
+        step2_text: 'Click "Request Price" on any product to fill in your company details. Takes under 2 minutes.',
+        step3_title: 'We Review Your Account',
+        step3_text: 'Our team reviews your company profile and contacts you within 24 hours to confirm your account.',
+        step4_title: 'Start Ordering',
+        step4_text: 'Log in with your credentials to browse the full catalog with pricing, any time.',
+        nc_eyebrow: 'Open an Account',
+        nc_h2: 'Ready to Get<br>Started as a<br><em>New Client?</em>',
+        nc_p: 'Opening a wholesale account with Al Madinah takes less than 5 minutes. Browse the catalog, submit your company details, and we handle the rest.',
+        nc_check1: 'No minimum spend to open an account',
+        nc_check2: 'Dedicated account manager assigned to you',
+        nc_check3: 'Fast approval — typically within 24 hours',
+        nc_cta: 'Browse & Request Pricing →',
+        nc_already_h3: 'Already a Client?',
+        nc_already_p: 'Log in to browse the full catalog with pricing and place orders.',
+        nc_email_placeholder: 'Email address',
+        nc_pw_placeholder: 'Password',
+        nc_signin: 'Sign In to My Account →',
+        nc_new_client_q: 'New client?',
+        nc_request_access: 'Request access via the catalog',
+        footer_brand_p: 'Premium wholesale food distribution. Supplying retailers, restaurants, and distributors across Europe with quality products at competitive prices.',
+        footer_col1_h: 'Catalog',
+        footer_all_products: 'All Products',
+        footer_col2_h: 'Account',
+        footer_client_login: 'Client Login',
+        footer_request_access: 'Request Access',
+        footer_dashboard: 'My Dashboard',
+        footer_col3_h: 'Company',
+        footer_open_account: 'Open an Account',
+        footer_our_products: 'Our Products',
+        footer_copyright: '© 2024 Al Madinah Wholesale. All rights reserved.',
+        footer_tagline: 'Wholesale food distribution',
+      },
+      fr: {
+        topbar_tag: 'Comptes professionnels uniquement',
+        topbar_sub: 'Inscrivez-vous pour accéder aux tarifs grossiste',
+        topbar_catalog: 'Voir le Catalogue',
+        nav_products: 'Nos Produits',
+        nav_how: 'Comment ça marche',
+        nav_categories: 'Catégories',
+        nav_account: 'Ouvrir un Compte',
+        nav_login: 'Espace Client',
+        nav_cta: 'Demander les Tarifs →',
+        hero_tag: 'Fournisseur Grossiste Premium',
+        hero_h1: 'Produits Alimentaires<br>de Qualité aux<br>Prix <em>Grossiste</em>.',
+        hero_p: 'Al Madinah fournit des produits alimentaires et d\'épicerie premium aux revendeurs, restaurants et distributeurs à travers l\'Europe. Tarifs compétitifs, chaînes d\'approvisionnement fiables.',
+        hero_cta: 'Parcourir notre Catalogue',
+        hero_new_arrivals: 'Nouveautés',
+        hero_new_product: 'Coca Cola Vanille !',
+        hero_discover: 'Découvrir',
+        hero_new_client_tag: 'Livraison',
+        hero_open_account: 'Lisez notre <br>Politique de Livraison',
+        hero_open_account_p: 'Cliquez-ici pour lire notre Politique Intégral à Jour de Livraison.',
+        hero_get_started: 'Commencer',
+        cat_eyebrow: 'Notre Gamme',
+        cat_title_pre: 'Nos',
+        cat_title_em: 'Catégories',
+        cat_view_all: 'Voir tous les Produits →',
+        hiw_eyebrow: 'Processus Simple',
+        hiw_title: 'Comment ça <em>Marche</em>',
+        hiw_sub: 'De la première visite au compte approuvé — nous simplifions chaque étape.',
+        step1_title: 'Parcourir le Catalogue',
+        step1_text: 'Explorez notre gamme complète. Consultez les descriptions, unités et commandes minimales — aucun tarif visible avant approbation.',
+        step2_title: 'Soumettre vos Coordonnées',
+        step2_text: 'Cliquez sur "Demander le Tarif" sur n\'importe quel produit pour renseigner les informations de votre entreprise. Moins de 2 minutes.',
+        step3_title: 'Nous Examinons votre Compte',
+        step3_text: 'Notre équipe examine votre profil et vous contacte sous 24 heures pour confirmer votre compte.',
+        step4_title: 'Commencez à Commander',
+        step4_text: 'Connectez-vous avec vos identifiants pour accéder au catalogue complet avec les tarifs, à tout moment.',
+        nc_eyebrow: 'Ouvrir un Compte',
+        nc_h2: 'Prêt à Démarrer<br>en tant que<br><em>Nouveau Client ?</em>',
+        nc_p: 'Ouvrir un compte grossiste chez Al Madinah prend moins de 5 minutes. Parcourez le catalogue, soumettez les informations de votre entreprise, et nous nous occupons du reste.',
+        nc_check1: 'Pas de dépense minimale pour ouvrir un compte',
+        nc_check2: 'Un chargé de compte dédié vous est assigné',
+        nc_check3: 'Approbation rapide — généralement sous 24 heures',
+        nc_cta: 'Parcourir & Demander les Tarifs →',
+        nc_already_h3: 'Déjà Client ?',
+        nc_already_p: 'Connectez-vous pour parcourir le catalogue complet avec les tarifs et passer vos commandes.',
+        nc_email_placeholder: 'Adresse e-mail',
+        nc_pw_placeholder: 'Mot de passe',
+        nc_signin: 'Se Connecter à Mon Compte →',
+        nc_new_client_q: 'Nouveau client ?',
+        nc_request_access: 'Demander l\'accès via le catalogue',
+        footer_brand_p: 'Distribution alimentaire grossiste premium. Nous fournissons revendeurs, restaurants et distributeurs à travers l\'Europe avec des produits de qualité à des prix compétitifs.',
+        footer_col1_h: 'Catalogue',
+        footer_all_products: 'Tous les Produits',
+        footer_col2_h: 'Compte',
+        footer_client_login: 'Espace Client',
+        footer_request_access: 'Demander l\'Accès',
+        footer_dashboard: 'Mon Tableau de Bord',
+        footer_col3_h: 'Entreprise',
+        footer_open_account: 'Ouvrir un Compte',
+        footer_our_products: 'Nos Produits',
+        footer_copyright: '© 2024 Al Madinah Wholesale. Tous droits réservés.',
+        footer_tagline: 'Distribution alimentaire en gros',
+      }
+    };
+
+    let currentLang = 'fr';
+
+    function setLang(lang) {
+      currentLang = lang;
+      const t = translations[lang];
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.innerHTML = t[key];
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (t[key] !== undefined) el.placeholder = t[key];
+      });
+      try { localStorage.setItem('almadinah_lang', lang); } catch(e) {}
+    }
+
+    (function() {
+      let saved;
+      try { saved = localStorage.getItem('almadinah_lang'); } catch(e) {}
+      if (saved === 'fr' || saved === 'en') { setLang(saved); return; }
+      const browser = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      if (browser.startsWith('en')) setLang('en'); else setLang('fr');
+    })();
+
+    // ── Quick Login ──────────────────────────────────────────────────────────
+    function quickLogin() {
+      const email = document.getElementById('quickEmail').value.trim();
+      const password = document.getElementById('quickPassword').value;
+      if (!email || !password) {
+        alert(currentLang === 'fr' ? 'Veuillez saisir votre e-mail et votre mot de passe.' : 'Please enter your email and password.');
+        return;
+      }
+      sessionStorage.setItem('prefillEmail', email);
+      sessionStorage.setItem('prefillPassword', password);
+      window.location.href = 'login.html';
+    }
+
+    // ── Mobile Carousel ──────────────────────────────────────────────────────
+    (function() {
+      const SLIDE_DURATION = 4500; // ms per slide
+      const TOTAL_SLIDES = 3;
+      let currentSlide = 0;
+      let autoTimer = null;
+      let progressTimer = null;
+      let startX = null;
+
+      const carousel = document.getElementById('heroCarousel');
+      const track = document.getElementById('carouselTrack');
+      const progress = document.getElementById('carouselProgress');
+      const dots = document.querySelectorAll('.carousel-dot');
+
+      function updateDots(idx) {
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        carousel.setAttribute('data-slide', idx);
+      }
+
+      function goToSlide(idx) {
+        currentSlide = idx;
+        track.style.transform = `translateX(-${idx * 100}%)`;
+        updateDots(idx);
+        resetProgress();
+      }
+
+      // expose to global for inline onclick
+      window.goToSlide = goToSlide;
+
+      function nextSlide() {
+        goToSlide((currentSlide + 1) % TOTAL_SLIDES);
+      }
+
+      function resetProgress() {
+        // reset bar
+        progress.style.transition = 'none';
+        progress.style.width = '0%';
+        // force reflow
+        progress.offsetWidth;
+        // animate to 100% over SLIDE_DURATION
+        progress.style.transition = `width ${SLIDE_DURATION}ms linear`;
+        progress.style.width = '100%';
+      }
+
+      function startAuto() {
+        stopAuto();
+        autoTimer = setInterval(nextSlide, SLIDE_DURATION);
+        resetProgress();
+      }
+
+      function stopAuto() {
+        clearInterval(autoTimer);
+        clearInterval(progressTimer);
+        progress.style.transition = 'none';
+      }
+
+      // Touch/swipe support
+      carousel.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        stopAuto();
+      }, { passive: true });
+
+      carousel.addEventListener('touchend', e => {
+        if (startX === null) return;
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) goToSlide((currentSlide + 1) % TOTAL_SLIDES);
+          else goToSlide((currentSlide - 1 + TOTAL_SLIDES) % TOTAL_SLIDES);
+        }
+        startX = null;
+        startAuto();
+      }, { passive: true });
+
+      // Only init carousel on mobile
+      function init() {
+        if (window.innerWidth <= 768) {
+          goToSlide(0);
+          startAuto();
+        }
+      }
+
+      // Re-init on resize in case orientation changes
+      let resizeDebounce;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeDebounce);
+        resizeDebounce = setTimeout(() => {
+          if (window.innerWidth <= 768) {
+            if (!autoTimer) startAuto();
+          } else {
+            stopAuto();
+          }
+        }, 200);
+      });
+
+      init();
+    })();
+  </script>
+
+</body>
+</html>

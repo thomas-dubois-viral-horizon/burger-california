@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Politique de Livraison — Al Madinah Wholesale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark: #1a4d2e;
+      --green-mid: #2d7a47;
+      --green-light: #4caf70;
+      --gold: #f0c832;
+      --gold-dark: #c9a800;
+      --cream: #faf7f0;
+      --white: #ffffff;
+      --text-dark: #111111;
+      --text-mid: #4a5568;
+      --text-light: #8a9aaa;
+      --border: #e8e3d8;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+
+    /* ========== TOP BAR ========== */
+    .top-bar {
+      background: var(--green-dark);
+      padding: 10px 6%;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.78rem; color: rgba(255,255,255,0.7);
+    }
+    .top-bar-left { display: flex; align-items: center; gap: 6px; }
+    .top-bar-left span { color: var(--gold); font-weight: 700; }
+    .top-bar-right a { color: rgba(255,255,255,0.75); text-decoration: none; margin-left: 20px; transition: color 0.2s; }
+    .top-bar-right a:hover { color: var(--gold); }
+
+    /* ========== NAV ========== */
+    nav {
+      background: var(--white);
+      padding: 0 6%; height: 80px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 200;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 54px; width: auto; object-fit: contain; display: block; }
+    .nav-center { display: flex; gap: 34px; align-items: center; }
+    .nav-center a {
+      color: var(--text-dark); text-decoration: none;
+      font-size: 0.88rem; font-weight: 600; letter-spacing: 0.01em;
+      transition: color 0.2s; position: relative;
+    }
+    .nav-center a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 2px; background: var(--green-mid);
+      transform: scaleX(0); transition: transform 0.2s; transform-origin: left;
+    }
+    .nav-center a:hover { color: var(--green-dark); }
+    .nav-center a:hover::after { transform: scaleX(1); }
+    .nav-right { display: flex; gap: 10px; align-items: center; }
+    .btn-login {
+      border: 1.5px solid var(--border); color: var(--text-dark);
+      background: transparent; padding: 9px 20px; border-radius: 8px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-login:hover { border-color: var(--green-mid); color: var(--green-mid); }
+    .btn-nav-cta {
+      background: var(--green-dark); color: var(--white);
+      padding: 10px 22px; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: all 0.2s;
+    }
+    .btn-nav-cta:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+    /* ========== LANG TOGGLE ========== */
+    .lang-toggle {
+      display: flex; align-items: center;
+      background: rgba(0,0,0,0.06); border-radius: 100px;
+      padding: 3px; gap: 2px; margin-left: 6px;
+    }
+    .lang-btn {
+      padding: 5px 13px; border-radius: 100px; border: none;
+      font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s; letter-spacing: 0.04em;
+      background: transparent; color: var(--text-mid);
+    }
+    .lang-btn.active { background: var(--green-dark); color: var(--white); box-shadow: 0 2px 8px rgba(26,77,46,0.25); }
+    .lang-btn:hover:not(.active) { color: var(--green-dark); }
+
+    /* ========== HERO BANNER ========== */
+    .policy-hero {
+      background: var(--green-dark);
+      position: relative; overflow: hidden;
+      padding: 72px 6% 64px;
+    }
+    .policy-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(150deg, #0f2e1a 0%, #1a4d2e 40%, #2d7a47 100%);
+    }
+    .policy-hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(240,200,50,0.07) 0%, transparent 60%);
+    }
+    .policy-hero-pattern {
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M0 0h80v80H0V0zm20 20v40h40V20H20zm20 35a15 15 0 1 1 0-30 15 15 0 0 1 0 30z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .policy-hero-content { position: relative; z-index: 2; max-width: 720px; animation: fadeUp 0.9s ease both; }
+    .policy-hero-breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; color: rgba(255,255,255,0.45);
+      margin-bottom: 22px;
+    }
+    .policy-hero-breadcrumb a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+    .policy-hero-breadcrumb a:hover { color: var(--gold); }
+    .policy-hero-breadcrumb span { color: var(--gold); }
+    .policy-hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold); color: var(--green-dark);
+      padding: 7px 16px; border-radius: 100px;
+      font-size: 0.72rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 22px;
+    }
+    .policy-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      font-weight: 900; color: var(--white); line-height: 1.05;
+      margin-bottom: 18px;
+    }
+    .policy-hero h1 em { font-style: italic; color: var(--gold); }
+    .policy-hero-meta {
+      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+    }
+    .policy-hero-meta-item {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 0.8rem; color: rgba(255,255,255,0.5);
+    }
+    .policy-hero-meta-item .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+    /* ========== SUMMARY STRIP ========== */
+    .summary-strip { background: var(--cream); padding: 0 6%; border-bottom: 1px solid var(--border); }
+    .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+    .summary-card {
+      padding: 28px 24px; border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .summary-card:last-child { border-right: none; }
+    .summary-card-icon { font-size: 1.6rem; margin-bottom: 4px; }
+    .summary-card-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green-mid); }
+    .summary-card-value { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--green-dark); line-height: 1.25; }
+    .summary-card-sub { font-size: 0.76rem; color: var(--text-light); line-height: 1.5; }
+
+    /* ========== LAYOUT ========== */
+    .policy-layout {
+      display: grid; grid-template-columns: 240px 1fr; gap: 0;
+      max-width: 1200px; margin: 0 auto; padding: 60px 6%; align-items: start;
+    }
+
+    /* ========== TOC ========== */
+    .toc { position: sticky; top: 100px; padding-right: 40px; }
+    .toc-title { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-light); margin-bottom: 16px; }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .toc-list li a {
+      display: flex; align-items: center; gap: 10px;
+      color: var(--text-mid); text-decoration: none;
+      font-size: 0.82rem; font-weight: 500;
+      padding: 7px 10px; border-radius: 8px;
+      transition: all 0.2s; border-left: 2px solid transparent;
+    }
+    .toc-list li a:hover { color: var(--green-dark); background: var(--cream); border-left-color: var(--green-mid); }
+    .toc-list li a.active { color: var(--green-dark); font-weight: 700; background: var(--cream); border-left-color: var(--gold); }
+    .toc-num { font-size: 0.68rem; color: var(--text-light); font-weight: 700; min-width: 18px; }
+    .toc-divider { height: 1px; background: var(--border); margin: 12px 0; }
+    .toc-cta { margin-top: 24px; padding: 16px; background: var(--green-dark); border-radius: 12px; }
+    .toc-cta p { font-size: 0.78rem; color: rgba(255,255,255,0.6); line-height: 1.55; margin-bottom: 12px; }
+    .toc-cta a {
+      display: block; text-align: center;
+      background: var(--gold); color: var(--green-dark);
+      padding: 9px 16px; border-radius: 8px;
+      font-size: 0.8rem; font-weight: 800; text-decoration: none; transition: all 0.2s;
+    }
+    .toc-cta a:hover { background: #ffe066; }
+
+    /* ========== ARTICLE ========== */
+    .policy-article { min-width: 0; }
+    .policy-section { margin-bottom: 56px; scroll-margin-top: 110px; }
+    .policy-section-header {
+      display: flex; align-items: flex-start; gap: 18px;
+      margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border);
+    }
+    .section-num-badge {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: var(--green-dark); color: var(--white); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 900;
+    }
+    .policy-section-eyebrow {
+      font-size: 0.67rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--green-mid); margin-bottom: 4px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .policy-section-eyebrow::before { content: ''; display: inline-block; width: 18px; height: 2px; background: var(--gold); }
+    .policy-section h2 { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 900; color: var(--green-dark); line-height: 1.15; }
+
+    .policy-body { font-size: 0.92rem; color: var(--text-mid); line-height: 1.85; }
+    .policy-body p { margin-bottom: 16px; }
+    .policy-body p:last-child { margin-bottom: 0; }
+    .policy-body strong { color: var(--text-dark); font-weight: 700; }
+
+    /* Info Boxes */
+    .info-box { border-radius: 14px; padding: 20px 22px; margin: 22px 0; display: flex; gap: 14px; align-items: flex-start; }
+    .info-box-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+    .info-box-content { font-size: 0.86rem; line-height: 1.7; }
+    .info-box-content strong { display: block; margin-bottom: 4px; font-size: 0.88rem; }
+    .info-box.gold { background: rgba(240,200,50,0.1); border: 1px solid rgba(240,200,50,0.3); }
+    .info-box.gold .info-box-content { color: #7a6000; }
+    .info-box.gold .info-box-content strong { color: #5a4400; }
+    .info-box.green { background: rgba(26,77,46,0.06); border: 1px solid rgba(26,77,46,0.12); }
+    .info-box.green .info-box-content { color: #2d5a3a; }
+    .info-box.green .info-box-content strong { color: var(--green-dark); }
+    .info-box.red { background: rgba(220,50,50,0.06); border: 1px solid rgba(220,50,50,0.14); }
+    .info-box.red .info-box-content { color: #8a2020; }
+    .info-box.red .info-box-content strong { color: #6a1010; }
+
+    /* Tables */
+    .policy-table-wrap { overflow-x: auto; margin: 22px 0; border-radius: 14px; border: 1px solid var(--border); }
+    .policy-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+    .policy-table thead { background: var(--green-dark); }
+    .policy-table thead th { color: var(--white); padding: 14px 20px; text-align: left; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; }
+    .policy-table thead th:first-child { border-radius: 13px 0 0 0; }
+    .policy-table thead th:last-child { border-radius: 0 13px 0 0; }
+    .policy-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+    .policy-table tbody tr:last-child { border-bottom: none; }
+    .policy-table tbody tr:hover { background: var(--cream); }
+    .policy-table tbody td { padding: 13px 20px; color: var(--text-dark); vertical-align: top; line-height: 1.55; }
+    .policy-table tbody td:first-child { font-weight: 600; color: var(--green-dark); }
+    .td-badge { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; }
+    .td-badge.gold { background: rgba(240,200,50,0.15); color: var(--gold-dark); }
+    .td-badge.green { background: rgba(26,77,46,0.1); color: var(--green-dark); }
+    .td-badge.gray { background: rgba(0,0,0,0.06); color: var(--text-mid); }
+
+    /* Checklists */
+    .policy-checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+    .policy-checklist li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; color: var(--text-dark); line-height: 1.6; }
+    .policy-checklist li .check { width: 22px; height: 22px; flex-shrink: 0; background: var(--green-dark); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 800; margin-top: 1px; }
+    .policy-checklist li .cross { width: 22px; height: 22px; flex-shrink: 0; background: #dc3232; color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 800; margin-top: 1px; }
+
+    /* Step List */
+    .step-list { display: flex; flex-direction: column; gap: 16px; margin: 16px 0; }
+    .step-list-item { display: flex; gap: 16px; align-items: flex-start; padding: 16px 18px; background: var(--cream); border-radius: 12px; border-left: 3px solid var(--green-dark); }
+    .step-list-num { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: rgba(26,77,46,0.18); line-height: 1; min-width: 30px; }
+    .step-list-text { font-size: 0.87rem; color: var(--text-dark); line-height: 1.65; }
+    .step-list-text strong { color: var(--green-dark); }
+
+    .section-divider { height: 1px; background: var(--border); margin: 56px 0; }
+
+    .last-updated { display: inline-flex; align-items: center; gap: 8px; background: rgba(240,200,50,0.12); border: 1px solid rgba(240,200,50,0.3); padding: 6px 14px; border-radius: 100px; font-size: 0.73rem; font-weight: 600; color: var(--gold-dark); margin-bottom: 40px; }
+
+    /* ========== FOOTER ========== */
+    footer { background: #0d1f12; color: rgba(255,255,255,0.5); }
+    .footer-top { padding: 70px 6% 50px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .footer-logo { height: 50px; width: auto; display: block; margin-bottom: 18px; }
+    .footer-brand p { font-size: 0.83rem; line-height: 1.8; max-width: 270px; margin-bottom: 22px; }
+    .footer-social { display: flex; gap: 8px; }
+    .social-btn { width: 34px; height: 34px; background: rgba(255,255,255,0.07); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; text-decoration: none; color: rgba(255,255,255,0.6); transition: all 0.2s; }
+    .social-btn:hover { background: var(--gold); color: var(--green-dark); }
+    .footer-col h4 { color: var(--white); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; margin-bottom: 20px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom { padding: 20px 6%; display: flex; justify-content: space-between; align-items: center; font-size: 0.76rem; flex-wrap: wrap; gap: 10px; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 1024px) {
+      .policy-layout { grid-template-columns: 1fr; }
+      .toc { display: none; }
+      .summary-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-center, .top-bar { display: none; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .summary-grid { grid-template-columns: 1fr; }
+      .summary-card { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="top-bar-left">📦 <span data-i18n="topbar_tag">Comptes professionnels uniquement</span> — <span data-i18n="topbar_sub">Inscrivez-vous pour accéder aux tarifs grossiste</span></div>
+    <div class="top-bar-right">
+      <a href="login.html" data-i18n="nav_login">Espace Client</a>
+      <a href="catalog.html" data-i18n="topbar_catalog">Voir le Catalogue</a>
+    </div>
+  </div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="https://i.postimg.cc/PfQQkYvs/logo.png" alt="Al Madinah Wholesale">
+    </a>
+    <div class="nav-center">
+      <a href="catalog.html" data-i18n="nav_products">Nos Produits</a>
+      <a href="index.html#how-it-works" data-i18n="nav_how">Comment ça marche</a>
+      <a href="index.html#categories" data-i18n="nav_categories">Catégories</a>
+      <a href="index.html#new-client" data-i18n="nav_account">Ouvrir un Compte</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
+      </div>
+      <a href="login.html" class="btn-login" data-i18n="nav_login">Espace Client</a>
+      <a href="catalog.html" class="btn-nav-cta" data-i18n="nav_cta">Demander les Tarifs →</a>
+    </div>
+  </nav>
+
+  <section class="policy-hero">
+    <div class="policy-hero-pattern"></div>
+    <div class="policy-hero-content">
+      <div class="policy-hero-breadcrumb">
+        <a href="index.html" data-i18n="breadcrumb_home">Accueil</a>
+        <span>›</span>
+        <span data-i18n="breadcrumb_policy">Politique de Livraison</span>
+      </div>
+      <div class="policy-hero-tag">🚚 <span data-i18n="hero_tag">Politique de Livraison</span></div>
+      <h1 data-i18n="hero_h1">Livraison &amp; <em>Conditions</em><br>de Commande</h1>
+      <div class="policy-hero-meta">
+        <div class="policy-hero-meta-item"><div class="dot"></div><span data-i18n="meta_updated">Mis à jour : Mars 2025</span></div>
+        <div class="policy-hero-meta-item"><div class="dot"></div><span data-i18n="meta_applies">Applicable à tous les clients actifs</span></div>
+        <div class="policy-hero-meta-item"><div class="dot"></div><span data-i18n="meta_zone">Zone : Île-de-France &amp; environs</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="summary-strip">
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-card-icon">🚚</div>
+        <div class="summary-card-label" data-i18n="sum2_label">Livraison Offerte</div>
+        <div class="summary-card-value" data-i18n="sum2_value">À partir de 500 €</div>
+        <div class="summary-card-sub" data-i18n="sum2_sub">Franco de port dès 500 € HT</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-icon">🗓️</div>
+        <div class="summary-card-label" data-i18n="sum3_label">Délai de Livraison</div>
+        <div class="summary-card-value" data-i18n="sum3_value">24 – 72 h</div>
+        <div class="summary-card-sub" data-i18n="sum3_sub">Après confirmation de commande</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-icon">💳</div>
+        <div class="summary-card-label" data-i18n="sum4_label">Paiement</div>
+        <div class="summary-card-value" data-i18n="sum4_value">CB ou Espèces</div>
+        <div class="summary-card-sub" data-i18n="sum4_sub">À la livraison ou virement</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="policy-layout">
+    <aside class="toc">
+      <div class="toc-title" data-i18n="toc_title">Sommaire</div>
+      <ul class="toc-list">
+        <li><a href="#zone" class="active"><span class="toc-num">01</span><span data-i18n="toc1">Zone de Livraison</span></a></li>
+        <li><a href="#frais"><span class="toc-num">02</span><span data-i18n="toc3">Frais de Livraison</span></a></li>
+        <li><a href="#delais"><span class="toc-num">03</span><span data-i18n="toc4">Délais &amp; Horaires</span></a></li>
+        <li><a href="#paiement"><span class="toc-num">04</span><span data-i18n="toc5">Modalités de Paiement</span></a></li>
+        <li><a href="#reclamations"><span class="toc-num">05</span><span data-i18n="toc6">Réclamations &amp; Retours</span></a></li>
+        <li><a href="#annulations"><span class="toc-num">06</span><span data-i18n="toc7">Annulations</span></a></li>
+      </ul>
+    </aside>
+
+    <article class="policy-article">
+      <div class="last-updated">🕐 <span data-i18n="last_updated">Dernière mise à jour : Mars 2025</span></div>
+
+      <!-- S1 -->
+      <div class="policy-section" id="zone">
+        <div class="policy-section-header">
+          <div class="section-num-badge">01</div>
+          <div>
+            <div class="policy-section-eyebrow" data-i18n="s1_eyebrow">Périmètre géographique</div>
+            <h2 data-i18n="s1_h2">Zone de Livraison</h2>
+          </div>
+        </div>
+        <div class="policy-body">
+          <p data-i18n="s1_p1">Al Madinah Wholesale assure la livraison directe sur l'ensemble de la région <strong>Île-de-France</strong> et dans les communes limitrophes. Toutes les livraisons sont effectuées par notre propre flotte de véhicules.</p>
+          <div class="info-box green">
+            <div class="info-box-icon">✅</div>
+            <div class="info-box-content">
+              <strong data-i18n="s1_covered_title">Zones couvertes</strong>
+              <span data-i18n="s1_covered_body">Paris intra-muros (75), Seine-Saint-Denis (93), Val-de-Marne (94), Hauts-de-Seine (92), Seine-et-Marne (77), Essonne (91), Val-d'Oise (95), Yvelines (78). Livraison possible sur devis pour toute adresse hors Île-de-France.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+
+      <!-- S3 -->
+      <div class="policy-section" id="frais">
+        <div class="policy-section-header">
+          <div class="section-num-badge">02</div>
+          <div>
+            <div class="policy-section-eyebrow" data-i18n="s3_eyebrow">Coût de la livraison</div>
+            <h2 data-i18n="s3_h2">Frais de Livraison</h2>
+          </div>
+        </div>
+        <div class="policy-body">
+          <div class="policy-table-wrap">
+            <table class="policy-table">
+              <thead><tr><th data-i18n="table2_col1">Montant de la Commande (HT)</th><th data-i18n="table2_col2">Frais de Livraison</th><th data-i18n="table2_col3">Remarque</th></tr></thead>
+              <tbody>
+                <tr><td data-i18n="t2r1c1">300 € – 399,99 €</td><td data-i18n="t2r1c2">25 € HT</td><td><span class="td-badge gray" data-i18n="t2r1c3">Forfait fixe</span></td></tr>
+                <tr><td data-i18n="t2r2c1">400 € et plus</td><td data-i18n="t2r2c2">Gratuit</td><td><span class="td-badge gold" data-i18n="t2r2c3">Livraison Gratuite</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-box green">
+            <div class="info-box-icon">🎁</div>
+            <div class="info-box-content">
+              <strong data-i18n="s3_free_title">En Île-de-France, Livraison Gratuite dès 350 € HT</strong>
+              <span data-i18n="s3_free_body">Si vous êtes en Île-de-France, vous pouvez bénéficier de la livraison offerte dès 350 € HT. C'est le moyen le plus simple de maximiser votre marge sur vos achats grossiste.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+
+      <!-- S4 -->
+      <div class="policy-section" id="delais">
+        <div class="policy-section-header">
+          <div class="section-num-badge">03</div>
+          <div>
+            <div class="policy-section-eyebrow" data-i18n="s4_eyebrow">Planning</div>
+            <h2 data-i18n="s4_h2">Délais et Horaires de Livraison</h2>
+          </div>
+        </div>
+        <div class="policy-body">
+          <p data-i18n="s4_p1">Nos délais de livraison sont calculés à partir de la <strong>confirmation de votre commande</strong>, sous réserve que le paiement ait bien été validé.</p>
+          <div class="step-list">
+            <div class="step-list-item"><div class="step-list-num">1</div><div class="step-list-text"><strong data-i18n="step1_title">Commande confirmée</strong> — <span data-i18n="step1_body">Votre commande est validée sur la plateforme et le paiement est confirmé.</span></div></div>
+            <div class="step-list-item"><div class="step-list-num">2</div><div class="step-list-text"><strong data-i18n="step2_title">Préparation</strong> — <span data-i18n="step2_body">Votre commande est préparée dans nos entrepôts. Cette étape prend généralement entre 6 et 12 heures ouvrables.</span></div></div>
+            <div class="step-list-item"><div class="step-list-num">3</div><div class="step-list-text"><strong data-i18n="step3_title">Expédition &amp; Livraison</strong> — <span data-i18n="step3_body">Votre livreur vous contacte en amont pour convenir d'un créneau. Livraison sous 6 à 12 h après confirmation.</span></div></div>
+          </div>
+          <div class="policy-table-wrap" style="margin-top:22px;">
+            <table class="policy-table">
+              <thead><tr><th data-i18n="table3_col1">Jour de Commande</th><th data-i18n="table3_col2">Livraison Estimée</th></tr></thead>
+              <tbody>
+                <tr><td data-i18n="t3r1c1">Lundi – Mercredi (avant 12h)</td><td data-i18n="t3r1c2">J+1</td></tr>
+                <tr><td data-i18n="t3r2c1">Jeudi – Vendredi (avant 12h)</td><td data-i18n="t3r2c2">J+1 à J+2</td></tr>
+                <tr><td data-i18n="t3r3c1">Après 14h ou week-end</td><td data-i18n="t3r3c2">Traitement le prochain jour ouvré</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-box gold">
+            <div class="info-box-icon">📞</div>
+            <div class="info-box-content">
+              <strong data-i18n="s4_contact_title">Confirmation de créneau</strong>
+              <span data-i18n="s4_contact_body">Notre équipe logistique vous contactera par WhatsApp pour confirmer votre créneau de livraison exact.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+
+      <!-- S5 -->
+      <div class="policy-section" id="paiement">
+        <div class="policy-section-header">
+          <div class="section-num-badge">04</div>
+          <div>
+            <div class="policy-section-eyebrow" data-i18n="s5_eyebrow">Règlement</div>
+            <h2 data-i18n="s5_h2">Modalités de Paiement</h2>
+          </div>
+        </div>
+        <div class="policy-body">
+          <p data-i18n="s5_p1">Al Madinah accepte les modes de paiement suivants. Le règlement doit intervenir au plus tard <strong>au moment de la livraison</strong>.</p>
+          <ul class="policy-checklist">
+            <li><span class="check">✓</span><span data-i18n="pay1">Carte bancaire (CB, Visa, Mastercard) — paiement en ligne ou sur terminal à la livraison (Bientôt disponible)</span></li>
+            <li><span class="check">✓</span><span data-i18n="pay2">Espèces — acceptées à la livraison, montant exact apprécié</span></li>
+            <li><span class="check">✓</span><span data-i18n="pay3">Virement bancaire — avant expédition</span></li>
+            <li><span class="cross">✗</span><span data-i18n="pay4">Chèques — non acceptés</span></li>
+            <li><span class="cross">✗</span><span data-i18n="pay5">Paiement différé / crédit — non disponible sans accord préalable écrit</span></li>
+          </ul>
+          <div class="info-box red">
+            <div class="info-box-icon">⚠️</div>
+            <div class="info-box-content">
+              <strong data-i18n="s5_warning_title">Commandes non réglées</strong>
+              <span data-i18n="s5_warning_body">En cas de non-paiement à la livraison, la marchandise sera reprise par notre livreur et la commande annulée. Tout compte présentant un impayé sera suspendu jusqu'à régularisation complète.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+
+      <!-- S6 -->
+      <div class="policy-section" id="reclamations">
+        <div class="policy-section-header">
+          <div class="section-num-badge">05</div>
+          <div>
+            <div class="policy-section-eyebrow" data-i18n="s6_eyebrow">Litiges</div>
+            <h2 data-i18n="s6_h2">Réclamations et Retours</h2>
+          </div>
+        </div>
+        <div class="policy-body">
+          <p data-i18n="s6_p1">La satisfaction de nos clients est notre priorité. Si vous constatez un problème à la réception de votre commande (produit manquant, endommagé, ou non conforme), voici la marche à suivre.</p>
+          <div class="step-list">
+            <div class="step-list-item"><div class="step-list-num">1</div><div class="step-list-text"><strong data-i18n="rec1_title">Vérification à la livraison</strong> — <span data-i18n="rec1_body">Contrôlez systématiquement votre commande en présence du livreur. Toute anomalie visible doit être signalée immédiatement et notée sur le bon de livraison.</span></div></div>
+            <div class="step-list-item"><div class="step-list-num">2</div><div class="step-list-text"><strong data-i18n="rec2_title">Signalement sous 24 h</strong> — <span data-i18n="rec2_body">Pour tout problème constaté après réception, contactez votre chargé de compte dans les 24 heures suivant la livraison, photos à l'appui si nécessaire.</span></div></div>
+            <div class="step-list-item"><div class="step-list-num">3</div><div class="step-list-text"><strong data-i18n="rec3_title">Traitement de la réclamation</strong> — <span data-i18n="rec3_body">Notre équipe traite chaque réclamation sous 48 heures ouvrables. Selon le cas : remplacement ou remboursement.</span></div></div>
+          </div>
+          <div class="info-box gold">
+            <div class="info-box-icon">📸</div>
+            <div class="info-box-content">
+              <strong data-i18n="s6_photo_title">Photos obligatoires</strong>
+              <span data-i18n="s6_photo_body">Pour tout retour ou réclamation, des photos du produit concerné (et de l'emballage si endommagé) sont requises pour traiter votre dossier dans les meilleurs délais.</span>
+            </div>
+          </div>
+          <p style="margin-top:16px;" data-i18n="s6_p2"><strong>Produits alimentaires :</strong> Les retours de produits périssables ou dont la date de péremption est proche ne sont acceptés que si le problème est signalé dans les 24 heures suivant la livraison et accompagné de preuves visuelles.</p>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+
+      <!-- S7 -->
+      <div class="policy-section" id="annulations">
+        <div class="policy-section-header">
+          <div class="section-num-badge">06</div>
+          <div>
+            <div class="policy-section-eyebrow" data-i18n="s7_eyebrow">Modification de commande</div>
+            <h2 data-i18n="s7_h2">Annulations et Modifications</h2>
+          </div>
+        </div>
+        <div class="policy-body">
+          <p data-i18n="s7_p1">Une commande confirmée peut être modifiée ou annulée uniquement si elle n'a pas encore été préparée. Passé ce stade, l'annulation n'est plus possible.</p>
+          <ul class="policy-checklist">
+            <li><span class="check">✓</span><span data-i18n="can1">Annulation possible si la commande n'est pas encore en préparation — contactez immédiatement votre chargé de compte</span></li>
+            <li><span class="check">✓</span><span data-i18n="can2">Modification de quantités possible avant mise en préparation, sous réserve de disponibilité stock</span></li>
+            <li><span class="cross">✗</span><span data-i18n="can3">Aucune annulation possible une fois la commande en cours de préparation ou expédiée</span></li>
+            <li><span class="cross">✗</span><span data-i18n="can4">Les refus de livraison non justifiés sans signalement préalable peuvent entraîner des frais de retour</span></li>
+          </ul>
+          <div class="info-box green">
+            <div class="info-box-icon">💬</div>
+            <div class="info-box-content">
+              <strong data-i18n="s7_contact_title">Contact rapide</strong>
+              <span data-i18n="s7_contact_body">Pour toute modification ou annulation urgente, contactez votre chargé de compte directement via WhatsApp. Plus vous agissez tôt, plus nous pouvons vous aider efficacement.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://i.postimg.cc/PfQQkYvs/logo.png" alt="Al Madinah Wholesale" class="footer-logo">
+        <p data-i18n="footer_brand_p">Distribution alimentaire grossiste premium. Nous fournissons revendeurs, restaurants et distributeurs à travers l'Europe avec des produits de qualité à des prix compétitifs.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">𝕏</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_col1_h">Catalogue</h4>
+        <ul>
+          <li><a href="catalog.html" data-i18n="footer_all_products">Tous les Produits</a></li>
+          <li><a href="catalog.html?cat=Boissons+33cl">Boissons</a></li>
+          <li><a href="catalog.html?cat=Offre+Gamme+Emballage">Emballages</a></li>
+          <li><a href="catalog.html?cat=Hygiène+%26+Entretien">Hygiène</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_col2_h">Compte</h4>
+        <ul>
+          <li><a href="login.html" data-i18n="footer_client_login">Espace Client</a></li>
+          <li><a href="catalog.html" data-i18n="footer_request_access">Demander l'Accès</a></li>
+          <li><a href="dashboard.html" data-i18n="footer_dashboard">Mon Tableau de Bord</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_col3_h">Entreprise</h4>
+        <ul>
+          <li><a href="index.html#how-it-works" data-i18n="nav_how">Comment ça marche</a></li>
+          <li><a href="index.html#new-client" data-i18n="footer_open_account">Ouvrir un Compte</a></li>
+          <li><a href="policy.html" data-i18n="footer_delivery">Politique de Livraison</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer_copyright">© 2025 Al Madinah Wholesale. Tous droits réservés.</span>
+      <span data-i18n="footer_tagline">Distribution alimentaire en gros</span>
+    </div>
+  </footer>
+
+  <script>
+    const T = {
+      fr: {
+        topbar_tag:'Comptes professionnels uniquement',topbar_sub:'Inscrivez-vous pour accéder aux tarifs grossiste',topbar_catalog:'Voir le Catalogue',
+        nav_products:'Nos Produits',nav_how:'Comment ça marche',nav_categories:'Catégories',nav_account:'Ouvrir un Compte',nav_login:'Espace Client',nav_cta:'Demander les Tarifs →',
+        breadcrumb_home:'Accueil',breadcrumb_policy:'Politique de Livraison',
+        hero_tag:'Politique de Livraison',hero_h1:'Livraison et <em>Conditions</em><br>de Commande',
+        meta_updated:'Mis à jour : Mars 2025',meta_applies:'Applicable à tous les clients actifs',meta_zone:'Zone : Île-de-France &amp; France &amp; Europe',
+        sum2_label:'Livraison Offerte',sum2_value:'À partir de 400 €',sum2_sub:'Île-de-France dès 350 € HT',
+        sum3_label:'Délai de Livraison',sum3_value:'24 – 48 h',sum3_sub:'Après confirmation de commande',
+        sum4_label:'Paiement',sum4_value:'CB (Bientôt) ou Espèces',sum4_sub:'À la livraison ou au préalable',
+        toc_title:'Sommaire',toc1:'Zone de Livraison',toc2:'Minimums de Commande',toc3:'Frais de Livraison',toc4:'Délais &amp; Horaires',toc5:'Modalités de Paiement',toc6:'Réclamations &amp; Retours',toc7:'Annulations',
+        last_updated:'Dernière mise à jour : Mars 2025',
+        s1_eyebrow:'Périmètre géographique',s1_h2:'Zone de Livraison',
+        s1_p1:'Al Madinah assure la livraison directe sur l\'ensemble de la région <strong>Île-de-France</strong> et dans l\'ensemble de la France ainsi que l\'Europe. Toutes les livraisons sont effectuées par notre propre flotte de véhicules.',
+        s1_covered_title:'Zones couvertes',s1_covered_body:'Île-de-France, France entière et Europe.',
+        s3_eyebrow:'Coût de la livraison',s3_h2:'Frais de Livraison',
+        table2_col1:'Montant de la Commande (HT)',table2_col2:'Frais de Livraison',table2_col3:'Remarque',
+        t2r1c1:'300 € – 399,99 €',t2r1c2:'25 € HT',t2r1c3:'Forfait fixe',t2r2c1:'400 € et plus',t2r2c2:'Gratuit',t2r2c3:'Livraison Gratuite',
+        s3_free_title:'En Île-de-France, Livraison Gratuite dès 350 € HT',s3_free_body:'Si vous êtes en Île-de-France, vous pouvez bénéficier de la livraison offerte dès 350 € HT. C\'est le moyen le plus simple de maximiser votre marge sur vos achats grossiste.',
+        s4_eyebrow:'Planning',s4_h2:'Délais et Horaires de Livraison',s4_p1:'Nos délais de livraison sont calculés à partir de la <strong>confirmation de votre commande</strong>, sous réserve que le paiement ait bien été validé.',
+        step1_title:'Commande confirmée',step1_body:'Votre commande est validée sur la plateforme et le paiement est confirmé.',step2_title:'Préparation',step2_body:'Votre commande est préparée dans nos entrepôts. Cette étape prend généralement entre 6 et 12 heures ouvrables.',step3_title:'Expédition &amp; Livraison',step3_body:'Votre livreur vous contacte en amont pour convenir d\'un créneau. Livraison sous 6 à 12 h après confirmation.',
+        table3_col1:'Jour de Commande',table3_col2:'Livraison Estimée',t3r1c1:'Lundi – Mercredi (avant 14h)',t3r1c2:'J+1',t3r2c1:'Jeudi – Vendredi (avant 14h)',t3r2c2:'J+1 à J+2',t3r3c1:'Après 14h ou week-end',t3r3c2:'Traitement le prochain jour ouvré',
+        s4_contact_title:'Confirmation de créneau',s4_contact_body:'Notre équipe logistique vous contactera par WhatsApp pour confirmer votre créneau de livraison exact.',
+        s5_eyebrow:'Règlement',s5_h2:'Modalités de Paiement',s5_p1:'Al Madinah accepte les modes de paiement suivants. Le règlement doit intervenir au plus tard <strong>au moment de la livraison</strong>.',
+        pay1:'Carte bancaire (CB, Visa, Mastercard) — paiement en ligne ou sur terminal à la livraison (Bientôt disponible)',pay2:'Espèces — acceptées à la livraison, montant exact apprécié',pay3:'Virement bancaire — avant expédition',pay4:'Chèques — non acceptés',pay5:'Paiement différé / crédit — non disponible sans accord préalable écrit',
+        s5_warning_title:'Commandes non réglées',s5_warning_body:'En cas de non-paiement à la livraison, la marchandise sera reprise par notre livreur et la commande annulée. Tout compte présentant un impayé sera suspendu jusqu\'à régularisation complète.',
+        s6_eyebrow:'Litiges',s6_h2:'Réclamations et Retours',s6_p1:'La satisfaction de nos clients est notre priorité. Si vous constatez un problème à la réception de votre commande (produit manquant, endommagé, ou non conforme), voici la marche à suivre.',
+        rec1_title:'Vérification à la livraison',rec1_body:'Contrôlez systématiquement votre commande en présence du livreur. Toute anomalie visible doit être signalée immédiatement et notée sur le bon de livraison.',rec2_title:'Signalement sous 24 h',rec2_body:'Pour tout problème constaté après réception, contactez votre chargé de compte dans les 24 heures suivant la livraison, photos à l\'appui si nécessaire.',rec3_title:'Traitement de la réclamation',rec3_body:'Notre équipe traite chaque réclamation sous 48 heures ouvrables. Selon le cas : remplacement ou remboursement.',
+        s6_photo_title:'Photos obligatoires',s6_photo_body:'Pour tout retour ou réclamation, des photos du produit concerné (et de l\'emballage si endommagé) sont requises pour traiter votre dossier dans les meilleurs délais.',
+        s6_p2:'<strong>Produits alimentaires :</strong> Les retours de produits périssables ou dont la date de péremption est proche ne sont acceptés que si le problème est signalé dans les 24 heures suivant la livraison et accompagné de preuves visuelles.',
+        s7_eyebrow:'Modification de commande',s7_h2:'Annulations et Modifications',s7_p1:'Une commande confirmée peut être modifiée ou annulée uniquement si elle n\'a pas encore été préparée. Passé ce stade, l\'annulation n\'est plus possible.',
+        can1:'Annulation possible si la commande n\'est pas encore en préparation — contactez immédiatement votre chargé de compte',can2:'Modification de quantités possible avant mise en préparation, sous réserve de disponibilité stock',can3:'Aucune annulation possible une fois la commande en cours de préparation ou expédiée',can4:'Les refus de livraison non justifiés sans signalement préalable peuvent entraîner des frais de retour',
+        s7_contact_title:'Contact rapide',s7_contact_body:'Pour toute modification ou annulation urgente, contactez votre chargé de compte directement via WhatsApp. Plus vous agissez tôt, plus nous pouvons vous aider efficacement.',
+        footer_brand_p:'Distribution alimentaire grossiste premium. Nous fournissons revendeurs, restaurants et distributeurs à travers l\'Europe avec des produits de qualité à des prix compétitifs.',
+        footer_col1_h:'Catalogue',footer_all_products:'Tous les Produits',footer_col2_h:'Compte',footer_client_login:'Espace Client',footer_request_access:'Demander l\'Accès',footer_dashboard:'Mon Tableau de Bord',footer_col3_h:'Entreprise',footer_open_account:'Ouvrir un Compte',footer_our_products:'Nos Produits',footer_delivery:'Politique de Livraison',
+        footer_copyright:'© 2025 Al Madinah Wholesale. Tous droits réservés.',footer_tagline:'Distribution alimentaire en gros',
+      },
+      en: {
+        topbar_tag:'Professional accounts only',topbar_sub:'Register to access wholesale pricing',topbar_catalog:'View Catalog',
+        nav_products:'Our Products',nav_how:'How It Works',nav_categories:'Categories',nav_account:'Open Account',nav_login:'Client Login',nav_cta:'Request Pricing →',
+        breadcrumb_home:'Home',breadcrumb_policy:'Delivery Policy',
+        hero_tag:'Delivery Policy',hero_h1:'Delivery and Order <em>Terms</em>',
+        meta_updated:'Updated: March 2025',meta_applies:'Applies to all active clients',meta_zone:'Zone: Île-de-France, France &amp; Europe',
+        sum2_label:'Free Delivery',sum2_value:'From €400',sum2_sub:'Île-de-France free from €350 excl. VAT',
+        sum3_label:'Delivery Time',sum3_value:'24 – 48 h',sum3_sub:'After order confirmation',
+        sum4_label:'Payment',sum4_value:'Card (Soon) or Cash',sum4_sub:'On delivery or in advance',
+        toc_title:'Contents',toc1:'Delivery Zone',toc3:'Delivery Fees',toc4:'Timelines &amp; Hours',toc5:'Payment Terms',toc6:'Claims &amp; Returns',toc7:'Cancellations',
+        last_updated:'Last updated: March 2025',
+        s1_eyebrow:'Geographic scope',s1_h2:'Delivery Zone',
+        s1_p1:'Al Madinah provides direct delivery throughout the <strong>Île-de-France</strong> region as well as the rest of France and Europe. All deliveries are made by our own vehicle fleet.',
+        s1_covered_title:'Covered areas',s1_covered_body:'Île-de-France, all of France, and Europe.',
+        s3_eyebrow:'Delivery cost',s3_h2:'Delivery Fees',
+        table2_col1:'Order Amount (excl. VAT)',table2_col2:'Delivery Fee',table2_col3:'Note',
+        t2r1c1:'€300 – €399.99',t2r1c2:'€25 excl. VAT',t2r1c3:'Fixed flat fee',
+        t2r2c1:'€400 and above',t2r2c2:'Free',t2r2c3:'Free Delivery',
+        s3_free_title:'In Île-de-France, Free Delivery from €350 excl. VAT',s3_free_body:'If you are based in Île-de-France, you can enjoy free delivery from €350 excl. VAT. It\'s the simplest way to maximise your margin on wholesale purchases.',
+        s4_eyebrow:'Scheduling',s4_h2:'Delivery Times and Hours',
+        s4_p1:'Delivery times are calculated from the <strong>order confirmation</strong>, provided payment has been validated.',
+        step1_title:'Order confirmed',step1_body:'Your order is validated on the platform and payment is confirmed.',
+        step2_title:'Preparation',step2_body:'Your order is prepared in our warehouses. This step typically takes between 6 and 12 business hours.',
+        step3_title:'Dispatch &amp; Delivery',step3_body:'Your delivery driver will contact you beforehand to arrange a time slot. Delivery within 6 to 12 hours after confirmation.',
+        table3_col1:'Order Day',table3_col2:'Estimated Delivery',
+        t3r1c1:'Monday – Wednesday (before 2pm)',t3r1c2:'D+1',
+        t3r2c1:'Thursday – Friday (before 2pm)',t3r2c2:'D+1 to D+2',
+        t3r3c1:'After 2pm or weekend',t3r3c2:'Processed next business day',
+        s4_contact_title:'Slot confirmation',s4_contact_body:'Our logistics team will contact you via WhatsApp to confirm your exact delivery slot.',
+        s5_eyebrow:'Settlement',s5_h2:'Payment Terms',
+        s5_p1:'Al Madinah accepts the following payment methods. Payment must be made no later than <strong>at the time of delivery</strong>.',
+        pay1:'Bank card (CB, Visa, Mastercard) — online payment or terminal on delivery (Coming soon)',
+        pay2:'Cash — accepted on delivery, exact amount appreciated',
+        pay3:'Bank transfer — before dispatch',
+        pay4:'Cheques — not accepted',
+        pay5:'Deferred payment / credit — not available without prior written agreement',
+        s5_warning_title:'Unpaid orders',s5_warning_body:'In the event of non-payment on delivery, the goods will be taken back by our driver and the order cancelled. Any account with an outstanding balance will be suspended until fully settled.',
+        s6_eyebrow:'Disputes',s6_h2:'Claims and Returns',
+        s6_p1:'Client satisfaction is our priority. If you notice a problem upon receiving your order (missing, damaged, or non-conforming product), here is the procedure to follow.',
+        rec1_title:'Check on delivery',rec1_body:'Systematically check your order in the presence of the delivery driver. Any visible anomaly must be reported immediately and noted on the delivery note.',
+        rec2_title:'Report within 24 h',rec2_body:'For any issue noticed after reception, contact your account manager within 24 hours of delivery, with supporting photos if necessary.',
+        rec3_title:'Claim processing',rec3_body:'Our team processes each claim within 48 business hours. Depending on the case: replacement or refund.',
+        s6_photo_title:'Photos required',s6_photo_body:'For any return or claim, photos of the affected product (and packaging if damaged) are required to process your case as quickly as possible.',
+        s6_p2:'<strong>Food products:</strong> Returns of perishable items or products nearing their expiry date are only accepted if the issue is reported within 24 hours of delivery and accompanied by visual evidence.',
+        s7_eyebrow:'Order modification',s7_h2:'Cancellations and Modifications',
+        s7_p1:'A confirmed order can only be modified or cancelled if it has not yet entered preparation. Once preparation has started, cancellation is no longer possible.',
+        can1:'Cancellation possible if the order is not yet in preparation — contact your account manager immediately',
+        can2:'Quantity modifications possible before preparation starts, subject to stock availability',
+        can3:'No cancellation possible once the order is in preparation or dispatched',
+        can4:'Unjustified delivery refusals without prior notification may incur return fees',
+        s7_contact_title:'Quick contact',s7_contact_body:'For any urgent modification or cancellation, contact your account manager directly via WhatsApp. The sooner you act, the more we can help.',
+        footer_brand_p:'Premium wholesale food distribution. Supplying retailers, restaurants, and distributors across Europe with quality products at competitive prices.',
+        footer_col1_h:'Catalog',footer_all_products:'All Products',
+        footer_col2_h:'Account',footer_client_login:'Client Login',footer_request_access:'Request Access',footer_dashboard:'My Dashboard',
+        footer_col3_h:'Company',footer_open_account:'Open an Account',footer_delivery:'Delivery Policy',
+        footer_copyright:'© 2025 Al Madinah Wholesale. All rights reserved.',footer_tagline:'Wholesale food distribution',
+      }
+    };
+
+    let currentLang = 'fr';
+    function setLang(lang) {
+      currentLang = lang;
+      const t = T[lang];
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.getAttribute('data-i18n'); if (t[k] !== undefined) el.innerHTML = t[k]; });
+      try { localStorage.setItem('almadinah_lang', lang); } catch(e) {}
+    }
+    (function() {
+      let s; try { s = localStorage.getItem('almadinah_lang'); } catch(e) {}
+      if (s === 'fr' || s === 'en') { setLang(s); return; }
+      if ((navigator.language || '').toLowerCase().startsWith('en')) setLang('en'); else setLang('fr');
+    })();
+
+    const sections = document.querySelectorAll('.policy-section');
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    window.addEventListener('scroll', () => {
+      let cur = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
+      tocLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + cur); });
+    }, { passive: true });
+  </script>
+</body>
+</html>

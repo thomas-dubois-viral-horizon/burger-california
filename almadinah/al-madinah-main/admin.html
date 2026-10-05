@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel — Al Madinah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark: #1a4d2e;
+      --green-mid: #2d7a47;
+      --gold: #f0c832;
+      --gold-dark: #c9a800;
+      --cream: #faf7f0;
+      --white: #ffffff;
+      --text-dark: #1a1a1a;
+      --text-mid: #4a5568;
+      --text-light: #718096;
+      --border: #e8e3d8;
+      --red: #dc2626;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: #1a1a1a; min-height: 100vh; }
+
+    /* PASSWORD GATE */
+    #passwordGate {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(150deg, #0d2818 0%, #1a4d2e 100%);
+    }
+    .gate-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 50px;
+      width: 100%; max-width: 420px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+    }
+    .gate-icon { font-size: 3rem; margin-bottom: 20px; }
+    .gate-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem; color: var(--white);
+      margin-bottom: 8px;
+    }
+    .gate-box p { color: rgba(255,255,255,0.5); font-size: 0.88rem; margin-bottom: 28px; }
+    .gate-input {
+      width: 100%; padding: 14px 16px;
+      background: rgba(255,255,255,0.07);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 12px; color: var(--white);
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+      outline: none; transition: border 0.2s;
+      text-align: center; letter-spacing: 0.1em;
+      margin-bottom: 14px;
+    }
+    .gate-input:focus { border-color: var(--gold); }
+    .gate-btn {
+      width: 100%; background: var(--gold); color: var(--green-dark);
+      border: none; padding: 14px; border-radius: 12px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .gate-btn:hover { background: #ffe066; }
+    .gate-error { color: #ff6b6b; font-size: 0.83rem; margin-top: 10px; display: none; }
+
+    /* ADMIN PANEL */
+    #adminPanel { display: none; background: #f0ede6; min-height: 100vh; }
+
+    /* TOP BAR */
+    .topbar {
+      background: var(--green-dark); height: 64px;
+      padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .topbar-logo { display: flex; align-items: center; text-decoration: none; }
+    .topbar-logo img { height: 52px; width: auto; object-fit: contain; display: block; }
+    .topbar-badge { width: 36px; height: 36px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+    .topbar-title { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.05rem; }
+    .topbar-title span { color: var(--gold); }
+    .topbar-right { display: flex; align-items: center; gap: 16px; }
+    .admin-badge { background: rgba(240,200,50,0.2); border: 1px solid rgba(240,200,50,0.4); color: var(--gold); font-size: 0.75rem; font-weight: 700; padding: 5px 12px; border-radius: 100px; letter-spacing: 0.05em; }
+    .btn-exit { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+    .btn-exit:hover { color: var(--white); }
+
+    /* TABS */
+    .tabs { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 32px; display: flex; gap: 4px; }
+    .tab { padding: 16px 24px; font-size: 0.88rem; font-weight: 600; color: var(--text-mid); cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; }
+    .tab:hover { color: var(--green-dark); }
+    .tab.active { color: var(--green-dark); border-bottom-color: var(--green-dark); }
+
+    /* MAIN CONTENT */
+    .admin-main { padding: 32px; max-width: 1400px; margin: 0 auto; }
+
+    /* STATS ROW */
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+    .stat-card {
+      background: var(--white); border-radius: 16px; padding: 22px 24px;
+      border: 1px solid rgba(0,0,0,0.05);
+      display: flex; align-items: center; gap: 16px;
+    }
+    .stat-icon { font-size: 2rem; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--green-dark); display: block; line-height: 1; }
+    .stat-lbl { font-size: 0.78rem; color: var(--text-light); font-weight: 600; margin-top: 3px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* SECTION */
+    .section-card { background: var(--white); border-radius: 20px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); margin-bottom: 24px; }
+    .section-header { padding: 22px 28px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .section-header h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--green-dark); }
+    .section-sub { font-size: 0.82rem; color: var(--text-light); margin-top: 3px; }
+
+    /* TABLE */
+    table { width: 100%; border-collapse: collapse; }
+    th { background: #f8f5ee; padding: 12px 20px; text-align: left; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-light); border-bottom: 1px solid var(--border); }
+    td { padding: 16px 20px; border-bottom: 1px solid #f5f0e8; font-size: 0.88rem; vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fafaf8; }
+
+    /* BADGES */
+    .badge { display: inline-block; padding: 4px 12px; border-radius: 100px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; }
+    .badge-pending { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+    .badge-approved { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
+    .badge-rejected { background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; }
+
+    /* ACTION BUTTONS */
+    .btn-approve { background: var(--green-mid); color: var(--white); border: none; padding: 7px 14px; border-radius: 7px; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+    .btn-approve:hover { background: var(--green-dark); }
+    .btn-reject { background: #fff1f2; color: var(--red); border: 1px solid #fecdd3; padding: 7px 14px; border-radius: 7px; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+    .btn-reject:hover { background: #ffe4e6; }
+    .btn-price { background: var(--gold); color: var(--green-dark); border: none; padding: 7px 14px; border-radius: 7px; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+    .btn-price:hover { background: #ffe066; }
+    .btn-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    /* PRICING MODAL */
+    .modal-overlay { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal { background: var(--white); border-radius: 22px; width: 100%; max-width: 700px; max-height: 90vh; overflow-y: auto; transform: translateY(20px); transition: transform 0.3s; }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-top { background: linear-gradient(135deg, var(--green-dark), var(--green-mid)); padding: 28px 32px; border-radius: 22px 22px 0 0; }
+    .modal-top h2 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.4rem; margin-bottom: 4px; }
+    .modal-top p { color: rgba(255,255,255,0.65); font-size: 0.85rem; }
+    .modal-close { position: absolute; top: 18px; right: 18px; background: rgba(255,255,255,0.15); border: none; border-radius: 50%; width: 34px; height: 34px; cursor: pointer; color: var(--white); font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+    .modal-body-inner { padding: 28px 32px; }
+
+    .price-product-list { display: flex; flex-direction: column; gap: 10px; }
+    .price-row {
+      display: grid; grid-template-columns: 1fr auto auto;
+      align-items: center; gap: 14px;
+      padding: 12px 16px; border-radius: 12px;
+      background: var(--cream); border: 1px solid var(--border);
+    }
+    .price-row-name { font-size: 0.88rem; font-weight: 600; color: var(--text-dark); }
+    .price-row-unit { font-size: 0.75rem; color: var(--text-light); }
+    .price-input-wrap { display: flex; align-items: center; gap: 6px; }
+    .price-input-wrap span { font-size: 0.85rem; font-weight: 700; color: var(--text-mid); }
+    .price-input {
+      width: 110px; padding: 8px 10px;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      outline: none; transition: border 0.2s; text-align: right;
+    }
+    .price-input:focus { border-color: var(--green-mid); }
+    .currency-select {
+      padding: 8px 10px; border: 1.5px solid var(--border); border-radius: 8px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+      outline: none; background: var(--white); cursor: pointer;
+    }
+    .save-prices-btn {
+      width: 100%; background: var(--green-dark); color: var(--white);
+      border: none; padding: 14px; border-radius: 12px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s; margin-top: 20px;
+    }
+    .save-prices-btn:hover { background: var(--green-mid); }
+
+    .empty-state { padding: 50px; text-align: center; color: var(--text-light); }
+
+    .loading-state { text-align: center; padding: 50px; color: var(--text-light); }
+    .loader { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--green-mid); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* PRODUCTS TAB */
+    .products-admin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; padding: 24px 28px; }
+    .product-admin-card { background: var(--cream); border: 1px solid var(--border); border-radius: 14px; padding: 18px; display: flex; align-items: center; gap: 14px; }
+    .product-admin-emoji { font-size: 2rem; }
+    .product-admin-name { font-size: 0.88rem; font-weight: 600; color: var(--green-dark); margin-bottom: 4px; }
+    .product-admin-cat { font-size: 0.75rem; color: var(--text-light); }
+    .toggle-btn { margin-left: auto; background: none; border: 1.5px solid var(--border); border-radius: 8px; padding: 6px 12px; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 600; cursor: pointer; color: var(--text-mid); transition: all 0.2s; }
+    .toggle-btn.active { background: var(--green-mid); border-color: var(--green-mid); color: var(--white); }
+
+    @media (max-width: 900px) {
+      .stats-row { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .stats-row { grid-template-columns: 1fr; }
+      .admin-main { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="passwordGate">
+  <div class="gate-box">
+    <div class="gate-icon">🔐</div>
+    <h2>Admin Access</h2>
+    <p>Enter the admin password to continue</p>
+    <input type="password" class="gate-input" id="gatePassword" placeholder="••••••••••" onkeydown="if(event.key==='Enter') checkPassword()">
+    <button class="gate-btn" onclick="checkPassword()">Enter Admin Panel</button>
+    <div class="gate-error" id="gateError">Incorrect password. Please try again.</div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel">
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-logo">
+      <img src="https://i.postimg.cc/PfQQkYvs/logo.png" alt="Al Madinah Wholesale">
+    </div>
+    <div class="topbar-right">
+      <span class="admin-badge">⚙️ ADMIN PANEL</span>
+      <button class="btn-exit" onclick="document.getElementById('passwordGate').style.display='flex'; document.getElementById('adminPanel').style.display='none';">Exit</button>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('clients', this)">Client Requests</div>
+    <div class="tab" onclick="switchTab('approved', this)">Approved Clients</div>
+    <div class="tab" onclick="switchTab('products', this)">Products</div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+
+    <!-- STATS -->
+    <div class="stats-row" id="statsRow">
+      <div class="stat-card"><span class="stat-icon">⏳</span><div><span class="stat-num" id="statPending">—</span><span class="stat-lbl">Pending</span></div></div>
+      <div class="stat-card"><span class="stat-icon">✅</span><div><span class="stat-num" id="statApproved">—</span><span class="stat-lbl">Approved</span></div></div>
+      <div class="stat-card"><span class="stat-icon">❌</span><div><span class="stat-num" id="statRejected">—</span><span class="stat-lbl">Rejected</span></div></div>
+      <div class="stat-card"><span class="stat-icon">📦</span><div><span class="stat-num" id="statProducts">—</span><span class="stat-lbl">Products</span></div></div>
+    </div>
+
+    <!-- CLIENTS TAB -->
+    <div id="tab-clients">
+      <div class="section-card">
+        <div class="section-header">
+          <div>
+            <h3>Pending Requests</h3>
+            <div class="section-sub">Companies waiting for account approval</div>
+          </div>
+          <button class="btn-approve" style="padding:9px 18px;" onclick="loadData()">↻ Refresh</button>
+        </div>
+        <div id="pendingTable"><div class="loading-state"><div class="loader"></div></div></div>
+      </div>
+    </div>
+
+    <!-- APPROVED TAB -->
+    <div id="tab-approved" style="display:none;">
+      <div class="section-card">
+        <div class="section-header">
+          <div>
+            <h3>Approved Clients</h3>
+            <div class="section-sub">Manage pricing for each approved client</div>
+          </div>
+        </div>
+        <div id="approvedTable"><div class="loading-state"><div class="loader"></div></div></div>
+      </div>
+    </div>
+
+    <!-- PRODUCTS TAB -->
+    <div id="tab-products" style="display:none;">
+      <div class="section-card">
+        <div class="section-header">
+          <div>
+            <h3>Product Catalog</h3>
+            <div class="section-sub">Toggle product visibility</div>
+          </div>
+        </div>
+        <div id="productsAdminGrid"><div class="loading-state"><div class="loader"></div></div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PRICING MODAL -->
+<div class="modal-overlay" id="pricingModal">
+  <div class="modal" style="position:relative;">
+    <div class="modal-top">
+      <button class="modal-close" onclick="closePricingModal()">✕</button>
+      <h2>Set Custom Prices</h2>
+      <p id="pricingModalSub">For client —</p>
+    </div>
+    <div class="modal-body-inner">
+      <div id="pricingProductList" class="price-product-list"></div>
+      <button class="save-prices-btn" onclick="savePrices()">Save All Prices →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 1. Initialize Supabase
+  const { createClient } = supabase;
+  const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  let allProducts = [];
+  let allClients = [];
+  let currentPricingClientId = null;
+
+// ==========================================
+// 📚 FULL CATALOG — Keys match DB product names exactly
+// ==========================================
+const catalogPrices = {
+  // --- COCA COLA ---
+  "Coca Original Slim FR": 16.89,
+  "Coca Cola Zero FR": 14.97,
+  "Coca Cherry FR": 17.99,
+  "Coca Cherry EU": 12.12,
+  "Coca Original Fat EU": 10.80,
+  "Coca Original Slim EU": 10.80,
+  "Coca Zero Slim EU": 10.80,
+  "Coca Zero Fat EU": 10.80,
+  "Coca Vanille Slim EU": 12.99,
+  "Coca Cola Original 1.25L": 7.20,
+  "Coca Cola Original 1.5L": 7.80,
+  "Coca Cola Zero 1.5L": 8.10,
+  "Coca Cola Cherry FR": 7.80,
+  "Coca Vanille": 11.99,
+  "Coca Cola Zero": 11.99,
+  "Coca Cola Cherry": 12.39,
+
+  // --- FANTA ---
+  "Fanta Orange FR": 9.99,
+  "Fanta Citron FR": 14.99,
+  "Fanta Exotic FR": 16.25,
+  "Fanta Dragon FR": 14.99,
+  "Fanta Orange EU": 10.99,
+  "Fanta Citron": 13.39,
+  "Fanta Exotic EU": 10.99,
+  "Fanta Kiwi EU": 10.99,
+  "Fanta Orange": 13.50,
+  "Fanta Blue": 8.40,
+  "Fanta Strawberry/Kiwi": 8.40,
+
+  // --- MONSTER ---
+  "Monster": 24.00,
+  "Monster Energy Monarch": 24.00,
+  "Monster Energy + Juice Mango Loco": 24.00,
+  "Monster Energy Nitro": 24.00,
+  "Monster Energy + Juice Bad Apple": 24.00,
+  "Monster Energy Ultra Rosa": 24.00,
+  "Monster Energy Ultra Golden Pineapple": 24.00,
+  "Monster Energy Ultra": 24.00,
+  "Monster Punch": 24.00,
+
+  // --- SPRITE, 7UP, PEPSI ---
+  "7 Up Tropical": 13.39,
+  "7 Up Mojito": 12.10,
+  "7 Up Cherry": 13.50,
+  "7 Up": 12.28,
+  "Seven Up": 7.99,
+  "Seven Up Mojito": 9.40,
+  "7 Up Citron": 10.89,
+  "Sprite FR": 12.87,
+  "Sprite": 12.39,
+  "Sprite EU": 10.99,
+  "Pepsi FR Max": 10.99,
+  "Pepsi Max": 10.13,
+  "Pepsi Up": 10.62,
+  "Pepsi FR": 10.99,
+  "Pepsi": 9.21,
+  "Kola Champion": 14.79,
+  "Canada Dry": 16.52,
+  "Hawai FR": 16.77,
+  "Hawai Maroc": 13.00,
+  "Hawai Tropical": 9.64,
+  "Hawai": 12.49,
+  "Dr Pepper Original": 15.99,
+
+  // --- MIRINDA ---
+  "Mirinda Orange": 13.30,
+  "Mirinda Fraise FR": 10.70,
+  "Mirinda Orange FR": 10.67,
+
+  // --- OASIS, SCHWEPPES, TROPICO, ORANGINA ---
+  "Oasis Pomme Poire": 13.52,
+  "Oasis Frais Framboise": 13.81,
+  "Oasis Ice Tea Pêche": 12.47,
+  "Oasis Pomme Cassis Framboise FR": 12.99,
+  "Oasis Pomme Cassis Framboise": 13.37,
+  "Oasis Tropical": 12.65,
+  "Schweppes Agrum": 12.39,
+  "Schweppes Pomme": 13.77,
+  "Schweppes Mojito": 12.99,
+  "Schweppes Tonic": 13.99,
+  "Schweppes Lemon": 14.68,
+  "Schweppes Orange Passion": 15.73,
+  "Tropico Tropical": 15.99,
+  "Tropico Rouge": 15.99,
+  "Tropico Original": 14.95,
+  "Tropico Citron": 15.99,
+  "Tropico Exotic": 11.49,
+  "Tropico": 12.39,
+  "Orangina Rouge": 15.83,
+  "Orangina": 13.20,
+
+  // --- TEA & JUICES ---
+  "Fuze Tea Pêche FR": 13.28,
+  "Fuze Tea Pêche": 11.54,
+  "Fuze Tea Mangue": 11.54,
+  "Fuze Tea Pêche EU": 12.59,
+  "Minute Maid Orange": 18.99,
+  "Minute Maid Tropical": 17.99,
+  "Minute Maid Pomme": 19.31,
+  "Lipton Ice Tea Pêche": 11.97,
+  "Lipton Ice Tea Pasteque": 12.20,
+  "Lipton Ice Tea Framboise": 12.67,
+  "Ice Tea Pêche": 12.48,
+  "Ice Tea Framboise": 11.92,
+  "Ice Tea": 13.41,
+  "May Tea Menthe": 13.98,
+  "May Tea Peach": 13.98,
+
+  // --- PAGO ---
+  "Pago Ananas": 8.50,
+  "Pago Mangue": 8.50,
+  "Pago Fraise": 8.50,
+  "Pago Abricot": 8.50,
+  "Pago Multi Vitaminé": 8.50,
+  "Pago Banana": 9.99,
+  "Pago Pomme": 9.99,
+  "Pago Framboise": 9.99,
+  "Pago Pêche": 15.99,
+  "Pago Oranges": 15.99,
+  "Pago Tropical": 15.99,
+  "Pago Ace": 15.99,
+
+  // --- GRANINI ---
+  "Granini Orange": 13.75,
+  "Granini Mangue": 13.27,
+  "Granini Kiwi": 10.99,
+  "Granini Fraise": 10.99,
+  "Granini Pomme": 10.99,
+  "Granini Ace": 10.99,
+  "Granini Ananas": 10.99,
+  "Granini Framboise": 10.99,
+
+  // --- TROPICANA ---
+  "Tropicana Multifruit": 13.19,
+  "Tropicana Orange": 13.19,
+
+  // --- MAAZA ---
+  "Maaza Banane": 15.20,
+  "Maaza Mangue": 15.99,
+  "Maaza Goyave": 15.99,
+  "Maaza Tropical": 15.99,
+
+  // --- CARAÏBOS ---
+  "Caraïbos Goyave": 19.99,
+  "Caraïbos Banane": 19.68,
+  "Caraïbos Mangue": 19.85,
+  "Caraïbos Ananas": 18.85,
+  "Caraïbos Tropical": 18.60,
+
+  "Caprisun Multi Vitamin": 11.99,
+
+  // --- ROCHAMBEAU ---
+  "Rochambeau Ananas": 8.39,
+  "Rochambeau Pamplemousse": 6.99,
+  "Rochambeau Orange": 10.26,
+  "Rochambeau Pomme": 6.99,
+
+  // --- POM'S ---
+  "Pom's Bouteille": 9.69,
+
+  // --- RED BULL & ENERGY ---
+  "Red Bull White Edition FR": 30.99,
+  "Red Bull Tropical FR": 30.99,
+  "Red Bull Red FR": 30.99,
+  "Red Bull Blue FR": 30.99,
+  "Red Bull Green FR": 30.99,
+  "Red Bull Abricot FR": 30.99,
+  "Red Bull 35cl": 42.00,
+  "Red Bull 47cl": 54.50,
+  "Red Bull 25cl": 24.97,
+  "Carabao": 15.50,
+  "Ginseng": 17.50,
+  "Vita Malt Classic": 18.99,
+  "Ginger Beer": 10.90,
+  "Old Jamaica Ginger": 15.50,
+
+  // --- DADA & EXOTIC ---
+  "Dada Cherry": 12.99,
+  "Dada Melon": 14.57,
+  "Dada Pêche": 14.57,
+  "Dada Pomme": 14.57,
+  "Dada Mojito": 14.57,
+  "Dada Goyave": 14.57,
+  "Dada Fraise": 14.57,
+  "Dada Cola": 14.13,
+  "Tas Young Coconut": 14.13,
+  "Tas Tamarind": 17.60,
+  "Hamoud": 11.50,
+  "Hamoud 1.5L": 10.00,
+  "Vimto": 15.99,
+  "Vimto 2L": 14.02,
+  "Selecto": 10.99,
+  "Selecto 1.5L": 9.88,
+
+  // --- FREEZ ---
+  "Freez Mix Mango Peach": 18.99,
+  "Freez Citron Menthe Mojito": 18.99,
+  "Freez Citron Gingembre": 18.99,
+  "Freez Litchi": 18.99,
+  "Freez Pomme Raisin": 18.99,
+  "Freez Mix Grenadine": 18.99,
+  "Freez Blue Hawai": 19.49,
+  "Freez Mix Fraise": 18.99,
+  "Freez Ananas Coco": 18.99,
+  "Freez Mojito Fraise": 18.99,
+
+  // --- MOGU ---
+  "Mogu Lycee": 10.49,
+  "Mogu Coco": 20.20,
+  "Mogu Melon": 21.11,
+  "Mogu Goyave": 19.49,
+  "Mogu Ananas": 19.49,
+  "Mogu Framboise": 19.49,
+  "Mogu Fraise": 19.49,
+  "Mogu Mangue": 19.49,
+  "Mogu Passion": 19.49,
+  "Mogu Pêche": 19.49,
+  "Mogu Blackurrnt": 19.49,
+  "Mogu Pinacolada": 19.49,
+  "Mogu Raisin": 19.49,
+
+  // --- SAN PELLEGRINO ---
+  "San Pellegrino Petillante": 12.90,
+  "San Pellegrino Limonata": 16.59,
+  "San Pellegrino Aro Rossa": 17.49,
+  "San Pellegrino Granadine": 16.99,
+  "San Pellegrino Menth": 16.59,
+  "San Pellegrino": 11.99,
+
+  // --- SYRUPS ---
+  "Pulco Citron": 11.11,
+  "Sirop Gilbert Grenadine": 3.90,
+  "Sirop Gilbert Citron Jaune": 4.38,
+  "Sirop Gilbert Citron Rior": 4.66,
+  "Sirop Gilbert Peche": 4.90,
+  "Sirop Gilbert Fraise": 5.00,
+  "Sirop Gilbert Pomme Verte": 5.01,
+  "Sirop Gilbert Kiwi": 5.07,
+  "Sirop Gilbert Melon": 5.09,
+  "Sirop Gilbert Passion": 5.57,
+
+  // --- WATER ---
+  "Cristalline Citronnade": 10.80,
+  "Cristalline Fraise": 10.75,
+  "Cristaline Tropical": 10.80,
+  "Cristaline Menthe": 10.99,
+  "Cristaline Pêche": 10.75,
+  "Cristaline Petillante": 9.99,
+  "Cristaline Petilante": 1.26,
+  "Cristaline": 4.79,
+  "Evian": 10.60,
+  "Evian 1.5L": 3.99,
+  "Evian 1L": 3.40,
+  "Volvic Citron": 8.14,
+  "Volvic Exotic": 11.33,
+  "Volvic Fraise": 9.86,
+  "Volvic Natural": 9.75,
+  "Volvic Natural 1.5L": 3.78,
+  "Badoit 33cl": 16.18,
+  "Badoit 50cl": 17.99,
+  "Badoit": 17.99,
+  "Badoit Intensement": 3.99,
+  "Badoit Finement": 3.99,
+  "Perrier Canette FR": 10.99,
+  "Perrier Bouteille": 15.56,
+  "Perrier Bouteille Plastique": 4.69,
+  "Vittel Aro Citron": 20.24,
+  "Vittel Aro Fraise": 20.26,
+  "Vittel": 8.99,
+  "Vittel 1.5L": 3.30,
+  "Vittel 1L": 2.99,
+  "Sant Anna": 6.80,
+  "Nestlé Pure Life": 6.10,
+
+  // --- GROCERIES, CONDIMENTS & OILS ---
+  "Bingoil Huile 1L": 24.00,
+  "Bingoil Huile 5L": 24.00,
+  "Bingoil Huile Professionnel 10L": 16.50,
+  "Bingoil Huile de Tournesol 20L": 35.42,
+  "Bingoil Huile de Tournesol Métal": 35.63,
+  "Huile de Tournesol Sakoil 1L": 24.00,
+  "Huile de Tournesol Sakoil 5L": 24.00,
+  "Huile de Tournesol Sakoil 10L": 16.50,
+  "Maurel Huile": 16.49,
+  "Maurel Huile Metal": 0,
+  "KTC Huile de Cuisson Végétale": 39.99,
+  "Crème Liquide President 18%": 21.50,
+  "Lactel": 5.79,
+  "Viva Candia": 6.20,
+  "Lait d'Ici Rouge": 6.24,
+  "Farine Type-55": 20.99,
+  "Farine Spéciale Pizza T00": 7.93,
+  "Tortillas Antalya 30cm": 19.90,
+  "Onion 5KG": 2.70,
+  "Sucre en Poudre Saint Louis": 1.49,
+  "Sachets Buchettes de Sucre Didon 600x4G": 8.99,
+  "Sel Fin": 0.89,
+  "Les Oeufs": 6.00,
+  "Pomme de Terre Lavée 5KG": 3.30,
+  "Sauce Tomate Tabana": 7.32,
+  "Olives Vertes Rondelles Martin's": 8.70,
+  "Olives Vertes Dénoyautées La Fragua": 7.50,
+  "Olives Noires Rondelles Martin's": 7.75,
+  "Olives Noires Dénoyautées La Fragua": 10.40,
+  "Thon en Morceaux Huile de Tournesol": 4.80,
+  "Thon en Morceaux au Naturel": 4.67,
+  "Penne Rigate Barilla 1KG": 2.71,
+  "Penne Rigate Barilla 5KG": 13.57,
+  "Spaghetti Barilla": 13.09,
+  "Tagliatelle Barilla": 6.83,
+  "Linguine Barilla": 13.09,
+  "Coquillette Barilla": 13.57,
+  "Charbon de Bois 10KG": 0,
+  "Lavazza Pointe Capsules": 23.17,
+  "Lavazza Blue Capsules": 23.00,
+
+  // --- SAUCES ---
+  "Mayonnaise Sachet 10ML": 23.23,
+  "Samourai Sachet 10ML": 22.64,
+  "Ketchup Sachet 10G": 19.80,
+  "Pitta Kebab Sachet 10ML": 22.64,
+  "Barbecue Sachet 10G": 21.70,
+  "Bigiburger Sachet 10G": 22.64,
+  "Andalouse Sachet 10ML": 25.90,
+  "Algerienne Sachet 10ML": 25.22,
+  "Huile Pimentée Sachet 3ML": 20.95,
+  "Mayonnaise Doro 4.5KG": 8.70,
+  "Ketchup Doro 4.7KG": 8.49,
+  "Samourai Doro 4.8KG": 11.55,
+  "Barbecue Doro 4.8KG": 11.30,
+  "Biggi Doro 4.6KG": 12.55,
+  "Andalouse Doro 4.8KG": 14.30,
+  "Pitta Doro 4.6KG": 12.80,
+  "Algerienne Doro 4.6KG": 12.40,
+  "Harissa": 23.66,
+  "Arome Maggi": 8.57,
+  "Arome Maggi Liquide": 5.28,
+  "Sauce Pimentée Sriracha": 3.99,
+
+  // --- PACKAGING & NON-FOOD ---
+  "Sac Kraft 22x10x28": 15.30,
+  "Sac Kraft 26x14x28": 16.99,
+  "Sac Kraft 32x22x24": 24.99,
+  "Sac Kraft R4": 12.49,
+  "Sac Kraft R8": 12.99,
+  "Sac Kraft R12": 14.99,
+  "Sac Kraft Blanc 6x6": 9.49,
+  "Sac Kraft Blanc 8x8": 12.50,
+  "Film Alimentaire 30CM": 13.99,
+  "Film Alimentaire 45CM": 20.99,
+  "Film Etirable en Boite Distributrice 45CM R300M": 6.99,
+  "Aluminium Rouleaux 30CM": 16.49,
+  "Film Palette Transparent": 25.34,
+  "Rouleau Aluminium Distributeur 30CM": 12.95,
+  "Papier Toilette Maxi Jumbo": 11.50,
+  "Sopalin Essuie Tout Bobine": 8.99,
+  "Recznik Good Deal Celuzoza": 1.40,
+  "Serviette Ouate 1 Pli 30x30CM Blanche": 2.40,
+  "Boite à Pizza 26x26": 13.50,
+  "Boite à Pizza 29x29": 14.99,
+  "Boite à Pizza 31x31": 14.99,
+  "Boite à Pizza 33x33": 15.20,
+  "Boite à Pizza 40x40": 12.99,
+  "Sac Panini/Sandwich": 14.99,
+  "Box Assiette 3 Compartiments EPP": 18.84,
+  "Assiette Carton Blanche 18CM Platipack": 3.50,
+  "Boîte Sandwich Kraft": 15.50,
+  "Boite Sandwich HB10B": 12.99,
+  "Papier Plateux 32.5x25CM": 25.99,
+  "Sac en Papier Döner Kebab 16x16CM": 13.86,
+  "Papier Hamburger 40x31CM": 18.99,
+  "Papier Hamburger 25x33CM": 15.20,
+  "Sac Poulet": 0,
+  "Papier Boucherie 40x50CM": 0,
+  "Papier Boucherie 50x70CM": 0,
+  "Papier Boucherie 50x75CM": 0,
+  "Sacs Bretelles Noir 26x12x45": 10.63,
+  "Sacs Bretelles Noir 20x10x35": 14.88,
+  "Sac Plastique Réutilisable Blanc M 28x14x48": 19.99,
+  "Sac Plastique Réutilisable Blanc T50 28x16": 16.10,
+  "Sac Poubelle 110 Litres": 13.99,
+  "Sac Poubelle 130 Litres": 15.99,
+  "Sac Poubelle 160 Litres": 17.99,
+  "Boite Burger S": 14.09,
+  "Boite Burger L": 16.90,
+  "Box Hamburger HP6/EPP": 23.76,
+  "Box Hamburger HP7/EPP": 31.44,
+  "Bol Kraft 1300ML avec Couvercle": 10.05,
+  "Bol Kraft 1100ML avec Couvercle": 8.09,
+  "Bol Kraft 750ML avec Couvercle": 6.96,
+  "Bol en Carton Kraft Noir 550ML avec Couvercle": 37.90,
+  "Bol en Carton Kraft Noir 750ML avec Couvercle": 39.00,
+  "Bol en Carton Kraft Noir 1200ML avec Couvercle": 35.99,
+  "Boite Crêpe": 6.10,
+  "Boite Frite Etui Petite": 4.11,
+  "Boite Frite Etui Moyenne": 6.99,
+  "Sachets Frites S Chips Paper 12x12CM": 9.99,
+  "Sachets Frites XS Chips Paper 11.5x9CM": 7.99,
+  "Gobelet Kraft 70z 200ML": 0.99,
+  "Gobelet Café 40z 200ML": 0.88,
+  "Gobelet Carton Brun 12CL": 2.09,
+  "Gobelet Carton Brun 18CL": 2.09,
+  "Gobelet Carton Blanc 12CL": 2.09,
+  "Gobelet Carton Blanc 18CL": 2.09,
+  "Boite Chicken Bucket FC4": 22.99,
+  "Chicken Box Petite FC0": 18.99,
+  "Chicken Box Moyenne": 19.99,
+  "Chicken Box Grande": 19.99,
+  "Triangle Tarte 140 PET": 9.20,
+  "Barquette Microondes 500ML": 23.95,
+  "Barquette Microondes 650ML": 25.00,
+  "Barquette Microondes 750ML": 26.40,
+  "Barquette Microondes 1000ML": 27.40,
+  "Barquette Aluminium 930CC avec Couvercle": 26.00,
+  "Kit Couverts Plastique Réutilisable 3PCS": 22.00,
+  "Barquette Aluminium 670CC avec Couvercle": 16.95,
+  "Pack Pot de Sauce 50ML": 15.31,
+  "Pack Pot de Sauce 30ML": 9.99,
+  "Pack Pot de Sauce 2OZ 60CC": 11.39,
+  "Fourchette Plastique Réutilisable": 1.20,
+  "Couteau Plastique Réutilisable": 1.30,
+  "Kit Couverts Bois 4/1": 24.00,
+  "Fourchette Bois 16.5CM": 1.80,
+  "Couteau Bois 16.5CM": 1.42,
+  "Cuillère Bois 11CM": 1.38,
+  "Cuillère Bois 16.5CM": 1.82,
+  "Pique Frites Bois 8.5CM": 5.16,
+  "Pique Frites Bois 9.5CM": 5.16,
+  "Bubble Tea Couvercle Dôme PET avec Trou": 2.14,
+  "Gant Jetable Nitrile Non-Poudre Noir XL": 4.20,
+  "Gant Jetable Nitrile Non-Poudre Noir L": 4.20,
+  "Gant Jetable Nitrile Non-Poudre Noir M": 4.20,
+  "Paille Droite Papier Noire 20CM 6MM": 2.24,
+  "Paille Droite Cuillère Noire/Blanche 20CM 8MM": 2.90,
+  "Cuillère Plastique Réutilisable 20": 26.00,
+  "Cuillère à Dessert Plastique Réutilisable 20": 26.00,
+  "Rouleau Caisse 57MM x 17M": 2.30,
+  "Rouleau Caisse 79MM x 75M": 8.90,
+  "Abrasif Vert sur Éponge 13x9CM": 4.62,
+  "Abrasif Vert sur Éponge 11x7CM": 3.36,
+  "Éponges Inox 40GR": 3.18,
+
+  // --- CLEANING ---
+  "Détergent Liquide Plonge Manuelle Citron Avantage": 5.50,
+  "Savon Liquide Mains et Corps": 4.80,
+  "Détergent Multi Usages": 4.49,
+  "Spray Désinfectant Surfaces Sans Rinçage": 4.30,
+  "Nettoyant Multi Surfaces Pro Net V": 2.99,
+  "Nettoyant Vitres et Surfaces Modernes": 1.80,
+  "Eau de Javel 2.6%": 3.99,
+  "Liquide Nettoyant Vitres": 4.80,
+  "Plyn Do Naczyn Fairy": 2.66,
+  "Plateau 35x27 Noir": 3.65,
+  "Plateau 35x27 Rouge Cerise": 3.65
+};
+
+  // --- PASSWORD GATE (EXACT ORIGINAL LOGIC) ---
+  async function hashString(str) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(str);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  async function checkPassword() {
+    const val = document.getElementById('gatePassword').value;
+    const hashed = await hashString(val);
+    if (hashed === ADMIN_PASSWORD_HASH) {
+      document.getElementById('passwordGate').style.display = 'none';
+      document.getElementById('adminPanel').style.display = 'block';
+      loadData();
+    } else {
+      document.getElementById('gateError').style.display = 'block';
+      document.getElementById('gatePassword').value = '';
+    }
+  }
+
+  // --- TAB NAVIGATION ---
+  function switchTab(tabId, el) {
+    // Hide all tabs
+    document.getElementById('tab-clients').style.display = 'none';
+    document.getElementById('tab-approved').style.display = 'none';
+    document.getElementById('tab-products').style.display = 'none';
+    // Remove active class
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    // Show selected
+    document.getElementById('tab-' + tabId).style.display = 'block';
+    el.classList.add('active');
+  }
+
+  // --- LOAD DATA ---
+  async function loadData() {
+    const { data: clients } = await sb.from('client_profiles').select('*').order('created_at', { ascending: false });
+    allClients = clients || [];
+
+    const { data: products } = await sb.from('products').select('*').order('category');
+    allProducts = products || [];
+
+    updateUI();
+  }
+
+  function updateUI() {
+    const pending = allClients.filter(c => c.status === 'pending');
+    const approved = allClients.filter(c => c.status === 'approved');
+    const rejected = allClients.filter(c => c.status === 'rejected');
+
+    document.getElementById('statPending').textContent = pending.length;
+    document.getElementById('statApproved').textContent = approved.length;
+    document.getElementById('statRejected').textContent = rejected.length;
+    document.getElementById('statProducts').textContent = allProducts.filter(p => p.is_active).length;
+
+    renderPendingTable(pending);
+    renderApprovedTable(approved);
+    renderProductsAdmin(allProducts);
+  }
+
+  function renderPendingTable(list) {
+    const el = document.getElementById('pendingTable');
+    if (!list.length) { el.innerHTML = '<div class="empty-state">No pending requests.</div>'; return; }
+    el.innerHTML = `<table><thead><tr><th>Company</th><th>Actions</th></tr></thead><tbody>` + 
+      list.map(c => `<tr><td><strong>${c.company_name}</strong></td><td><button class="btn-approve" onclick="updateStatus('${c.id}', 'approved')">Approve</button></td></tr>`).join('') + `</tbody></table>`;
+  }
+
+  function renderApprovedTable(list) {
+    const el = document.getElementById('approvedTable');
+    if (!list.length) { el.innerHTML = '<div class="empty-state">No approved clients.</div>'; return; }
+    el.innerHTML = `<table><thead><tr><th>Company</th><th>Control</th></tr></thead><tbody>` + 
+      list.map(c => `<tr><td><strong>${c.company_name}</strong></td><td><button class="btn-price" onclick="openPricingModal('${c.id}')">Set Custom Prices</button></td></tr>`).join('') + `</tbody></table>`;
+  }
+
+  function renderProductsAdmin(list) {
+    const grid = document.getElementById('productsAdminGrid');
+    grid.innerHTML = list.map(p => `
+      <div class="product-admin-card">
+        <div class="product-admin-emoji">${p.image_emoji || '📦'}</div>
+        <div>
+          <div class="product-admin-name">${p.name}</div>
+          <div class="product-admin-cat">${p.category}</div>
+        </div>
+        <button class="toggle-btn ${p.is_active ? 'active' : ''}" onclick="toggleProduct('${p.id}', ${p.is_active})">${p.is_active ? 'Active' : 'Hidden'}</button>
+      </div>`).join('');
+  }
+
+  async function updateStatus(id, newStatus) { await sb.from('client_profiles').update({ status: newStatus }).eq('id', id); loadData(); }
+  async function toggleProduct(id, curr) { await sb.from('products').update({ is_active: !curr }).eq('id', id); loadData(); }
+
+  // --- FIXED PRICING MODAL ---
+  async function openPricingModal(clientId) {
+    currentPricingClientId = clientId;
+    const client = allClients.find(c => c.id === clientId);
+    document.getElementById('pricingModalSub').textContent = `For client — ${client.company_name}`;
+    
+    const { data: existingCustom } = await sb.from('custom_prices').select('*').eq('client_id', clientId);
+    const container = document.getElementById('pricingProductList');
+
+    const filteredProducts = allProducts.filter(p => {
+      const n = p.name.toUpperCase();
+      return p.is_active && !n.includes("ROYAL SODA") && !n.includes("SLIM POMME") && !n.includes("SLIM FRAISE");
+    });
+
+    container.innerHTML = filteredProducts.map(p => {
+      const nameUpper = p.name.toUpperCase();
+      let catalogVal = 0;
+      let matchScore = 0;
+
+      // Replace the old loop with this one:
+      for (const [key, val] of Object.entries(catalogPrices)) {
+        // Convert the catalog key to uppercase during the comparison check
+        if (nameUpper.includes(key.toUpperCase()) && key.length > matchScore) {
+          catalogVal = val;
+          matchScore = key.length;
+        }
+      }
+      if (catalogVal === 0) catalogVal = p.price || 0;
+
+      const saved = existingCustom ? existingCustom.find(cp => cp.product_id === p.id) : null;
+      // If saved is 0 or doesn't exist, show the catalog value in the box
+      const boxVal = (saved && saved.price_per_unit > 0) ? saved.price_per_unit : catalogVal;
+
+      return `
+        <div class="price-row">
+          <div class="price-row-name">${p.name}<br><small style="color:gray;">Catalog Default: ${catalogVal.toFixed(2)} €</small></div>
+          <div class="price-input-wrap">
+            <input type="number" id="price_${p.id}" value="${boxVal}" step="0.01" class="price-input">
+            <span>€</span>
+          </div>
+        </div>`;
+    }).join('');
+
+    document.getElementById('pricingModal').classList.add('open');
+  }
+
+  function closePricingModal() { document.getElementById('pricingModal').classList.remove('open'); }
+
+  async function savePrices() {
+    const upsertData = [];
+    document.querySelectorAll('#pricingProductList input').forEach(input => {
+      upsertData.push({
+        client_id: currentPricingClientId,
+        product_id: input.id.replace('price_', ''),
+        price_per_unit: parseFloat(input.value) || 0,
+        currency: 'EUR'
+      });
+    });
+    await sb.from('custom_prices').upsert(upsertData, { onConflict: 'client_id,product_id' });
+    alert("Prices saved for this client.");
+    closePricingModal();
+  }
+</script>
+
+</body>
+</html>
